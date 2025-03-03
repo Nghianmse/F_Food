@@ -16,7 +16,7 @@
 
             android:name=".Screen.features_customer.FoodDetailActivity"
             android:exported="true" />
-
+        <activity
             android:name=".Screen.authentication_authorization.RestaurantLogIn"
             android:exported="false" />
         <activity
@@ -30,10 +30,7 @@
             android:exported="false" />
         <activity
             android:name=".Screen.features_customer.OrderTracking"
-            android:exported="false" />
-        <activity
-            android:name=".Screen.features_customer.Odertracking"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Screen.features_customer.OrderHistory"
             android:exported="false" />
