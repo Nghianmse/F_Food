@@ -13,8 +13,34 @@
         android:theme="@style/Theme.F_Food"
         tools:targetApi="31">
         <activity
+
             android:name=".Screen.features_customer.FoodDetailActivity"
             android:exported="true" />
+
+            android:name=".Screen.authentication_authorization.RestaurantLogIn"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.authentication_authorization.RestaurantSignUp"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.features_customer.ManageAddress"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.features_customer.ReviewAndRating"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.features_customer.OrderTracking"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.features_customer.Odertracking"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.features_customer.OrderHistory"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.authentication_authorization.LoginActivity"
+            android:exported="false" />
+
         <activity
             android:name=".Screen.features_customer.ViewRestaurantList"
             android:exported="true" />
