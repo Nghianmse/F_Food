@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FFF3E0"
+    android:id="@+id/foodDetailActivity"
+    android:layout_marginTop="20dp">
+
+    <!-- Tiêu đề "Chỉ tiết món ăn" -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chỉ tiết món ăn"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#E64A19"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Giám Số:"
+        android:textSize="20sp"
+        android:textColor="#FF5722"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/dishName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gà rang muối"
+        android:textSize="18sp"
+        android:textColor="#FF9800"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Giá: 76.000 VNĐ 89.000 VNĐ"
+        android:textSize="16sp"
+        android:textColor="#FF5722"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Các món từ gia cò nhiên vỏ số kể, với đa dạng cách chế hiến liệp dẫn, thơm ngọn, đậm đã đầy lời cuốn. Vay bạn đã biết đến công thức gà rang muối chuẩn vị, để thực hiện này chưa. Cùng Điện máy XANH vào bếp và thực hiện ngay món ăn bổ dưỡng này nhé"
+        android:textSize="14sp"
+        android:textColor="#000000"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/imageTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Một số hình ảnh khác"
+        android:textSize="16sp"
+        android:textColor="#FF5722"
+        android:layout_marginBottom="8dp"/>
+
+    <ImageView
+        android:id="@+id/dishImage"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/isushi"
+    android:scaleType="centerCrop"
+    android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/seeMoreButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Xem thêm"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#FF5722"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>
