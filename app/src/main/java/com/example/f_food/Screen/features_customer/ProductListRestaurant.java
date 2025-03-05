@@ -11,31 +11,33 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.f_food.Adapter.FoodListAdapter;
 import com.example.f_food.Adapter.RestaurantListAdapter;
+import com.example.f_food.Entity.Food;
 import com.example.f_food.Entity.Restaurant;
 import com.example.f_food.R;
+import com.example.f_food.Repository.FoodRepository;
 import com.example.f_food.Repository.RestaurantRepository;
 
 import java.util.List;
 
-public class ViewRestaurantList extends AppCompatActivity {
+public class ProductListRestaurant extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private RestaurantListAdapter adapter;
-    private List<Restaurant> restaurantList;
+    private FoodListAdapter adapter;
+    private List<Food> foodList;
 
-    private RestaurantRepository restaurantRepository;
+    private FoodRepository foodRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_view_restaurant_list);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.viewRestaurantList), (v, insets) -> {
+        setContentView(R.layout.activity_product_list_restaurant);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.foodListRestaurant), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -45,14 +47,14 @@ public class ViewRestaurantList extends AppCompatActivity {
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
                         View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         );
-        recyclerView = findViewById(R.id.recyclerViewListRestaurant);
+        recyclerView = findViewById(R.id.recyclerViewListProduct);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         init();
-        adapter = new RestaurantListAdapter(restaurantList, new RestaurantListAdapter.OnItemClickListener() {
+        adapter = new FoodListAdapter(foodList, new FoodListAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(Restaurant restaurant) {
+            public void onItemClick(Food food) {
                 // Xử lý sự kiện click: Chuyển sang Activity mới
-                Intent intent = new Intent(ViewRestaurantList.this, FoodDetailActivity.class);
+                Intent intent = new Intent(ProductListRestaurant.this, FoodDetailActivity.class);
                 //intent.putExtra("restaurant", restaurant); // Truyền dữ liệu qua Intent
                 startActivity(intent);
             }
@@ -61,8 +63,8 @@ public class ViewRestaurantList extends AppCompatActivity {
     }
 
     private void init() {
-        restaurantRepository = new RestaurantRepository(this);
-        restaurantList = restaurantRepository.getAllRestaurants();
+        foodRepository = new FoodRepository(this);
+        foodList = foodRepository.getFoodsByRestaurantId(1);
     }
 
 
@@ -82,5 +84,4 @@ public class ViewRestaurantList extends AppCompatActivity {
         }
         return super.onPrepareOptionsMenu(menu);
     }
-
-}
+    }

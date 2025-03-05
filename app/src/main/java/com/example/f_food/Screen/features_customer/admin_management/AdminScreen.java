@@ -1,4 +1,4 @@
-package com.example.f_food.Screen.features_customer;
+package com.example.f_food.Screen.features_customer.admin_management;
 
 import android.os.Bundle;
 
@@ -10,14 +10,14 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.f_food.R;
 
-public class OrderTracking extends AppCompatActivity {
+public class AdminScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_order_tracking);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.orderTracking), (v, insets) -> {
+        setContentView(R.layout.activity_admin_screen);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;

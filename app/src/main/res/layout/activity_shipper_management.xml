@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:id="@+id/main"
+tools:context=".Screen.features_customer.admin_management.Shipper_Management">
+
+<!-- Back Button and Title -->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Shipper Management"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+</LinearLayout>
+
+<!-- Add User Button -->
+<Button
+    android:id="@+id/btnAddUser"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="ADD Shipper"
+    android:layout_marginTop="10dp"
+    android:layout_gravity="center_horizontal" />
+
+<!-- List Title -->
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Danh sách Shipper"
+    android:textSize="16sp"
+    android:textStyle="bold"
+    android:layout_gravity="center"
+    android:layout_marginTop="10dp" />
+
+<!-- Header Section -->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:background="?android:attr/selectableItemBackground">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="01"
+        android:gravity="center"
+        android:text="ShipperID"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="FullName"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:gravity="center" />
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Email"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Phone"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="CreateAt"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:gravity="center" />
+</LinearLayout>
+
+<!-- RecyclerView to Display Users -->
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recyclerViewPolicies"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp" />
+
+</LinearLayout>
