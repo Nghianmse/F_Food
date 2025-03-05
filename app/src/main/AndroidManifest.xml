@@ -13,6 +13,27 @@
         android:theme="@style/Theme.F_Food"
         tools:targetApi="31">
         <activity
+            android:name=".Screen.features_customer.admin_management.Payment_Transactions_Management"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.features_customer.admin_management.Shipper_Management"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.features_customer.admin_management.Customer_Management"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.features_customer.admin_management.Policy_Management"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.features_customer.admin_management.Restaurant_Management"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.features_customer.admin_management.AdminScreen"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.features_customer.authentication_authorization.Register"
+            android:exported="false" />
+        <activity
             android:name=".Screen.features_customer.ViewRestaurantList"
             android:exported="false" />
         <activity
