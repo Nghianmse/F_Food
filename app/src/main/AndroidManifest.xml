@@ -12,6 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.F_Food"
         tools:targetApi="31">
+
+        <!-- Activities từ nhánh binh -->
         <activity
             android:name=".Screen.features_customer.admin_management.Payment_Transactions_Management"
             android:exported="false" />
@@ -33,15 +35,47 @@
         <activity
             android:name=".Screen.features_customer.authentication_authorization.Register"
             android:exported="false" />
+        
+        <!-- Activities từ nhánh main -->
+        <activity
+            android:name=".Screen.features_customer.ProductListRestaurant"
+            android:exported="true" />
+        <activity
+            android:name=".Screen.features_customer.FoodDetailActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Screen.authentication_authorization.RestaurantLogIn"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.authentication_authorization.RestaurantSignUp"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.features_customer.ManageAddress"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.features_customer.ReviewAndRating"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.features_customer.OrderTracking"
+            android:exported="true" />
+        <activity
+            android:name=".Screen.features_customer.OrderHistory"
+            android:exported="false" />
+
+        <!-- Hoạt động có trong cả hai nhánh -->
         <activity
             android:name=".Screen.features_customer.ViewRestaurantList"
+            android:exported="true" />
+        <activity
+            android:name=".Screen.authentication_authorization.LoginActivity"
             android:exported="false" />
+
+        <!-- Main Activity -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
