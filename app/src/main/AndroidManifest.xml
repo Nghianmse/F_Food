@@ -45,7 +45,7 @@
             android:exported="true" />
         <activity
             android:name=".Screen.authentication_authorization.RestaurantLogIn"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Screen.authentication_authorization.RestaurantSignUp"
             android:exported="false" />
@@ -68,7 +68,7 @@
             android:exported="true" />
         <activity
             android:name=".Screen.authentication_authorization.LoginActivity"
-            android:exported="false" />
+            android:exported="true" />
 
         <!-- Main Activity -->
         <activity

@@ -5,14 +5,16 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="24dp"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:id="@+id/restaurantLogIn">
 
     <!-- Logo -->
     <ImageView
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:src="@drawable/login"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:id="@+id/imgLogoLogin"/>
 
     <!-- App Name -->
     <TextView
