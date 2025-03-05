@@ -2,6 +2,7 @@ package com.example.f_food.Screen.features_customer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -50,10 +51,10 @@ public class ViewRestaurantList extends AppCompatActivity {
         init();
         adapter = new RestaurantListAdapter(restaurantList, new RestaurantListAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(Restaurant restaurant) {
+            public void onItemClick(int id) {
                 // Xử lý sự kiện click: Chuyển sang Activity mới
-                Intent intent = new Intent(ViewRestaurantList.this, FoodDetailActivity.class);
-                //intent.putExtra("restaurant", restaurant); // Truyền dữ liệu qua Intent
+                Intent intent = new Intent(ViewRestaurantList.this, ProductListRestaurant.class);
+                intent.putExtra("restaurantId", id);
                 startActivity(intent);
             }
         });

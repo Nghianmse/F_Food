@@ -1,6 +1,7 @@
 package com.example.f_food.Adapter;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.f_food.Entity.Restaurant;
 import com.example.f_food.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -26,7 +28,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
 
     // Interface để xử lý sự kiện click
     public interface OnItemClickListener {
-        void onItemClick(Restaurant restaurant);
+        void onItemClick(int id);
     }
 
     @NonNull
@@ -66,13 +68,19 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
             txtAddress.setText(restaurant.getAddress());
             txtPhone.setText(restaurant.getPhone());
             txtStatus.setText(restaurant.getStatus());
-            //imgRestaurant.setImageResource(restaurant.getImage());
+            if(restaurant.getImage() != null && !restaurant.getImage().isEmpty()) {
+                Picasso.get()
+                        .load(restaurant.getImage())
+                        .resize(500, 500)
+                        .centerCrop()
+                        .into(imgRestaurant);
+            }
 
             // Xử lý sự kiện click
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onItemClick(restaurant);
+                    listener.onItemClick(restaurant.getRestaurantId());
                 }
             });
         }
