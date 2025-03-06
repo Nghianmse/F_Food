@@ -13,13 +13,10 @@
         android:theme="@style/Theme.F_Food"
         tools:targetApi="31">
         <activity
-            android:name=".Screen.order_processing.DeliveryHistory"
-            android:exported="false" />
-        <activity
-            android:name=".Screen.order_processing.DeliveryStatusUpdate"
-            android:exported="false" />
-        <activity
             android:name=".Screen.order_processing.AcceptShippingOrder"
+            android:exported="true" />
+        <activity
+            android:name=".Screen.order_processing.DeliveryHistory"
             android:exported="false" />
         <activity
             android:name=".Screen.order_processing.PendingOrder"

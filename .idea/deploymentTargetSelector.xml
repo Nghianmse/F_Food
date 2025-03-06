@@ -8,6 +8,9 @@
       <SelectionState runConfigName="PendingOrder">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+      <SelectionState runConfigName="AcceptShippingOrder">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
     </selectionStates>
   </component>
 </project>
