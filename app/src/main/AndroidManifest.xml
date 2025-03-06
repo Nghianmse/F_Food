@@ -49,9 +49,6 @@
         <activity
             android:name=".Screen.features_customer.ViewRestaurantList"
             android:exported="true" />
-        <activity
-            android:name=".Screen.authentication_authorization.LoginActivity"
-            android:exported="true" />
 
         <!-- Main Activity -->
         <activity
