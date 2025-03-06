@@ -6,37 +6,48 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.f_food.Adapter.FoodListAdapter;
 import com.example.f_food.Adapter.RestaurantListAdapter;
+import com.example.f_food.Entity.Food;
 import com.example.f_food.Entity.Restaurant;
 import com.example.f_food.R;
+import com.example.f_food.Repository.FoodRepository;
 import com.example.f_food.Repository.RestaurantRepository;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class ViewRestaurantList extends AppCompatActivity {
+public class ProductListRestaurant extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private RestaurantListAdapter adapter;
-    private List<Restaurant> restaurantList;
-
     private RestaurantRepository restaurantRepository;
+    private FoodListAdapter adapter;
+    private List<Food> foodList;
+
+    private FoodRepository foodRepository;
+
+    private ImageView headerImage;
+
+    private TextView tvRestaurantName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_view_restaurant_list);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.viewRestaurantList), (v, insets) -> {
+        setContentView(R.layout.activity_product_list_restaurant);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.foodListRestaurant), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -46,15 +57,14 @@ public class ViewRestaurantList extends AppCompatActivity {
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
                         View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         );
-        recyclerView = findViewById(R.id.recyclerViewListRestaurant);
+        recyclerView = findViewById(R.id.recyclerViewListProduct);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         init();
-        adapter = new RestaurantListAdapter(restaurantList, new RestaurantListAdapter.OnItemClickListener() {
+        adapter = new FoodListAdapter(this, foodList, new FoodListAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(int id) {
-                // Xử lý sự kiện click: Chuyển sang Activity mới
-                Intent intent = new Intent(ViewRestaurantList.this, ProductListRestaurant.class);
-                intent.putExtra("restaurantId", id);
+            public void onItemClick(int foodId) {
+                Intent intent = new Intent(ProductListRestaurant.this, FoodDetailActivity.class);
+                intent.putExtra("foodId", foodId);
                 startActivity(intent);
             }
         });
@@ -62,8 +72,22 @@ public class ViewRestaurantList extends AppCompatActivity {
     }
 
     private void init() {
+        Intent intent = getIntent();
+        foodRepository = new FoodRepository(this);
         restaurantRepository = new RestaurantRepository(this);
-        restaurantList = restaurantRepository.getAllRestaurants();
+        int idRestaurantIntent = intent.getIntExtra("restaurantId", -1);
+        var restaurant = restaurantRepository.getRestaurantById(idRestaurantIntent);
+        foodList = foodRepository.getFoodsByRestaurantId(idRestaurantIntent);
+        headerImage = findViewById(R.id.headerImage);
+        tvRestaurantName = findViewById(R.id.tvRestaurantName);
+        tvRestaurantName.setText(restaurant.getName());
+        if(restaurant.getImage() != null && !restaurant.getImage().isEmpty()) {
+            Picasso.get()
+                    .load(restaurant.getImage())
+                    .resize(500, 500)
+                    .centerCrop()
+                    .into(headerImage);
+        }
     }
 
 
@@ -83,5 +107,4 @@ public class ViewRestaurantList extends AppCompatActivity {
         }
         return super.onPrepareOptionsMenu(menu);
     }
-
-}
+    }

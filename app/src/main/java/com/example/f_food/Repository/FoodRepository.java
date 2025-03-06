@@ -58,7 +58,7 @@ public class FoodRepository {
         List<Food> sampleFoods = Arrays.asList(
                 new Food(1, "Margherita Pizza", "Classic cheese pizza", 8.99, "Pizza", "", "Available"),
                 new Food(1, "Pepperoni Pizza", "Pepperoni and cheese", 9.99, "Pizza", "", "Available"),
-                new Food(2, "Fried Chicken", "Crispy fried chicken", 7.99, "Fast Food", "", "Available"),
+                new Food(1, "Fried Chicken", "Crispy fried chicken", 7.99, "Fast Food", "", "Available"),
                 new Food(3, "Sushi Roll", "Fresh salmon sushi roll", 12.99, "Japanese", "", "Available")
         );
 
