@@ -2,9 +2,12 @@ package com.example.f_food.Screen.features_customer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,16 +24,23 @@ import com.example.f_food.Entity.Restaurant;
 import com.example.f_food.R;
 import com.example.f_food.Repository.FoodRepository;
 import com.example.f_food.Repository.RestaurantRepository;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class ProductListRestaurant extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+    private RestaurantRepository restaurantRepository;
     private FoodListAdapter adapter;
     private List<Food> foodList;
 
     private FoodRepository foodRepository;
+
+    private ImageView headerImage;
+
+    private TextView tvRestaurantName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +60,11 @@ public class ProductListRestaurant extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewListProduct);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         init();
-        adapter = new FoodListAdapter(foodList, new FoodListAdapter.OnItemClickListener() {
+        adapter = new FoodListAdapter(this, foodList, new FoodListAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(Food food) {
-                // Xử lý sự kiện click: Chuyển sang Activity mới
+            public void onItemClick(int foodId) {
                 Intent intent = new Intent(ProductListRestaurant.this, FoodDetailActivity.class);
-                //intent.putExtra("restaurant", restaurant); // Truyền dữ liệu qua Intent
+                intent.putExtra("foodId", foodId);
                 startActivity(intent);
             }
         });
@@ -63,8 +72,22 @@ public class ProductListRestaurant extends AppCompatActivity {
     }
 
     private void init() {
+        Intent intent = getIntent();
         foodRepository = new FoodRepository(this);
-        foodList = foodRepository.getFoodsByRestaurantId(1);
+        restaurantRepository = new RestaurantRepository(this);
+        int idRestaurantIntent = intent.getIntExtra("restaurantId", -1);
+        var restaurant = restaurantRepository.getRestaurantById(idRestaurantIntent);
+        foodList = foodRepository.getFoodsByRestaurantId(idRestaurantIntent);
+        headerImage = findViewById(R.id.headerImage);
+        tvRestaurantName = findViewById(R.id.tvRestaurantName);
+        tvRestaurantName.setText(restaurant.getName());
+        if(restaurant.getImage() != null && !restaurant.getImage().isEmpty()) {
+            Picasso.get()
+                    .load(restaurant.getImage())
+                    .resize(500, 500)
+                    .centerCrop()
+                    .into(headerImage);
+        }
     }
 
 

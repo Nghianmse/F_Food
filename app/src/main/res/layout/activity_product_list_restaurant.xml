@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="3"
     android:id="@+id/foodListRestaurant"
     tools:context=".Screen.features_customer.ProductListRestaurant">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:orientation="vertical"
+    android:layout_weight="2.7">
     <!-- Ảnh bìa -->
     <ImageView
         android:id="@+id/headerImage"
@@ -16,20 +22,11 @@
         android:scaleType="centerCrop"
         android:src="@drawable/pizza_banner"/>
 
-    <!-- Back button -->
-<!--    <ImageView-->
-<!--        android:id="@+id/backButton"-->
-<!--        android:layout_width="40dp"-->
-<!--        android:layout_height="40dp"-->
-<!--        android:layout_margin="16dp"-->
-<!--        android:background="@drawable/ic_back"-->
-<!--        android:tint="@android:color/white"/>-->
-
     <!-- Nội dung chính -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="-50dp"
         android:radius="20dp"
         app:cardElevation="4dp">
 
@@ -40,6 +37,7 @@
             android:padding="16dp">
 
             <TextView
+                android:id="@+id/tvRestaurantName"
                 android:text="The Pizza Place"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -52,26 +50,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
-<!--            &lt;!&ndash; Tabs (Combo deals, Classic Pizza, ...) &ndash;&gt;-->
-<!--            <com.google.android.material.tabs.TabLayout-->
-<!--                android:id="@+id/tabLayout"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:tabIndicatorColor="@color/black"-->
-<!--                app:tabSelectedTextColor="@color/black"-->
-<!--                app:tabTextColor="@color/yellow">-->
-<!--                <com.google.android.material.tabs.TabItem-->
-<!--                    android:text="Combo deals"/>-->
-<!--                <com.google.android.material.tabs.TabItem-->
-<!--                    android:text="Classic Pizza"/>-->
-<!--                <com.google.android.material.tabs.TabItem-->
-<!--                    android:text="Premium Pizza"/>-->
-<!--                <com.google.android.material.tabs.TabItem-->
-<!--                    android:text="Sides"/>-->
-<!--                <com.google.android.material.tabs.TabItem-->
-<!--                    android:text="Drinks"/>-->
-<!--            </com.google.android.material.tabs.TabLayout>-->
-
             <!-- Danh sách món ăn -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewListProduct"
@@ -79,12 +57,13 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+</LinearLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
         android:background="?android:attr/windowBackground"
         app:menu="@menu/bottom_nav_menu"/>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>
