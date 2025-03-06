@@ -48,7 +48,7 @@
             android:exported="true" />
         <activity
             android:name=".Screen.authentication_authorization.RestaurantSignUp"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Screen.features_customer.ManageAddress"
             android:exported="false" />

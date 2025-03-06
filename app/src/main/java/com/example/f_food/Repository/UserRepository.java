@@ -12,6 +12,7 @@ import java.util.List;
 
 public class UserRepository {
     private UserDAO userDAO;
+    private RestaurantRoomDatabase restaurantRoomDatabase;
 
     public UserRepository(Context context) {
         RestaurantRoomDatabase db = RestaurantRoomDatabase.getInstance(context);
@@ -62,5 +63,12 @@ public class UserRepository {
         for (User user : sampleUsers) {
             userDAO.insert(user);
         }
+    }
+    public User getUserByEmail(String email) {
+        return userDAO.getUserByEmail(email);
+    }
+
+    public User getUserByPhone(String phone) {
+        return userDAO.getUserByPhone(phone);
     }
 }

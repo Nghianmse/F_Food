@@ -33,6 +33,9 @@ public class Restaurant {
     @ColumnInfo(name = "image")
     private String image;
 
+    public Restaurant() {
+    }
+
     public Restaurant(int userId, String name, String address, String phone, String status, String image) {
         this.userId = userId;
         this.name = name;
