@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/main"
-    tools:context=".Screen.features_customer.admin_management.Customer_Management">
+    tools:context=".Screen.admin_management.Customer_Management">
 
     <!-- Back Button and Title -->
     <LinearLayout
