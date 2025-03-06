@@ -6,14 +6,16 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.f_food.Entity.Food;
+import com.example.f_food.Entity.Policy;
 import com.example.f_food.Entity.Restaurant;
 
-@Database(entities = {Restaurant.class, Food.class}, version = 2, exportSchema = false)
+@Database(entities = {Restaurant.class, Food.class, Policy.class}, version = 3, exportSchema = false)
 public abstract class RestaurantRoomDatabase extends RoomDatabase {
 
     public abstract RestaurantDAO restaurantDAO();
 
     public abstract FoodDAO foodDAO();
+    public  abstract  PolicyDAO policyDAO();
 
     private static volatile RestaurantRoomDatabase INSTANCE;
 
