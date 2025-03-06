@@ -13,7 +13,18 @@
         android:theme="@style/Theme.F_Food"
         tools:targetApi="31">
         <activity
-
+            android:name=".Screen.order_processing.DeliveryHistory"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.order_processing.DeliveryStatusUpdate"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.order_processing.AcceptShippingOrder"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.order_processing.PendingOrder"
+            android:exported="true" />
+        <activity
             android:name=".Screen.features_customer.FoodDetailActivity"
             android:exported="true" />
         <activity
@@ -37,7 +48,6 @@
         <activity
             android:name=".Screen.authentication_authorization.LoginActivity"
             android:exported="false" />
-
         <activity
             android:name=".Screen.features_customer.ViewRestaurantList"
             android:exported="true" />
