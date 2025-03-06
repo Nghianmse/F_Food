@@ -32,6 +32,9 @@ public class User {
     @ColumnInfo(name = "UpdatedAt")
     private String updatedAt;
 
+    public User() {
+    }
+
     public User(int userId, String fullName, String email, String password, String phone, String userType, String createdAt, String updatedAt) {
         this.userId = userId;
         this.fullName = fullName;

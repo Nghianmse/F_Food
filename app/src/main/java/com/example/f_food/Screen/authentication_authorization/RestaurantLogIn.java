@@ -24,7 +24,7 @@ import java.util.List;
 
 public class RestaurantLogIn extends AppCompatActivity {
     private EditText etEmail, etPassword;
-    private Button btnLogin, btnLoginForCustomer;
+    private Button btnLogin, btnLoginForCustomer, btnRegister;
     private TextView tvForgotPassword;
     private UserRepository userRepository;
     ImageView imgLogoLogin;
@@ -41,6 +41,7 @@ public class RestaurantLogIn extends AppCompatActivity {
         btnLoginForCustomer = findViewById(R.id.btnLoginForCustomer);  // Initialize the Login for Partner button
         tvForgotPassword = findViewById(R.id.tvForgotPassword);
         imgLogoLogin = findViewById(R.id.imgLogoLogin);
+        btnRegister = findViewById(R.id.btnRegister);
 
         Picasso.get()
                 .load(R.drawable.login)
@@ -55,6 +56,7 @@ public class RestaurantLogIn extends AppCompatActivity {
         btnLogin.setOnClickListener(v -> handleLogin());
         // Xử lý sự kiện khi nhấn nút đăng nhập cho partner
         btnLoginForCustomer.setOnClickListener(v -> navigateToRestaurantLogIn());
+        btnRegister.setOnClickListener(view -> navigateToRestaurantRegister());
     }
 
     private void handleLogin() {
@@ -92,6 +94,10 @@ public class RestaurantLogIn extends AppCompatActivity {
     }
     private void navigateToRestaurantLogIn() {
         Intent intent = new Intent(this, LoginActivity.class);  // Assuming RestaurantLogInActivity is your target activity
+        startActivity(intent);
+    }
+    private void navigateToRestaurantRegister() {
+        Intent intent = new Intent(this, RestaurantSignUp.class);  // Assuming RestaurantLogInActivity is your target activity
         startActivity(intent);
     }
 }

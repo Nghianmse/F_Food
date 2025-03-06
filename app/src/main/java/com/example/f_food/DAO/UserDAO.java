@@ -23,6 +23,9 @@ public interface UserDAO {
     @Query("SELECT * FROM Users WHERE Email = :email")
     User getUserByEmail(String email);
 
+    @Query("SELECT * FROM Users WHERE Phone = :phone")
+    User getUserByPhone(String phone); // Kiểm tra trùng số điện thoại
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(User user);
 
@@ -41,3 +44,4 @@ public interface UserDAO {
     @Query("DELETE FROM Users")
     void deleteAll();
 }
+
