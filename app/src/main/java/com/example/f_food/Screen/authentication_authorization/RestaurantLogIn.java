@@ -24,7 +24,7 @@ import java.util.List;
 
 public class RestaurantLogIn extends AppCompatActivity {
     private EditText etEmail, etPassword;
-    private Button btnLogin, btnLoginForPartner;
+    private Button btnLogin, btnLoginForCustomer;
     private TextView tvForgotPassword;
     private UserRepository userRepository;
     ImageView imgLogoLogin;
@@ -32,13 +32,13 @@ public class RestaurantLogIn extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_restaurant_log_in);
 
         // Ánh xạ UI
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
-        btnLoginForPartner = findViewById(R.id.btnLoginForPartner);  // Initialize the Login for Partner button
+        btnLoginForCustomer = findViewById(R.id.btnLoginForCustomer);  // Initialize the Login for Partner button
         tvForgotPassword = findViewById(R.id.tvForgotPassword);
         imgLogoLogin = findViewById(R.id.imgLogoLogin);
 
@@ -53,7 +53,8 @@ public class RestaurantLogIn extends AppCompatActivity {
 
         // Xử lý sự kiện khi nhấn nút đăng nhập
         btnLogin.setOnClickListener(v -> handleLogin());
-
+        // Xử lý sự kiện khi nhấn nút đăng nhập cho partner
+        btnLoginForCustomer.setOnClickListener(v -> navigateToRestaurantLogIn());
     }
 
     private void handleLogin() {
@@ -80,7 +81,7 @@ public class RestaurantLogIn extends AppCompatActivity {
                     finish();
                     return;
                 } else {
-                    Toast.makeText(this, "Bạn không phải là khách hàng!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Bạn không phải là nhà hàng!", Toast.LENGTH_SHORT).show();
                     return;
                 }
             }
@@ -89,5 +90,8 @@ public class RestaurantLogIn extends AppCompatActivity {
         // Nếu không tìm thấy user phù hợp
         Toast.makeText(this, "Email hoặc mật khẩu không đúng!", Toast.LENGTH_SHORT).show();
     }
-
+    private void navigateToRestaurantLogIn() {
+        Intent intent = new Intent(this, LoginActivity.class);  // Assuming RestaurantLogInActivity is your target activity
+        startActivity(intent);
+    }
 }
