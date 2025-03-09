@@ -27,7 +27,6 @@
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/btm_layout_image"
             android:layout_marginEnd="8dp"/>
 
         <LinearLayout
@@ -80,7 +79,6 @@
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/east_end_image"
             android:layout_marginEnd="8dp"/>
 
         <LinearLayout
@@ -133,7 +131,6 @@
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/hsr_layout_image"
             android:layout_marginEnd="8dp"/>
 
         <LinearLayout
@@ -185,7 +182,6 @@
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/indranagar_image"
             android:layout_marginEnd="8dp"/>
 
         <LinearLayout

@@ -4,11 +4,13 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
+    android:id="@+id/hihi"
     android:padding="24dp"
     android:background="@android:color/white">
 
     <!-- Logo -->
     <ImageView
+        android:id="@+id/imgLogoLogin"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:src="@drawable/login"

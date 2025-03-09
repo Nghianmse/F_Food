@@ -46,7 +46,6 @@ tools:context=".Screen.features_customer.admin_management.Payment_Transactions_M
         android:layout_weight="1"
         android:hint="Search by ID or Name"
         android:padding="8dp"
-        android:background="@drawable/rounded_edittext"
         android:inputType="text" />
 
     <Button
