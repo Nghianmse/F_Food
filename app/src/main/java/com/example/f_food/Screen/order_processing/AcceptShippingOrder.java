@@ -1,4 +1,4 @@
-package com.example.f_food.Screen.features_customer.admin_management;
+package com.example.f_food.Screen.order_processing;
 
 import android.os.Bundle;
 
@@ -10,14 +10,14 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.f_food.R;
 
-public class Policy_Management extends AppCompatActivity {
+public class AcceptShippingOrder extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_policy_management);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        setContentView(R.layout.activity_accept_shipping_order);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.acceptShippingOrder), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;

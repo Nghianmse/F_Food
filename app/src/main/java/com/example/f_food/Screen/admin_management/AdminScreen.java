@@ -1,4 +1,4 @@
-package com.example.f_food.Screen.features_customer.admin_management;
+package com.example.f_food.Screen.admin_management;
 
 import android.os.Bundle;
 

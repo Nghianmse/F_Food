@@ -6,7 +6,8 @@
     android:orientation="vertical"
     android:id="@+id/hihi"
     android:padding="24dp"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:id="@+id/login">
 
     <!-- Logo -->
     <ImageView
@@ -65,7 +66,6 @@
         android:layout_marginTop="8dp"
         android:layout_gravity="end"
         android:id="@+id/tvForgotPassword"/>
-
     <!-- Login Button -->
     <Button
         android:id="@+id/btnLogin"
@@ -76,5 +76,39 @@
         android:backgroundTint="@android:color/holo_blue_dark"
         android:textColor="@android:color/white"
         android:layout_marginTop="16dp"/>
+
+    <!-- "If you don't have an account" Text -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="If you don't have an account, click to Register"
+        android:textSize="14sp"
+        android:textColor="@android:color/darker_gray"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center"/>
+
+    <!-- Register Button -->
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Register"
+        android:textSize="16sp"
+        android:backgroundTint="@android:color/holo_green_light"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Login for Partner Button -->
+    <Button
+        android:id="@+id/btnLoginForPartner"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Login for Partner"
+        android:textSize="16sp"
+        android:backgroundTint="@android:color/holo_blue_light"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="8dp"/>
+
+
 
 </LinearLayout>

@@ -4,156 +4,157 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Screen.features_customer.admin_management.AdminScreen">
+    tools:context=".Screen.admin_management.AdminScreen">
 
-<!--    <ImageView-->
-<!--        android:id="@+id/logo"-->
-<!--        android:layout_width="180dp"-->
-<!--        android:layout_height="180dp"-->
-<!--        android:src="@drawable/ic_logo"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent" />-->
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:src="@drawable/login"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/tvDashboard"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Dashboard"-->
-<!--        android:textSize="30sp"-->
-<!--        android:textStyle="bold"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/logo"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent" />-->
+    <!-- Tiêu đề Dashboard -->
+    <TextView
+        android:id="@+id/tvDashboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dashboard"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-<!--    &lt;!&ndash; CardView chứa các tính năng &ndash;&gt;-->
-<!--    <androidx.cardview.widget.CardView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="16dp"-->
-<!--        app:cardCornerRadius="12dp"-->
-<!--        app:cardElevation="6dp"-->
-<!--        android:padding="50dp"-->
-<!--        android:layout_gravity="center"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/tvDashboard"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent">-->
+    <!-- CardView chứa các tính năng -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp"
+        android:padding="50dp"
+        android:layout_gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/tvDashboard"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-<!--        <GridLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:columnCount="3"-->
-<!--            android:rowCount="2"-->
-<!--            android:padding="16dp"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:layout_marginBottom="16dp">-->
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="3"
+            android:rowCount="2"
+            android:padding="16dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp">
 
-<!--            &lt;!&ndash; Các nút tính năng &ndash;&gt;-->
-<!--            <LinearLayout-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="vertical"-->
-<!--                android:gravity="center"-->
-<!--                android:padding="12dp"-->
-<!--                android:layout_gravity="center">-->
-<!--                <ImageView-->
-<!--                    android:layout_width="48dp"-->
-<!--                    android:layout_height="48dp"-->
-<!--                    android:src="@drawable/ic_order" />-->
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Order" />-->
-<!--            </LinearLayout>-->
+            <!-- Các nút tính năng -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="12dp"
+                android:layout_gravity="center">
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/baseline_child_friendly_24" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Order" />
+            </LinearLayout>
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="vertical"-->
-<!--                android:gravity="center"-->
-<!--                android:padding="12dp"-->
-<!--                android:layout_gravity="center">-->
-<!--                <ImageView-->
-<!--                    android:layout_width="48dp"-->
-<!--                    android:layout_height="48dp"-->
-<!--                    android:src="@drawable/ic_shipper" />-->
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Shipper" />-->
-<!--            </LinearLayout>-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="12dp"
+                android:layout_gravity="center">
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/baseline_barcode_reader_24" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Shipper" />
+            </LinearLayout>
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="vertical"-->
-<!--                android:gravity="center"-->
-<!--                android:padding="12dp"-->
-<!--                android:layout_gravity="center">-->
-<!--                <ImageView-->
-<!--                    android:layout_width="48dp"-->
-<!--                    android:layout_height="48dp"-->
-<!--                    android:src="@drawable/ic_customer" />-->
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Customer" />-->
-<!--            </LinearLayout>-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="12dp"
+                android:layout_gravity="center">
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/user_ex" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Customer" />
+            </LinearLayout>
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="vertical"-->
-<!--                android:gravity="center"-->
-<!--                android:padding="12dp"-->
-<!--                android:layout_gravity="center">-->
-<!--                <ImageView-->
-<!--                    android:layout_width="48dp"-->
-<!--                    android:layout_height="48dp"-->
-<!--                    android:src="@drawable/ic_policy" />-->
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Policy" />-->
-<!--            </LinearLayout>-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="12dp"
+                android:layout_gravity="center">
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/baseline_auto_stories_24" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Policy" />
+            </LinearLayout>
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="vertical"-->
-<!--                android:gravity="center"-->
-<!--                android:padding="12dp"-->
-<!--                android:layout_gravity="center">-->
-<!--                <ImageView-->
-<!--                    android:layout_width="48dp"-->
-<!--                    android:layout_height="48dp"-->
-<!--                    android:src="@drawable/ic_restaurant" />-->
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Restaurant" />-->
-<!--            </LinearLayout>-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="12dp"
+                android:layout_gravity="center">
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/baseline_assured_workload_24" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Restaurant" />
+            </LinearLayout>
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="vertical"-->
-<!--                android:gravity="center"-->
-<!--                android:padding="12dp"-->
-<!--                android:layout_gravity="center">-->
-<!--                <ImageView-->
-<!--                    android:layout_width="48dp"-->
-<!--                    android:layout_height="48dp"-->
-<!--                    android:src="@drawable/ic_report" />-->
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Report" />-->
-<!--            </LinearLayout>-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="12dp"
+                android:layout_gravity="center">
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/isushi" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Report" />
+            </LinearLayout>
 
-<!--        </GridLayout>-->
-<!--    </androidx.cardview.widget.CardView>-->
+        </GridLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
