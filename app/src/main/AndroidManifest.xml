@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -17,7 +17,7 @@
             android:exported="true" />
         <activity
             android:name=".Screen.order_processing.DeliveryHistory"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Screen.order_processing.PendingOrder"
             android:exported="true" />
@@ -26,28 +26,31 @@
             android:exported="true" />
         <activity
             android:name=".Screen.authentication_authorization.RestaurantLogIn"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Screen.authentication_authorization.RestaurantSignUp"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Screen.features_customer.ManageAddress"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Screen.features_customer.ReviewAndRating"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Screen.features_customer.OrderTracking"
             android:exported="true" />
         <activity
             android:name=".Screen.features_customer.OrderHistory"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Screen.authentication_authorization.LoginActivity"
-            android:exported="false" />
+            android:exported="true" />
 
         <activity
             android:name=".Screen.features_customer.ViewRestaurantList"
+            android:exported="true" />
+        <activity
+            android:name=".Screen.features_customer.ProductListRestaurant"
             android:exported="true" />
 
         <!-- Main Activity -->
