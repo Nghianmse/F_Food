@@ -15,6 +15,13 @@
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
       <SelectionState runConfigName="ProductListRestaurant">
+      <SelectionState runConfigName="AcceptShippingOrder">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="DeliveryStatusUpdate">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="DeliveryHistory">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

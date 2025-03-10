@@ -12,6 +12,7 @@ import com.example.f_food.Entity.Policy;
 import com.example.f_food.Entity.Restaurant;
 import com.example.f_food.Entity.Review;
 import com.example.f_food.Entity.User;
+import com.example.f_food.Entity.OrderDetail;
 
 @Database(entities = {Restaurant.class, Food.class, User.class, Policy.class, Order.class, OrderDetail.class}, version = 9, exportSchema = false)
 public abstract class RestaurantRoomDatabase extends RoomDatabase {
@@ -28,6 +29,7 @@ public abstract class RestaurantRoomDatabase extends RoomDatabase {
     public abstract  OrderDetailDAO orderDetailDAO();
 
 //    public abstract  ReviewDAO reviewDAO();
+
     private static volatile RestaurantRoomDatabase INSTANCE;
 
     public static RestaurantRoomDatabase getInstance(Context context) {
