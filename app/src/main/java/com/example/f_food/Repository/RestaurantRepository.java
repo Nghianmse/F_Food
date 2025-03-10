@@ -53,10 +53,10 @@ public class RestaurantRepository {
 
     private void insertSampleData() {
         List<Restaurant> sampleRestaurants = Arrays.asList(
-                new Restaurant(1, "Pizza Hut", "Ha Noi", "012345", "Open", ""),
-                new Restaurant(2, "KFC", "Ha Noi", "012345", "Open", ""),
-                new Restaurant(3, "Sushi Bar", "Ha Noi", "012345", "Open", ""),
-                new Restaurant(4, "McDonald's", "Ha Noi", "012345", "Open", "")
+                new Restaurant(1, "Pizza Hut", "Ha Noi, My Dinh", "012345", "Open", ""),
+                new Restaurant(2, "KFC", "Ha Noi, Dong Da", "012345", "Open", ""),
+                new Restaurant(3, "Sushi Bar", "Ha Noi , Ha Dong", "012345", "Open", ""),
+                new Restaurant(4, "McDonald's", "Ha Noi, Ba Dinh", "012345", "Open", "")
         );
 
         for (Restaurant restaurant : sampleRestaurants) {
