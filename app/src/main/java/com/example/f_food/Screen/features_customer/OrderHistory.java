@@ -1,26 +1,33 @@
 package com.example.f_food.Screen.features_customer;
 
 import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.f_food.Adapter.OrderHistoryAdapter;
+import com.example.f_food.Entity.Order;
 import com.example.f_food.R;
+import com.example.f_food.DAO.RestaurantRoomDatabase;
+import java.util.List;
 
 public class OrderHistory extends AppCompatActivity {
+
+    private RecyclerView recyclerView;
+    private OrderHistoryAdapter orderAdapter;
+    private List<Order> orderList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_order_history);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        recyclerView = findViewById(R.id.orderHistory);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Fetch orders with status "Delivered" or "Cancelled"
+        orderList = RestaurantRoomDatabase.getInstance(this).orderDAO().getDeliveredOrCancelledOrders();
+        orderAdapter = new OrderHistoryAdapter(orderList, this);
+        recyclerView.setAdapter(orderAdapter);
     }
 }

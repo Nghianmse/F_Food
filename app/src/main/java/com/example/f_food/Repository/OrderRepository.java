@@ -1,6 +1,8 @@
 package com.example.f_food.Repository;
 
 import android.content.Context;
+
+import com.example.f_food.DAO.FoodWithOrder;
 import com.example.f_food.DAO.OrderDAO;
 import com.example.f_food.DAO.RestaurantRoomDatabase;
 import com.example.f_food.DAO.RestaurantDAO;
@@ -63,6 +65,14 @@ public class OrderRepository {
 
     public void update(Order order) {
         orderDAO.update(order);
+    }
+
+    public List<FoodWithOrder> getFoodNamesByOrderId(int orderId) {
+        return orderDAO.getFoodNamesByOrderId(orderId);
+    }
+
+    public List<FoodWithOrder> getImageByOrderId(int orderId) {
+        return orderDAO.getImageByOrderId(orderId);
     }
 
     private void insertSampleData() {

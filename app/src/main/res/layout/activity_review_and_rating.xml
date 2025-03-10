@@ -3,23 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
-
-    <!-- Tên người dùng -->
-    <EditText
-        android:id="@+id/editTextUserName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Tên người dùng"
-        android:inputType="textPersonName" />
-
-    <!-- Ảnh món ăn -->
-    <ImageView
-        android:id="@+id/imageViewFood"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/login" />
+    android:padding="16dp"
+    android:id="@+id/reviewAndRating">
 
     <!-- Tên món ăn -->
     <TextView
@@ -28,6 +13,12 @@
         android:layout_height="wrap_content"
         android:text="Tên món ăn"
         android:textSize="18sp"
+        android:layout_marginTop="16dp"/>
+    <!-- Ảnh món ăn -->
+    <ImageView
+        android:id="@+id/imageViewFood"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:layout_marginTop="16dp"/>
 
     <!-- Đánh giá sao -->
@@ -52,10 +43,10 @@
 
     <!-- Nút Đóng -->
     <Button
-        android:id="@+id/buttonClose"
+        android:id="@+id/buttonSend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Đóng"
+        android:text="Gửi"
         android:layout_marginTop="16dp"
         android:layout_gravity="center" />
 
