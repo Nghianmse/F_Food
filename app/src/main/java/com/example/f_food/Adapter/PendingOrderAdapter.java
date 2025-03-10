@@ -1,13 +1,12 @@
 package com.example.f_food.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,23 +15,27 @@ import com.example.f_food.Entity.Order;
 import com.example.f_food.Entity.Restaurant;
 import com.example.f_food.R;
 import com.example.f_food.Repository.RestaurantRepository;
+import com.example.f_food.Screen.order_processing.AcceptShippingOrder;
 
 import java.util.List;
 
 public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapter.ViewHolder> {
-    private List<Order> orderList;
-    private OnOrderClickListener listener;
-    private RestaurantRepository restaurantRepository;
+    private final List<Order> orderList;
+    private final RestaurantRepository restaurantRepository;
+    private final Context context;
+    private final OnOrderClickListener listener; // Lưu listener
 
+    // Interface xử lý sự kiện khi nhấn vào một đơn hàng
     public interface OnOrderClickListener {
         void onOrderClick(Order order);
     }
 
-    // Constructor nhận Context để khởi tạo database
+    // Constructor nhận Context, danh sách Order và listener
     public PendingOrderAdapter(Context context, List<Order> orderList, OnOrderClickListener listener) {
+        this.context = context;
         this.orderList = orderList;
         this.listener = listener;
-        this.restaurantRepository = new RestaurantRepository(context); // Khởi tạo repository với context
+        this.restaurantRepository = new RestaurantRepository(context);
     }
 
     @NonNull
@@ -46,20 +49,32 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Order order = orderList.get(position);
 
-        // Lấy thông tin nhà hàng từ database dựa trên restaurantId
-        Restaurant restaurant = restaurantRepository.getRestaurantById(order.getRestaurantId());
-
-        if (restaurant != null) {
-            holder.tvRestaurantAddress.setText(restaurant.getAddress()); // Hiển thị địa chỉ nhà hàng
-        } else {
-            holder.tvRestaurantAddress.setText("Unknown Address"); // Nếu không tìm thấy
+        // Kiểm tra order có hợp lệ không
+        if (!(order instanceof Order)) {
+            return;
         }
 
-        holder.tvDeliveryAddress.setText("User Address"); // Bạn có thể cập nhật nếu có dữ liệu
+        // Lấy thông tin nhà hàng từ database dựa trên restaurantId
+        Restaurant restaurant = restaurantRepository.getRestaurantById(order.getRestaurantId());
+        String restaurantAddress = (restaurant != null) ? restaurant.getAddress() : "Unknown Address";
 
+        // Hiển thị dữ liệu lên ViewHolder
+        holder.tvRestaurantAddress.setText(restaurantAddress);
+        holder.tvDeliveryAddress.setText("User Address"); // Dữ liệu thực tế từ DB
+
+        // Khi nhấn nút Details -> Gọi listener và chuyển sang AcceptShippingOrder
         holder.btnDetails.setOnClickListener(v -> {
             listener.onOrderClick(order);
-            Toast.makeText(v.getContext(), "Order ID: " + order.getOrderId(), Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(context, AcceptShippingOrder.class);
+            intent.putExtra("orderId", order.getOrderId());
+            intent.putExtra("restaurantAddress", restaurantAddress);
+            intent.putExtra("deliveryAddress", "User's Address"); // Lấy từ DB nếu có
+            intent.putExtra("deliveryTime", order.getCreatedAt());
+            intent.putExtra("foodOrder", "Food details here"); // Lấy từ DB nếu có
+            intent.putExtra("cost", order.getTotalPrice());
+
+            context.startActivity(intent);
         });
     }
 
@@ -69,15 +84,12 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView imgDeliveryIcon;
-        TextView tvRestaurantAddress, tvArrow, tvDeliveryAddress;
+        TextView tvRestaurantAddress, tvDeliveryAddress;
         Button btnDetails;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgDeliveryIcon = itemView.findViewById(R.id.imgDeliveryIcon);
             tvRestaurantAddress = itemView.findViewById(R.id.tvRestaurantAddress);
-            tvArrow = itemView.findViewById(R.id.tvArrow);
             tvDeliveryAddress = itemView.findViewById(R.id.tvDeliveryAddress);
             btnDetails = itemView.findViewById(R.id.btnDetails);
         }
