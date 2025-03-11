@@ -56,10 +56,10 @@ public class FoodRepository {
 
     private void insertSampleData() {
         List<Food> sampleFoods = Arrays.asList(
-                new Food(1, "Margherita Pizza", "Classic cheese pizza", 8.99, "Pizza", "", "Available"),
-                new Food(1, "Pepperoni Pizza", "Pepperoni and cheese", 9.99, "Pizza", "", "Available"),
-                new Food(1, "Fried Chicken", "Crispy fried chicken", 7.99, "Fast Food", "", "Available"),
-                new Food(3, "Sushi Roll", "Fresh salmon sushi roll", 12.99, "Japanese", "", "Available")
+                new Food(1, "Margherita Pizza", "Classic cheese pizza", 8.99, 1, "https://media.istockphoto.com/id/184946701/photo/pizza.jpg?s=612x612&w=0&k=20&c=97rc0VIi-s3mn4xe4xDy9S-XJ_Ohbn92XaEMaiID_eY=", "Available"),
+                new Food(1, "Pepperoni Pizza", "Pepperoni and cheese", 9.99, 2, "https://www.allrecipes.com/thmb/rarUQLSXEvsTwnbu-0Zm5NDNtBE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Pepperoni-Pizza-Cheese-Drip-Chips-2000-15cec53ba155400aa33587c1561f01d5.jpg", "Available"),
+                new Food(1, "Fried Chicken", "Crispy fried chicken", 7.99, 3, "https://cravinghomecooked.com/wp-content/uploads/2019/08/crispy-fried-chicken-1.jpg", "Available"),
+                new Food(3, "Sushi Roll", "Fresh salmon sushi roll", 12.99, 4, "https://norecipes.com/wp-content/uploads/2022/02/shrimp-tempura-roll-004.jpg", "Available")
         );
 
         for (Food food : sampleFoods) {
