@@ -1,7 +1,9 @@
 package com.example.f_food.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,21 +69,38 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.ViewHo
         }
 
         public void bind(final Food food, final OnItemClickListener listener) {
+            Context context = itemView.getContext();
             productName.setText(food.getName());
             productDescription.setText(food.getDescription());
+
+            // Định dạng giá tiền
             NumberFormat formatter = NumberFormat.getInstance(new Locale("vi", "VN"));
             productPrice.setText(formatter.format(food.getPrice()) + " VNĐ");
+
             productStockStatus.setText(food.getStockStatus());
-            if(food.getImageUrl() != null && !food.getImageUrl().isEmpty()) {
-                Picasso.get()
-                        .load(food.getImageUrl())
-                        .resize(500, 500)
-                        .centerCrop()
-                        .into(productImage);
+
+            if (food.getImageUrl() != null && !food.getImageUrl().isEmpty()) {
+                Uri imageUri = Uri.parse(food.getImageUrl());
+                    // Load ảnh từ URL bằng Picasso
+                    Picasso.get()
+                            .load(imageUri)
+                            .resize(500, 500)
+                            .centerCrop()
+                            .into(productImage);
+
+            } else {
+                // Nếu không có ảnh, đặt ảnh mặc định
+                productImage.setImageResource(R.drawable.bg_counter);
             }
-            if(Objects.equals(food.getStockStatus(), "Available")) {
-                productStockStatus.setTextColor(Color.parseColor("#006400"));
-            } else productStockStatus.setTextColor(Color.RED);
+
+            // Thay đổi màu trạng thái kho hàng
+            if (Objects.equals(food.getStockStatus(), "Available")) {
+                productStockStatus.setTextColor(Color.parseColor("#006400")); // Xanh đậm
+            } else {
+                productStockStatus.setTextColor(Color.RED);
+            }
+
+            // Xử lý sự kiện click
             itemView.setOnClickListener(v -> listener.onItemClick(food.getFoodId()));
         }
     }

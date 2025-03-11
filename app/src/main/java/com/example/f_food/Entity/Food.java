@@ -23,8 +23,8 @@ public class Food {
     @ColumnInfo(name = "price")
     private double price;
 
-    @ColumnInfo(name = "category")
-    private String category;
+    @ColumnInfo(name = "category_id")
+    private int categoryId;
 
     @ColumnInfo(name = "image_url")
     private String imageUrl;
@@ -32,12 +32,15 @@ public class Food {
     @ColumnInfo(name = "stock_status")
     private String stockStatus;
 
-    public Food(int restaurantId, String name, String description, double price, String category, String imageUrl, String stockStatus) {
+
+    public Food(){}
+
+    public Food(int restaurantId, String name, String description, double price, int categoryId, String imageUrl, String stockStatus) {
         this.restaurantId = restaurantId;
         this.name = name;
         this.description = description;
         this.price = price;
-        this.category = category;
+        this.categoryId = categoryId;
         this.imageUrl = imageUrl;
         this.stockStatus = stockStatus;
     }
@@ -82,12 +85,12 @@ public class Food {
         this.price = price;
     }
 
-    public String getCategory() {
-        return category;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategoryId(int category) {
+        this.categoryId = category;
     }
 
     public String getImageUrl() {

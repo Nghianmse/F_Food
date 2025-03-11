@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.f_food.DAO.CartManager;
 import com.example.f_food.Entity.Food;
 import com.example.f_food.R;
 import com.example.f_food.Repository.FoodRepository;
@@ -30,6 +32,9 @@ public class FoodDetailActivity extends AppCompatActivity {
 
     ImageView dishImage;
 
+    Button addToCart;
+
+    private CartManager cartManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,17 +50,27 @@ public class FoodDetailActivity extends AppCompatActivity {
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
                         View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         );
-        init();
+        foodRepository = new FoodRepository(this);
+        Intent intent = getIntent();
+        int id = intent.getIntExtra("foodId", -1);
+        Food food = foodRepository.getFoodById(id);
+        init(food);
+        cartManager = CartManager.getInstance();
+        addToCart = findViewById(R.id.addToCart);
+        addToCart.setOnClickListener(v -> {
+            cartManager.addToCart(food);
+            Intent intent1 = new Intent(FoodDetailActivity.this, activity_cart.class);
+            startActivity(intent1);
+        });
+
     }
 
-    private void init() {
+    private void init(Food food) {
         dishName = findViewById(R.id.dishName);
         price = findViewById(R.id.price);
         description = findViewById(R.id.description);
         dishImage = findViewById(R.id.dishImage);
-        Intent intent = getIntent();
-        foodRepository = new FoodRepository(this);
-        Food food = foodRepository.getFoodById(intent.getIntExtra("foodId", -1));
+
         dishName.setText(food.getName());
         NumberFormat formatter = NumberFormat.getInstance(new Locale("vi", "VN"));
         price.setText("Giá tiền: " + formatter.format(food.getPrice()) + " VNĐ");

@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
+    android:id="@+id/hihi"
     android:padding="24dp"
     android:background="@android:color/white"
     android:id="@+id/login">
