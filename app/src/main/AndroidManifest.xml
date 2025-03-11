@@ -25,6 +25,9 @@
             android:name=".Screen.features_customer.activity_cart"
             android:exported="true" />
         <activity
+            android:name=".Screen.features_customer.OrderHistoryDetail"
+            android:exported="false" />
+        <activity
             android:name=".Screen.order_processing.DeliveryStatusUpdate"
             android:exported="true" />
         <activity

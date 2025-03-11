@@ -1,4 +1,3 @@
-/*
 package com.example.f_food.DAO;
 
 import androidx.room.Dao;
@@ -15,34 +14,46 @@ import java.util.List;
 @Dao
 public interface ReviewDAO {
 
-    @Query("SELECT * FROM Reviews")
+    // Lấy tất cả các đánh giá
+    @Query("SELECT * FROM review")
     List<Review> getAllReviews();
 
-    @Query("SELECT * FROM Reviews WHERE review_id = :id")
+    // Lấy một đánh giá theo review_id
+    @Query("SELECT * FROM review WHERE review_id = :id")
     Review getReviewById(int id);
 
-    @Query("SELECT * FROM Reviews WHERE restaurant_id = :restaurantId")
+    // Lấy các đánh giá theo restaurant_id
+    @Query("SELECT * FROM review WHERE restaurant_id = :restaurantId")
     List<Review> getReviewsByRestaurantId(int restaurantId);
 
-    @Query("SELECT * FROM Reviews WHERE user_id = :userId")
+    // Lấy các đánh giá theo user_id
+    @Query("SELECT * FROM review WHERE user_id = :userId")
     List<Review> getReviewsByUserId(int userId);
 
+    // Thêm một đánh giá
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Review review);
 
+    // Thêm nhiều đánh giá
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<Review> reviews);
 
+    // Cập nhật một đánh giá
     @Update
     void update(Review review);
 
+    // Xóa một đánh giá
     @Delete
     void delete(Review review);
 
-    @Query("DELETE FROM Reviews WHERE review_id = :id")
+    // Xóa đánh giá theo review_id
+    @Query("DELETE FROM review WHERE review_id = :id")
     void deleteById(int id);
 
-    @Query("DELETE FROM Reviews")
+    // Xóa tất cả các đánh giá
+    @Query("DELETE FROM review")
     void deleteAll();
+
+    @Query("SELECT * FROM review WHERE restaurant_id = :restaurantId AND food_name = :foodName")
+    Review getReviewByRestaurantAndFoodName(int restaurantId, String foodName);
 }
-*/

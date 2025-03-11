@@ -57,4 +57,5 @@ public interface OrderDAO {
             "WHERE o.order_id = :orderId")
     List<FoodWithOrder> getImageByOrderId(int orderId);
     // A custom class to hold the results of the join query
+
 }
