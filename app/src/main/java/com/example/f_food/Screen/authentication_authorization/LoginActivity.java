@@ -11,9 +11,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.f_food.Entity.OrderDetail;
 import com.example.f_food.Entity.User;
 import com.example.f_food.MainActivity;
 import com.example.f_food.R;
+import com.example.f_food.Repository.OrderDetailRepository;
 import com.example.f_food.Repository.UserRepository;
 import com.example.f_food.Screen.features_customer.OrderHistory;
 import com.squareup.picasso.Picasso;
@@ -49,7 +51,6 @@ public class LoginActivity extends AppCompatActivity {
 
         // Khởi tạo repository
         userRepository = new UserRepository(this);
-
         // Xử lý sự kiện khi nhấn nút đăng nhập
         btnLogin.setOnClickListener(v -> handleLogin());
 

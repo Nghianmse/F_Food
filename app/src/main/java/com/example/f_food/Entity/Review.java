@@ -2,10 +2,10 @@ package com.example.f_food.Entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
-@Entity
- public class Review {
+
+@Entity(tableName = "review")
+public class Review {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "review_id")
@@ -26,14 +26,25 @@ import androidx.room.PrimaryKey;
     @ColumnInfo(name = "created_at")
     private String createdAt;
 
-    public Review(int userId, int restaurantId, int rating, String comment, String createdAt) {
+    // Thêm trường foodName và foodImage
+    @ColumnInfo(name = "food_name")
+    private String foodName;
+
+    @ColumnInfo(name = "food_image")
+    private String foodImage;
+
+    // Constructor với foodName và foodImage
+    public Review(int userId, int restaurantId, int rating, String comment, String createdAt, String foodName, String foodImage) {
         this.userId = userId;
         this.restaurantId = restaurantId;
         this.rating = rating;
         this.comment = comment;
         this.createdAt = createdAt;
+        this.foodName = foodName;
+        this.foodImage = foodImage;
     }
 
+    // Getter và setter cho các trường
     public int getReviewId() {
         return reviewId;
     }
@@ -83,5 +94,22 @@ import androidx.room.PrimaryKey;
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+
+    // Getter và setter cho foodName và foodImage
+    public String getFoodName() {
+        return foodName;
+    }
+
+    public void setFoodName(String foodName) {
+        this.foodName = foodName;
+    }
+
+    public String getFoodImage() {
+        return foodImage;
+    }
+
+    public void setFoodImage(String foodImage) {
+        this.foodImage = foodImage;
     }
 }
