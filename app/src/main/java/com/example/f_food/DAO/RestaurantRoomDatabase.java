@@ -8,11 +8,16 @@ import androidx.room.RoomDatabase;
 import com.example.f_food.Entity.Category;
 import com.example.f_food.Entity.Food;
 import com.example.f_food.Entity.Order;
+import com.example.f_food.Entity.OrderDetail;
 import com.example.f_food.Entity.Policy;
 import com.example.f_food.Entity.Restaurant;
+import com.example.f_food.Entity.Review;
 import com.example.f_food.Entity.User;
+import com.example.f_food.Entity.OrderDetail;
+
 
 @Database(entities = {Restaurant.class, Food.class, User.class, Policy.class, Order.class, Category.class}, version = 9, exportSchema = false)
+
 public abstract class RestaurantRoomDatabase extends RoomDatabase {
 
     public abstract RestaurantDAO restaurantDAO();
@@ -25,6 +30,10 @@ public abstract class RestaurantRoomDatabase extends RoomDatabase {
     public abstract  OrderDAO orderDAO();
 
     public abstract  CategoryDAO categoryDAO();
+    public abstract  OrderDetailDAO orderDetailDAO();
+
+//    public abstract  ReviewDAO reviewDAO();
+
     private static volatile RestaurantRoomDatabase INSTANCE;
 
     public static RestaurantRoomDatabase getInstance(Context context) {

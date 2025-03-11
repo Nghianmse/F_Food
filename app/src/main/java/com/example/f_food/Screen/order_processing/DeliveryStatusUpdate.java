@@ -1,4 +1,4 @@
-package com.example.f_food.Screen.features_customer;
+package com.example.f_food.Screen.order_processing;
 
 import android.os.Bundle;
 
@@ -10,14 +10,14 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.f_food.R;
 
-public class ReviewAndRating extends AppCompatActivity {
+public class DeliveryStatusUpdate extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_review_and_rating);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.reviewAndRating), (v, insets) -> {
+        setContentView(R.layout.activity_delivery_status_update);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.deliveryStatusUpdate), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
