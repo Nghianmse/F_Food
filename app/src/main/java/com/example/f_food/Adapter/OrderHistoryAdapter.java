@@ -89,6 +89,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             intent.putExtra("food_name", holder.tvFoodName.getText().toString()); // Truyền tên món ăn
             intent.putExtra("food_image", image.get(0).image_url);
             intent.putExtra("restaurant_id", order.getRestaurantId());
+            intent.putExtra("user_id", order.getUserId());
             // Kiểm tra xem người dùng đã đánh giá món ăn này chưa
             ReviewDAO reviewDAO = RestaurantRoomDatabase.getInstance(context).reviewDAO();
             Review existingReview = reviewDAO.getReviewByRestaurantAndFoodName(order.getRestaurantId(), holder.tvFoodName.getText().toString());

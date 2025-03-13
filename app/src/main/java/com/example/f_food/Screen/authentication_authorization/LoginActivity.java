@@ -1,7 +1,10 @@
 package com.example.f_food.Screen.authentication_authorization;
 
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +20,7 @@ import com.example.f_food.MainActivity;
 import com.example.f_food.R;
 import com.example.f_food.Repository.OrderDetailRepository;
 import com.example.f_food.Repository.UserRepository;
+import com.example.f_food.Screen.features_customer.ManageAddress;
 import com.example.f_food.Screen.features_customer.OrderHistory;
 import com.squareup.picasso.Picasso;
 
@@ -63,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
         String password = etPassword.getText().toString().trim();
 
         if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
+            showAlertDialog("Vui lòng nhập đầy đủ thông tin!");
             return;
         }
 
@@ -74,24 +78,36 @@ public class LoginActivity extends AppCompatActivity {
             if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
                 // Kiểm tra UserType là "Customer"
                 if ("Customer".equals(user.getUserType())) {
+                    // Lưu userId vào SharedPreferences
+                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putInt("userId", user.getUserId()); // Giả sử `getId()` trả về userId
+                    editor.apply();
+
                     Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
 
-                    // Chuyển sang màn hình khác sau khi đăng nhập
-                    Intent intent = new Intent(this, OrderHistory.class);
+                    // Chuyển sang màn hình OrderHistory
+                    Intent intent = new Intent(this, ManageAddress.class);
                     startActivity(intent);
                     finish();
                     return;
                 } else {
-                    Toast.makeText(this, "Bạn không phải là khách hàng!", Toast.LENGTH_SHORT).show();
+                    showAlertDialog("Email hoặc mật khẩu không đúng!");
                     return;
                 }
             }
         }
 
         // Nếu không tìm thấy user phù hợp
-        Toast.makeText(this, "Email hoặc mật khẩu không đúng!", Toast.LENGTH_SHORT).show();
+        showAlertDialog("Email hoặc mật khẩu không đúng!");
     }
-
+    private void showAlertDialog(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message)
+                .setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
 
     // Method to navigate to restaurant login screen
     private void navigateToRestaurantLogIn() {
