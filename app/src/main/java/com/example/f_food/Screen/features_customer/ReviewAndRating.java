@@ -26,7 +26,7 @@ public class ReviewAndRating extends AppCompatActivity {
     private EditText editTextFeedback;
     private Button buttonSend;
 
-    private int orderId, restaurantId, foodId;
+    private int orderId, restaurantId, foodId, userId;
     private String foodName, foodImage;
     private ReviewDAO reviewDAO;
 
@@ -53,7 +53,7 @@ public class ReviewAndRating extends AppCompatActivity {
             foodImage = getIntent().getStringExtra("food_image");
             restaurantId = getIntent().getIntExtra("restaurant_id", -1);
             foodId = getIntent().getIntExtra("food_id", -1); // Lấy food_id từ Intent, -1 là giá trị mặc định nếu không có
-
+            userId = getIntent().getIntExtra("user_id", -1);
 
             // Set data to UI
             textViewFoodName.setText(foodName);
@@ -74,7 +74,7 @@ public class ReviewAndRating extends AppCompatActivity {
             // Lấy thời gian hiện tại
             String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
             // Save the review into Room Database
-            Review review = new Review(orderId, restaurantId, (int) rating, feedback, currentTime, foodName, foodImage); // Pass the foodName and foodImage
+            Review review = new Review(userId, restaurantId, (int) rating, feedback, currentTime, foodName, foodImage); // Pass the foodName and foodImage
             reviewDAO.insert(review);
 
             new AlertDialog.Builder(ReviewAndRating.this)
