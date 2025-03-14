@@ -20,6 +20,7 @@ public class Restaurant_Management extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RestaurantManagementListAdapter adapter;
     private List<Restaurant> restaurantList;
+    private RestaurantRepository restaurantRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,21 +38,35 @@ public class Restaurant_Management extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Initialize repository and data
+        restaurantRepository = new RestaurantRepository(this);
         init();
 
-        // Set adapter after initializing data
-        adapter = new RestaurantManagementListAdapter(restaurantList);
+        // Set adapter with item click listener
+        adapter = new RestaurantManagementListAdapter(restaurantList, this::updateRestaurantStatus);
         recyclerView.setAdapter(adapter);
     }
 
     private void init() {
-        RestaurantRepository restaurantRepository = new RestaurantRepository(this);
         restaurantList = restaurantRepository.getAllRestaurants();
 
         if (restaurantList == null) {
             restaurantList = new ArrayList<>(); // Prevent NullPointerException
         }
+    }
 
+    // Update restaurant status and refresh adapter
+    private void updateRestaurantStatus(int position) {
+        Restaurant restaurant = restaurantList.get(position);
+        if (restaurant.getStatus().equals("Open")) {
+            restaurant.setStatus("Close");
+        } else {
+            restaurant.setStatus("Open");
+        }
 
+        // Cập nhật trạng thái trong database (nếu có)
+        restaurantRepository.update(restaurant);
+
+        // Cập nhật lại RecyclerView
+        adapter.notifyItemChanged(position);
     }
 }

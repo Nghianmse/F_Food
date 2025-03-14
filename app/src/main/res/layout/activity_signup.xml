@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:padding="20dp"
     android:gravity="center"
-    tools:context=".Screen.authentication_authorization.Register">
+    tools:context=".Screen.authentication_authorization.SignUp">
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,6 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Full name"
+        android:id="@+id/txtSignup_fullname"
         android:background="@android:drawable/editbox_background"
         android:padding="12dp"
         android:layout_marginBottom="10dp"/>
@@ -43,6 +44,7 @@
         android:inputType="textEmailAddress"
         android:background="@android:drawable/editbox_background"
         android:padding="12dp"
+        android:id="@+id/txtSignup_Email"
         android:layout_marginBottom="10dp"/>
 
     <EditText
@@ -50,6 +52,7 @@
         android:layout_height="wrap_content"
         android:hint="Phone number"
         android:inputType="phone"
+        android:id="@+id/txtSignup_Phone"
         android:background="@android:drawable/editbox_background"
         android:padding="12dp"
         android:layout_marginBottom="10dp"/>
@@ -57,6 +60,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/txtSignup_Password"
         android:hint="Password"
         android:inputType="textPassword"
         android:background="@android:drawable/editbox_background"
@@ -66,25 +70,20 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/txtSignup_ConfirmPassword"
         android:hint="Confirm password"
         android:inputType="textPassword"
         android:background="@android:drawable/editbox_background"
         android:padding="12dp"
         android:layout_marginBottom="10dp"/>
 
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:drawable/editbox_background"
-        android:padding="12dp"
-        android:inputType="textPassword"
-        android:autofillHints="UserType"
-        android:layout_marginBottom="10dp" />
+
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Confirm"
+        android:id="@+id/btnSignUp"
+        android:text="SIGN UP"
         android:backgroundTint="#007BFF"
         android:textColor="#FFFFFF"
         android:padding="12dp"
@@ -102,6 +101,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/txtFromSignUptoSignin"
         android:text="Log In"
         android:textSize="14sp"
         android:textColor="#007BFF"

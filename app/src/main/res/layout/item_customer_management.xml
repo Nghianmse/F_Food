@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -5,56 +6,63 @@
     android:padding="8dp">
 
     <ImageView
-        android:src="@drawable/isushi"
+        android:id="@+id/imgUser_Profile"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginEnd="8dp" />
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/avatarplaceholder" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
-
         <TextView
-            android:id="@+id/txtrestaurant_Management_Name"
+            android:id="@+id/txtUser_Management_Id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID: "
+            android:textSize="16sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/txtUser_Management_Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Name: "
             android:textSize="16sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/txtrestaurant_Management_Address"
+            android:id="@+id/txtUser_Management_Email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Address: "
+            android:text="Email: "
             android:textSize="14sp"
-            android:textColor="#666666"/>
+            android:textColor="#666666" />
 
         <TextView
-            android:id="@+id/txtrestaurant_Management_Phone"
+            android:id="@+id/txtUser_Management_Phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Phone: "
             android:textSize="14sp"
-            android:textColor="#666666"/>
+            android:textColor="#666666" />
 
         <TextView
-            android:id="@+id/txtrestaurant_Management_Status"
+            android:id="@+id/txtUser_Management_CreateAt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Status: "
+            android:text="Create_at: "
             android:textSize="14sp"
-            android:textColor="#666666"/>
-
+            android:textColor="#666666" />
     </LinearLayout>
+
     <Button
-        android:id="@+id/btnChangeStatus_Restaurant"
+        android:id="@+id/btnUser_Management_Delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Change"
+        android:text="Delete"
         android:layout_marginTop="8dp"
-        android:textColor="@android:color/white"/>
-
+        android:textColor="@android:color/white"
+        android:backgroundTint="@android:color/holo_red_light" />
 </LinearLayout>
