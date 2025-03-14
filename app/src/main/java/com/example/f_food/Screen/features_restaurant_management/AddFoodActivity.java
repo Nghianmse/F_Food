@@ -1,5 +1,6 @@
 package com.example.f_food.Screen.features_restaurant_management;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -71,14 +72,33 @@ public class AddFoodActivity extends AppCompatActivity {
             String foodDescription = edtFoodDescription.getText().toString().trim();
 
             // Kiểm tra dữ liệu có bị trống không
-            if (foodName.isEmpty() || foodPriceStr.isEmpty() || foodDescription.isEmpty() || imgFoodPreview == null) {
-                Toast.makeText(this, "Please fill in all fields and select an image", Toast.LENGTH_SHORT).show();
+            if (foodName.isEmpty() || foodPriceStr.isEmpty() || foodDescription.isEmpty() || imageUri == null) {
+                showAlert("Lưu ý", "Vui lòng điền đầy đủ thông tin và chọn ảnh!");
                 return;
             }
 
-            double foodPrice = Double.parseDouble(foodPriceStr);
+            double foodPrice;
+            try {
+                foodPrice = Double.parseDouble(foodPriceStr);
+                if (foodPrice <= 0) {
+                    showAlert("Lưu ý", "Giá sản phẩm phải lớn hơn 0!");
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                showAlert("Lưu ý", "Giá sản phẩm không hợp lệ!");
+                return;
+            }
 
-            // Chuyển đổi Uri ảnh thành String
+            if (selectedCategoryId == -1) {
+                showAlert("Lưu ý", "Vui lòng chọn danh mục!");
+                return;
+            }
+
+            if (!spinnerStockStatuslist.contains(StockStatus)) {
+                showAlert("Lưu ý", "Trạng thái sản phẩm không hợp lệ!");
+                return;
+            }
+
             String imageUriString = imageUri.toString();
 
             // Tạo đối tượng Food
@@ -89,18 +109,20 @@ public class AddFoodActivity extends AppCompatActivity {
             newFood.setDescription(foodDescription);
             newFood.setCategoryId(selectedCategoryId);
             newFood.setStockStatus(StockStatus);
-            newFood.setImageUrl(imageUriString); // Lưu URI ảnh dưới dạng String
+            newFood.setImageUrl(imageUriString);
+
             foodRepository = new FoodRepository(this);
+
             // Lưu vào Room Database trong luồng phụ
             new Thread(() -> {
-
-                foodRepository.insert(newFood);
-
-                // Cập nhật giao diện trong luồng chính
-                runOnUiThread(() -> {
-                    Toast.makeText(this, "Food added successfully!", Toast.LENGTH_SHORT).show();
-                    finish(); // Đóng Activity sau khi thêm xong
-                });
+                try {
+                    foodRepository.insert(newFood);
+                    runOnUiThread(() -> {
+                        showAlert("Thành công", "Thêm sản phẩm thành công!", true);
+                    });
+                } catch (Exception e) {
+                    runOnUiThread(() -> showAlert("Lỗi", "Không thể thêm sản phẩm, vui lòng thử lại sau!"));
+                }
             }).start();
         });
 
@@ -123,7 +145,7 @@ public class AddFoodActivity extends AppCompatActivity {
                 spinnerCategory.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(android.widget.AdapterView<?> parent, android.view.View view, int position, long id) {
-                        selectedCategoryId = categoryList.get(position).getCategoryId(); // Lưu ID của Category được chọn
+                        selectedCategoryId = categoryList.get(position).getCategoryId();
                     }
 
                     @Override
@@ -135,7 +157,6 @@ public class AddFoodActivity extends AppCompatActivity {
     }
 
     private void loadStockStatus() {
-        // Khởi tạo danh sách và thêm giá trị
         spinnerStockStatuslist = new ArrayList<>();
         spinnerStockStatuslist.add("Available");
         spinnerStockStatuslist.add("Out of Stock");
@@ -147,7 +168,7 @@ public class AddFoodActivity extends AppCompatActivity {
         spinnerStockStatus.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(android.widget.AdapterView<?> parent, android.view.View view, int position, long id) {
-                StockStatus = spinnerStockStatuslist.get(position); // Lưu trạng thái được chọn
+                StockStatus = spinnerStockStatuslist.get(position);
             }
 
             @Override
@@ -175,5 +196,24 @@ public class AddFoodActivity extends AppCompatActivity {
         intent.setType("image/*");
         intent.addCategory(Intent.CATEGORY_OPENABLE); // Đảm bảo chỉ chọn file mở được
         imagePickerLauncher.launch(intent);
+    }
+
+    private void showAlert(String title, String message) {
+        new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                .show();
+    }
+
+    private void showAlert(String title, String message, boolean closeActivity) {
+        new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("OK", (dialog, which) -> {
+                    dialog.dismiss();
+                    if (closeActivity) finish();
+                })
+                .show();
     }
 }

@@ -1,8 +1,11 @@
 package com.example.f_food.Adapter;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.content.Context;
-import android.graphics.Color;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,18 +16,16 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.f_food.Entity.CartItem;
-import com.example.f_food.Entity.Food;
 import com.example.f_food.R;
+import com.google.android.material.button.MaterialButton;
 import com.squareup.picasso.Picasso;
 
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
     private List<CartItem> cartItems;
-    private DecimalFormat formatter = new DecimalFormat("#,###"); // Thêm dòng này
     private Context context;
 
     public CartAdapter(Context context, List<CartItem> cartItems) {
@@ -42,27 +43,49 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
         CartItem item = cartItems.get(position);
+
         holder.txtProductName.setText(item.getProduct().getName());
+
+        NumberFormat formatter = NumberFormat.getInstance(new Locale("vi", "VN"));
         holder.txtProductPrice.setText(formatter.format(item.getProduct().getPrice()) + " VNĐ");
+
+        if (item.getProduct().getImageUrl() != null && !item.getProduct().getImageUrl().isEmpty()) {
+            Picasso.get()
+                    .load(item.getProduct().getImageUrl())
+                    .resize(50, 50)
+                    .centerCrop()
+                    .into(holder.imgProduct);
+        }
+
+        // Cập nhật số lượng từ cartItems
         holder.txtQuantity.setText(String.valueOf(item.getQuantity()));
 
-        holder.btnIncrease.setOnClickListener(v -> {
-            item.setQuantity(item.getQuantity() + 1);
-            notifyDataSetChanged();
-        });
-
+        // Xử lý sự kiện nút giảm
         holder.btnDecrease.setOnClickListener(v -> {
-            if (item.getQuantity() > 1) {
-                item.setQuantity(item.getQuantity() - 1);
-                notifyDataSetChanged();
+            int currentQuantity = item.getQuantity();  // Lấy số lượng từ CartItem
+            if (currentQuantity > 1) {
+                item.setQuantity(currentQuantity - 1);  // Cập nhật số lượng trong CartItem
+                cartItems.set(position, item);  // Cập nhật lại dữ liệu trong danh sách
+                notifyItemChanged(position);  // Cập nhật lại RecyclerView
             }
         });
 
+        // Xử lý sự kiện nút tăng
+        holder.btnIncrease.setOnClickListener(v -> {
+            int currentQuantity = item.getQuantity();  // Lấy số lượng từ CartItem
+            item.setQuantity(currentQuantity + 1);  // Cập nhật số lượng trong CartItem
+            cartItems.set(position, item);  // Cập nhật lại dữ liệu trong danh sách
+            notifyItemChanged(position);  // Cập nhật lại RecyclerView
+        });
+
+        // Xử lý sự kiện nút xóa
         holder.btnRemove.setOnClickListener(v -> {
-            cartItems.remove(position);
-            notifyDataSetChanged();
+            cartItems.remove(position);  // Xóa sản phẩm khỏi danh sách
+            notifyItemRemoved(position);  // Cập nhật lại RecyclerView
+            notifyItemRangeChanged(position, cartItems.size());  // Cập nhật lại vị trí các item
         });
     }
+
 
     @Override
     public int getItemCount() {
@@ -71,9 +94,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     public static class CartViewHolder extends RecyclerView.ViewHolder {
         TextView txtProductName, txtProductPrice, txtQuantity;
-        Button btnIncrease, btnDecrease;
-        ImageView btnRemove;
-        ImageView imgProduct;
+        ImageView imgProduct, btnRemove;
+        MaterialButton btnDecrease, btnIncrease;
 
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -81,22 +103,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             txtProductName = itemView.findViewById(R.id.txtProductName);
             txtProductPrice = itemView.findViewById(R.id.txtProductPrice);
             txtQuantity = itemView.findViewById(R.id.txtQuantity);
-            btnIncrease = itemView.findViewById(R.id.btnIncrease);
             btnDecrease = itemView.findViewById(R.id.btnDecrease);
+            btnIncrease = itemView.findViewById(R.id.btnIncrease);
             btnRemove = itemView.findViewById(R.id.btnRemove);
-        }
-        public void bind(final Food food, final FoodListAdapter.OnItemClickListener listener) {
-            txtProductName.setText(food.getName());
-            NumberFormat formatter = NumberFormat.getInstance(new Locale("vi", "VN"));
-            txtProductPrice.setText(formatter.format(food.getPrice()) + " VNĐ");
-            if(food.getImageUrl() != null && !food.getImageUrl().isEmpty()) {
-                Picasso.get()
-                        .load(food.getImageUrl())
-                        .resize(500, 500)
-                        .centerCrop()
-                        .into(imgProduct);
-            }
-            itemView.setOnClickListener(v -> listener.onItemClick(food.getFoodId()));
         }
     }
 }

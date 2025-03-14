@@ -1,5 +1,6 @@
 package com.example.f_food.Screen.features_customer;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -18,6 +19,8 @@ public class activity_cart extends AppCompatActivity {
 
     private RecyclerView recyclerCart;
     private CartAdapter cartAdapter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +35,9 @@ public class activity_cart extends AppCompatActivity {
         recyclerCart.setLayoutManager(new LinearLayoutManager(this));
 
         cartAdapter = new CartAdapter(this, CartManager.getInstance().getCartItems());
+
         recyclerCart.setAdapter(cartAdapter);
+
+
     }
 }
