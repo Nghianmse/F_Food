@@ -15,6 +15,7 @@ import com.example.f_food.Entity.User;
 import com.example.f_food.MainActivity;
 import com.example.f_food.R;
 import com.example.f_food.Repository.UserRepository;
+import com.example.f_food.Screen.features_customer.OrderHistory;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -75,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
 
                     // Chuyển sang màn hình khác sau khi đăng nhập
-                    Intent intent = new Intent(this, MainActivity.class);
+                    Intent intent = new Intent(this, OrderHistory.class);
                     startActivity(intent);
                     finish();
                     return;
