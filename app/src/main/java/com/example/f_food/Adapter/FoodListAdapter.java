@@ -1,5 +1,6 @@
 package com.example.f_food.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -99,9 +102,19 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.ViewHo
             } else {
                 productStockStatus.setTextColor(Color.RED);
             }
+            itemView.setOnClickListener(v -> {
+                if (food.getStockStatus().equals("Out of Stock")) {
+                    new AlertDialog.Builder(context)
+                            .setTitle("Thông báo")
+                            .setMessage("Sản phẩm đã hết hàng!")
+                            .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                            .show();
+                } else {
+                    listener.onItemClick(food.getFoodId());
+                }
+            });
 
-            // Xử lý sự kiện click
-            itemView.setOnClickListener(v -> listener.onItemClick(food.getFoodId()));
+
         }
     }
 }
