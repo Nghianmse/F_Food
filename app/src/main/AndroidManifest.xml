@@ -37,6 +37,30 @@
             android:name=".Screen.order_processing.DeliveryStatusUpdate"
             android:exported="true" />
         <activity
+            android:name=".Screen.features_restaurant_management.UpdateFood"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.features_restaurant_management.ManageFoodDetail"
+            android:exported="true" />
+        <activity
+            android:name=".Screen.features_customer.CustomerProfile"
+            android:exported="true" />
+        <activity
+            android:name=".Screen.features_restaurant_management.RestaurantNotifications"
+            android:exported="true" />
+        <activity
+            android:name=".Screen.features_restaurant_management.RestaurantSalesReport"
+            android:exported="true" />
+        <activity
+            android:name=".Screen.features_restaurant_management.RestaurantOrders"
+            android:exported="true" />
+        <activity
+            android:name=".Screen.features_restaurant_management.MenuManagement"
+            android:exported="true" />
+        <activity
+            android:name=".Screen.features_restaurant_management.CustomerSupport"
+            android:exported="true" />
+        <activity
             android:name=".Screen.order_processing.AcceptShippingOrder"
             android:exported="true" />
         <activity
