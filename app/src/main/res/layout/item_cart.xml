@@ -5,8 +5,17 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="8dp"
+    android:id="@+id/layoutItemCart"
     android:background="@color/yellow"
     android:layout_marginBottom="8dp">
+    <CheckBox
+        android:id="@+id/chkSelectItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginEnd="4dp"
+        android:scaleX="0.8"
+        android:scaleY="0.8"/>
 
     <ImageView
         android:id="@+id/imgProduct"
@@ -38,6 +47,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/btnGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

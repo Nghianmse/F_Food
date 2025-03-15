@@ -35,6 +35,17 @@ public class CartManager {
         cartItems.add(new CartItem(food, 1));
     }
 
+    public String getTotalPrice() {
+        double total = 0;
+        for (CartItem item : cartItems) {
+            total += item.getProduct().getPrice() * item.getQuantity();
+        }
+        total = total - total * 0.05; // Giảm 5%
+        return String.format("%.2f", total);
+    }
+
+
+
     public void removeFromCart(Food food) {
         cartItems.removeIf(item -> item.getProduct().getFoodId() == food.getFoodId());
     }
