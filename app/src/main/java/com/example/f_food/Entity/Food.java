@@ -1,11 +1,14 @@
 package com.example.f_food.Entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "Foods")
-public class Food {
+public class Food implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "food_id")
@@ -32,8 +35,7 @@ public class Food {
     @ColumnInfo(name = "stock_status")
     private String stockStatus;
 
-
-    public Food(){}
+    public Food() {}
 
     public Food(int restaurantId, String name, String description, double price, int categoryId, String imageUrl, String stockStatus) {
         this.restaurantId = restaurantId;
@@ -44,6 +46,29 @@ public class Food {
         this.imageUrl = imageUrl;
         this.stockStatus = stockStatus;
     }
+
+    protected Food(Parcel in) {
+        foodId = in.readInt();
+        restaurantId = in.readInt();
+        name = in.readString();
+        description = in.readString();
+        price = in.readDouble();
+        categoryId = in.readInt();
+        imageUrl = in.readString();
+        stockStatus = in.readString();
+    }
+
+    public static final Creator<Food> CREATOR = new Creator<Food>() {
+        @Override
+        public Food createFromParcel(Parcel in) {
+            return new Food(in);
+        }
+
+        @Override
+        public Food[] newArray(int size) {
+            return new Food[size];
+        }
+    };
 
     public int getFoodId() {
         return foodId;
@@ -107,5 +132,22 @@ public class Food {
 
     public void setStockStatus(String stockStatus) {
         this.stockStatus = stockStatus;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(foodId);
+        dest.writeInt(restaurantId);
+        dest.writeString(name);
+        dest.writeString(description);
+        dest.writeDouble(price);
+        dest.writeInt(categoryId);
+        dest.writeString(imageUrl);
+        dest.writeString(stockStatus);
     }
 }

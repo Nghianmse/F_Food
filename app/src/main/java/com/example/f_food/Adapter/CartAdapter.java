@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,9 +29,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     private List<CartItem> cartItems;
     private Context context;
 
-    public CartAdapter(Context context, List<CartItem> cartItems) {
+    private CartUpdateListener cartUpdateListener;
+
+    public interface CartUpdateListener {
+        void onCartUpdated();
+    }
+
+    public CartAdapter(Context context, List<CartItem> cartItems, CartUpdateListener listener) {
         this.context = context;
         this.cartItems = cartItems;
+        this.cartUpdateListener = listener;
     }
 
     @NonNull
@@ -56,6 +64,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     .centerCrop()
                     .into(holder.imgProduct);
         }
+        holder.chkSelectItem.setOnCheckedChangeListener(null); // Ngăn chặn gọi lại khi cập nhật ViewHolder
+        holder.chkSelectItem.setChecked(item.isSelected());
+
+// Xử lý sự kiện CheckBox khi người dùng chọn/bỏ chọn sản phẩm
+        holder.chkSelectItem.setOnClickListener(v -> {
+            item.setSelected(holder.chkSelectItem.isChecked()); // Lưu trạng thái chọn của sản phẩm đó
+            if (cartUpdateListener != null) {
+                cartUpdateListener.onCartUpdated();
+            }
+        });
+
 
         // Cập nhật số lượng từ cartItems
         holder.txtQuantity.setText(String.valueOf(item.getQuantity()));
@@ -67,6 +86,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 item.setQuantity(currentQuantity - 1);  // Cập nhật số lượng trong CartItem
                 cartItems.set(position, item);  // Cập nhật lại dữ liệu trong danh sách
                 notifyItemChanged(position);  // Cập nhật lại RecyclerView
+                if (cartUpdateListener != null) {
+                    cartUpdateListener.onCartUpdated();
+                }
             }
         });
 
@@ -76,6 +98,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             item.setQuantity(currentQuantity + 1);  // Cập nhật số lượng trong CartItem
             cartItems.set(position, item);  // Cập nhật lại dữ liệu trong danh sách
             notifyItemChanged(position);  // Cập nhật lại RecyclerView
+            if (cartUpdateListener != null) {
+                cartUpdateListener.onCartUpdated();
+            }
         });
 
         // Xử lý sự kiện nút xóa
@@ -83,6 +108,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             cartItems.remove(position);  // Xóa sản phẩm khỏi danh sách
             notifyItemRemoved(position);  // Cập nhật lại RecyclerView
             notifyItemRangeChanged(position, cartItems.size());  // Cập nhật lại vị trí các item
+            if (cartUpdateListener != null) {
+                cartUpdateListener.onCartUpdated();
+            }
         });
     }
 
@@ -96,6 +124,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         TextView txtProductName, txtProductPrice, txtQuantity;
         ImageView imgProduct, btnRemove;
         MaterialButton btnDecrease, btnIncrease;
+        CheckBox chkSelectItem;
 
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -106,6 +135,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             btnDecrease = itemView.findViewById(R.id.btnDecrease);
             btnIncrease = itemView.findViewById(R.id.btnIncrease);
             btnRemove = itemView.findViewById(R.id.btnRemove);
+            chkSelectItem = itemView.findViewById(R.id.chkSelectItem);
         }
     }
 }
