@@ -1,5 +1,6 @@
 package com.example.f_food.Screen.authentication_authorization;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -60,20 +61,21 @@ public class RestaurantSignUp extends AppCompatActivity {
         // Basic validation
         if (TextUtils.isEmpty(fullName) || TextUtils.isEmpty(email) || TextUtils.isEmpty(phoneNumber) ||
                 TextUtils.isEmpty(address) || TextUtils.isEmpty(password) || !password.equals(confirmPassword)) {
-            Toast.makeText(this, "Please fill in all fields correctly", Toast.LENGTH_SHORT).show();
+            showAlertDialog("Please fill in all fields correctly");
             return;
         }
 
-        // Check if email or phone number already exists
+// Check if email or phone number already exists
         if (userRepository.getUserByEmail(email) != null) {
-            Toast.makeText(this, "Email already registered", Toast.LENGTH_SHORT).show();
+            showAlertDialog("Email already registered");
             return;
         }
 
         if (userRepository.getUserByPhone(phoneNumber) != null) {
-            Toast.makeText(this, "Phone number already registered", Toast.LENGTH_SHORT).show();
+            showAlertDialog("Phone number already registered");
             return;
         }
+
 
         // Create and insert user
         User user = new User();
@@ -95,7 +97,7 @@ public class RestaurantSignUp extends AppCompatActivity {
         // Create and insert restaurant
         Restaurant restaurant = new Restaurant();
         restaurant.setUserId(userId);
-        restaurant.setName(fullName + " Restaurant");  // or another way to set the restaurant name
+        restaurant.setName(fullName + " Restaurant");
         restaurant.setAddress(address);
         restaurant.setPhone(phoneNumber);
         restaurant.setStatus("Open");
@@ -103,12 +105,37 @@ public class RestaurantSignUp extends AppCompatActivity {
 
         restaurantRepository.insert(restaurant);
 
-        // Provide feedback to the user
-        Toast.makeText(this, "Restaurant registered successfully", Toast.LENGTH_SHORT).show();
-          // Optionally, navigate back or to another screen
-
-
+        // Hiển thị pop-up thay vì Toast
+        showSuccessDialog();
     }
+
+    // Phương thức hiển thị popup
+    private void showSuccessDialog() {
+        // Tạo AlertDialog Builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Success");
+
+        // Sử dụng Layout tùy chỉnh với icon tích V màu xanh
+        builder.setMessage("Restaurant registered successfully")
+                .setIcon(R.drawable.ic_check_green)  // Thêm icon tick màu xanh lá
+                .setPositiveButton("OK", (dialog, which) -> {
+                    dialog.dismiss();
+                    // Chuyển hướng về trang đăng nhập
+                    navigateToRestaurantLogIn();
+                });
+
+        // Hiển thị Dialog
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+    private void showAlertDialog(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message)
+                .setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
     private void navigateToRestaurantLogIn() {
         Intent intent = new Intent(this, RestaurantLogIn.class);  // Assuming RestaurantLogInActivity is your target activity
         startActivity(intent);
