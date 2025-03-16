@@ -6,72 +6,59 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    app:cardElevation="4dp"
+    android:id="@+id/orderTrackingItem">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp">
 
         <!-- Hình ảnh đơn hàng -->
+        <TextView
+            android:id="@+id/orderStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
         <ImageView
             android:id="@+id/orderImage"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/login"/>
+            android:scaleType="centerCrop" />
 
         <!-- Tên đơn hàng -->
         <TextView
-            android:id="@+id/orderName"
+            android:id="@+id/foodName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Order's Name"
-            android:textSize="16sp"
-            android:textStyle="bold"/>
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
-        <!-- Số lượng -->
         <TextView
-            android:id="@+id/quantity"
+            android:id="@+id/paymentMethod"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Quantity: 1"
-            android:textSize="14sp"/>
-
-        <!-- Giá sản phẩm -->
-        <TextView
-            android:id="@+id/price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Price: 100,000 VNĐ"
-            android:textSize="14sp"/>
-
-        <!-- Phí vận chuyển -->
-        <TextView
-            android:id="@+id/shippingFee"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Shipping Fee: 20,000 VNĐ"
-            android:textSize="14sp"/>
-
+            android:textSize="14sp"
+            android:textStyle="bold" />
         <!-- Tổng tiền -->
         <TextView
             android:id="@+id/totalPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total Price: 120,000 VNĐ"
             android:textColor="@android:color/holo_red_dark"
-            android:textSize="16sp"
-            android:textStyle="bold"/>
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
-        <!-- Trạng thái đơn hàng -->
         <TextView
-            android:id="@+id/orderStatus"
+            android:id="@+id/findingShipperText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Order Status: Pending"
+            android:text="Đang tìm kiếm shipper"
+            android:textColor="@android:color/holo_orange_dark"
             android:textSize="14sp"
-            android:textStyle="bold"/>
+            android:visibility="gone" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

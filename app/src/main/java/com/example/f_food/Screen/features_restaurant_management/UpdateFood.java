@@ -64,7 +64,7 @@ public class UpdateFood extends AppCompatActivity {
                     tvFoodName.setText(food.getName());
                     tvFoodPrice.setText("$" + NumberFormat.getInstance(new Locale("vi", "VN")).format(food.getPrice()));
                     tvFoodDescription.setText(food.getDescription());
-                    tvFoodCategory.setText(food.getCategory());
+                    tvFoodCategory.setText(food.getCategoryId());
 
                     if (food.getImageUrl() != null && !food.getImageUrl().isEmpty()) {
                         Picasso.get().load(food.getImageUrl()).resize(500, 500).centerCrop().into(ivFoodImage);

@@ -58,4 +58,6 @@ public interface OrderDAO {
     List<FoodWithOrder> getImageByOrderId(int orderId);
     // A custom class to hold the results of the join query
 
+    @Query("SELECT * FROM Orders WHERE order_status IN ('Preparing', 'Delivering', 'Delivered')")
+    List<Order> getFilteredOrders();
 }
