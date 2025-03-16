@@ -35,6 +35,9 @@ public class AdminScreen extends AppCompatActivity {
         LinearLayout layoutCustomerManagement = findViewById(R.id.layout_CustomerManagement);
         LinearLayout layoutPolicyManagement = findViewById(R.id.layout_PolicyManagement);
         LinearLayout layoutRestaurantManagement = findViewById(R.id.layout_RestaurantManagement);
+        LinearLayout layoutPaymentManagement = findViewById(R.id.layout_PaymentManagement);
+        LinearLayout layoutOrderManagement = findViewById(R.id.layout_PaymentManagement);
+
 
         // Load images using Picasso for dynamic image loading
         ImageView logoImageView = findViewById(R.id.logo);
@@ -62,5 +65,18 @@ public class AdminScreen extends AppCompatActivity {
             Intent intent = new Intent(AdminScreen.this, Restaurant_Management.class);
             startActivity(intent);
         });
+        layoutPaymentManagement.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminScreen.this, Payment_Transactions_Management.class);
+            startActivity(intent);
+        });
+        layoutPaymentManagement.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminScreen.this, Payment_Transactions_Management.class);
+            startActivity(intent);
+        });
+        layoutOrderManagement.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminScreen.this, Payment_Transactions_Management.class);
+            startActivity(intent);
+        });
+
     }
 }

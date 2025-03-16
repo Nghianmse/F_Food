@@ -14,7 +14,7 @@ tools:context=".Screen.admin_management.Payment_Transactions_Management">
         android:gravity="center_vertical">
 
         <Button
-            android:id="@+id/btnBack"
+            android:id="@+id/btnBack_Transactions_Management"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Back" />

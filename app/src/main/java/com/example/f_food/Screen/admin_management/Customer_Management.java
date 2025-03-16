@@ -1,6 +1,8 @@
 package com.example.f_food.Screen.admin_management;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +25,8 @@ public class Customer_Management extends AppCompatActivity {
     private CustomerManagementAdapter adapter;
     private List<User> customerList;
     private UserRepository userRepository;
-
+    private Button back;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +38,8 @@ public class Customer_Management extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        back=findViewById(R.id.btnBack_Customer_Management);
+        back.setOnClickListener(v -> finish()); // Quay lại màn hình trước đó
         recyclerView = findViewById(R.id.recyclerViewCustomerManagement);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

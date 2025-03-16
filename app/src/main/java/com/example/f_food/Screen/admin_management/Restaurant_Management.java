@@ -2,6 +2,8 @@ package com.example.f_food.Screen.admin_management;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.widget.Button;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -21,6 +23,8 @@ public class Restaurant_Management extends AppCompatActivity {
     private RestaurantManagementListAdapter adapter;
     private List<Restaurant> restaurantList;
     private RestaurantRepository restaurantRepository;
+    private Button back;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +37,8 @@ public class Restaurant_Management extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        back=findViewById(R.id.btnBack_Restaurant_Management);
+        back.setOnClickListener(v->finish());
         recyclerView = findViewById(R.id.recyclerViewListRestaurant);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

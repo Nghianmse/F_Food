@@ -3239,7 +3239,11 @@ int id bounceBoth 0x7f080068
 int id bounceEnd 0x7f080069
 int id bounceStart 0x7f08006a
 int id btnAddPolicy 0x7f08006b
-int id btnBack 0x7f08006c
+int id btnBack_Customer_Management 0x7f080291
+int id btnBack_Policy_Management 0x7f080292
+int id btnBack_Restaurant_Management 0x7f080293
+int id btnBack_Shipper_Management 0x7f080294
+int id btnBack_Transactions_Management 0x7f080295
 int id btnChangeStatus_Restaurant 0x7f08006d
 int id btnComplete 0x7f08006e
 int id btnConfirm 0x7f08006f
@@ -3421,8 +3425,8 @@ int id layout 0x7f08011e
 int id layoutContainer 0x7f08011f
 int id layout_CustomerManagement 0x7f080120
 int id layout_OrderManagement 0x7f080121
+int id layout_PaymentManagement 0x7f080296
 int id layout_PolicyManagement 0x7f080122
-int id layout_ReportManagement 0x7f080123
 int id layout_RestaurantManagement 0x7f080124
 int id layout_ShipperManagement 0x7f080125
 int id left 0x7f080126

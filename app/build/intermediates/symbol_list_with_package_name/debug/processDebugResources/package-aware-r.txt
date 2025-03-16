@@ -3240,7 +3240,11 @@ id bounceBoth
 id bounceEnd
 id bounceStart
 id btnAddPolicy
-id btnBack
+id btnBack_Customer_Management
+id btnBack_Policy_Management
+id btnBack_Restaurant_Management
+id btnBack_Shipper_Management
+id btnBack_Transactions_Management
 id btnChangeStatus_Restaurant
 id btnComplete
 id btnConfirm
@@ -3422,8 +3426,8 @@ id layout
 id layoutContainer
 id layout_CustomerManagement
 id layout_OrderManagement
+id layout_PaymentManagement
 id layout_PolicyManagement
-id layout_ReportManagement
 id layout_RestaurantManagement
 id layout_ShipperManagement
 id left

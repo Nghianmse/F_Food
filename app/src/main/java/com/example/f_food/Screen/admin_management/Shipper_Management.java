@@ -2,6 +2,7 @@ package com.example.f_food.Screen.admin_management;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -24,6 +25,8 @@ public class Shipper_Management extends AppCompatActivity {
     private ShipperManagementAdapter adapter;
     private ShipperRepository shipperRepository;
     private List<Shipper> shipperList;
+    private Button back;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -41,7 +44,8 @@ public class Shipper_Management extends AppCompatActivity {
 
         // Lấy danh sách shipper từ SQLite
         shipperList = shipperRepository.getAllShippers();
-
+        back=findViewById(R.id.btnBack_Shipper_Management);
+        back.setOnClickListener(v->finish());
         // Ánh xạ RecyclerView
         recyclerView = findViewById(R.id.recyclerViewShipperManagement);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

@@ -88,8 +88,6 @@
                 android:id="@+id/layout_CustomerManagement"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_row="0"
-                android:layout_column="6"
                 android:background="@drawable/edittext_border"
                 android:gravity="center"
                 android:orientation="vertical"
@@ -148,7 +146,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/layout_ReportManagement"
+                android:id="@+id/layout_PaymentManagement"
                 android:layout_width="125dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext_border"
@@ -165,7 +163,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Report" />
+                    android:text="Payment" />
             </LinearLayout>
         </GridLayout>
     </androidx.cardview.widget.CardView>

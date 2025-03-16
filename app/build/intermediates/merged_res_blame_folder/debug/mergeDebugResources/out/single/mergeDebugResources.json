@@ -64,6 +64,10 @@
         "source": "D:\\PRM392\\daemon\\8.9\\com.example.f_food.app-main-37:\\drawable\\icdelivery.png"
     },
     {
+        "merged": "com.example.f_food.app-debug-35:/layout_activity_policy_management.xml.flat",
+        "source": "com.example.f_food.app-main-37:/layout/activity_policy_management.xml"
+    },
+    {
         "merged": "D:\\PRM392\\daemon\\8.9\\com.example.f_food.app-debug-35:\\drawable_icfood.png.flat",
         "source": "D:\\PRM392\\daemon\\8.9\\com.example.f_food.app-main-37:\\drawable\\icfood.png"
     },
@@ -144,6 +148,10 @@
         "source": "D:\\PRM392\\daemon\\8.9\\com.example.f_food.app-main-37:\\layout\\item_restaurant.xml"
     },
     {
+        "merged": "com.example.f_food.app-debug-35:/layout_activity_admin_screen.xml.flat",
+        "source": "com.example.f_food.app-main-37:/layout/activity_admin_screen.xml"
+    },
+    {
         "merged": "D:\\PRM392\\daemon\\8.9\\com.example.f_food.app-debug-35:\\drawable_baseline_barcode_reader_24.xml.flat",
         "source": "D:\\PRM392\\daemon\\8.9\\com.example.f_food.app-main-37:\\drawable\\baseline_barcode_reader_24.xml"
     },
@@ -200,8 +208,8 @@
         "source": "D:\\PRM392\\daemon\\8.9\\com.example.f_food.app-main-37:\\layout\\activity_food_detail.xml"
     },
     {
-        "merged": "D:\\PRM392\\daemon\\8.9\\com.example.f_food.app-debug-35:\\layout_activity_register.xml.flat",
-        "source": "D:\\PRM392\\daemon\\8.9\\com.example.f_food.app-main-37:\\layout\\activity_register.xml"
+        "merged": "com.example.f_food.app-debug-35:/layout_activity_restaurant_management.xml.flat",
+        "source": "com.example.f_food.app-main-37:/layout/activity_restaurant_management.xml"
     },
     {
         "merged": "D:\\PRM392\\daemon\\8.9\\com.example.f_food.app-debug-35:\\mipmap-anydpi_ic_launcher_round.xml.flat",
@@ -222,10 +230,6 @@
     {
         "merged": "D:\\PRM392\\daemon\\8.9\\com.example.f_food.app-debug-35:\\drawable_rounded_image.xml.flat",
         "source": "D:\\PRM392\\daemon\\8.9\\com.example.f_food.app-main-37:\\drawable\\rounded_image.xml"
-    },
-    {
-        "merged": "com.example.f_food.app-debug-35:/layout_item_payment_transaction_management.xml.flat",
-        "source": "com.example.f_food.app-main-37:/layout/item_payment_transaction_management.xml"
     },
     {
         "merged": "D:\\PRM392\\daemon\\8.9\\com.example.f_food.app-debug-35:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
@@ -272,8 +276,16 @@
         "source": "D:\\PRM392\\daemon\\8.9\\com.example.f_food.app-main-37:\\drawable\\button_home.xml"
     },
     {
+        "merged": "com.example.f_food.app-debug-35:/layout_activity_customer_management.xml.flat",
+        "source": "com.example.f_food.app-main-37:/layout/activity_customer_management.xml"
+    },
+    {
         "merged": "D:\\PRM392\\daemon\\8.9\\com.example.f_food.app-debug-35:\\layout_activity_product_list_restaurant.xml.flat",
         "source": "D:\\PRM392\\daemon\\8.9\\com.example.f_food.app-main-37:\\layout\\activity_product_list_restaurant.xml"
+    },
+    {
+        "merged": "com.example.f_food.app-debug-35:/layout_activity_shipper_management.xml.flat",
+        "source": "com.example.f_food.app-main-37:/layout/activity_shipper_management.xml"
     },
     {
         "merged": "D:\\PRM392\\daemon\\8.9\\com.example.f_food.app-debug-35:\\layout_activity_restaurant_sign_up.xml.flat",
