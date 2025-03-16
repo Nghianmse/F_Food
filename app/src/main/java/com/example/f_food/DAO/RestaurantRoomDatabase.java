@@ -9,6 +9,10 @@ import com.example.f_food.Entity.Address;
 import com.example.f_food.Entity.Category;
 import com.example.f_food.Entity.Food;
 import com.example.f_food.Entity.Order;
+import com.example.f_food.Entity.Payment;
+import com.example.f_food.Entity.Policy;
+import com.example.f_food.Entity.Restaurant;
+import com.example.f_food.Entity.Shipper;
 import com.example.f_food.Entity.OrderDetail;
 import com.example.f_food.Entity.Policy;
 import com.example.f_food.Entity.Restaurant;
@@ -18,6 +22,9 @@ import com.example.f_food.Entity.OrderDetail;
 
 @Database(entities = {Restaurant.class, Food.class, User.class, Policy.class, Order.class, OrderDetail.class, Review.class, Category.class, Address.class}, version = 14, exportSchema = false)
 
+
+
+@Database(entities = {Restaurant.class, Food.class, User.class, Policy.class, Order.class, Shipper.class, Payment.class }, version = 7, exportSchema = false)
 
 public abstract class RestaurantRoomDatabase extends RoomDatabase {
 
@@ -29,6 +36,9 @@ public abstract class RestaurantRoomDatabase extends RoomDatabase {
     public abstract UserDAO userDAO();
 
     public abstract  OrderDAO orderDAO();
+
+    public  abstract  ShipperDAO shipperDAO();
+    public abstract PaymentDAO paymentDAO();
 
     public abstract  CategoryDAO categoryDAO();
     public abstract  OrderDetailDAO orderDetailDAO();

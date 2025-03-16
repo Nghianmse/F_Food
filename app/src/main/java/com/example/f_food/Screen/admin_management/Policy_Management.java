@@ -1,6 +1,8 @@
 package com.example.f_food.Screen.admin_management;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +24,8 @@ private RecyclerView recyclerView;
 private List<Policy> policyList;
 private PolicyRepository policyRepository;
 private PolicyManagementAdapter policyAdapter;
+private Button back;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +36,11 @@ private PolicyManagementAdapter policyAdapter;
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
+        back = findViewById(R.id.btnBack_Policy_Management);
+        back.setOnClickListener(v->finish());
+
         recyclerView = findViewById(R.id.recyclerViewPolicies);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

@@ -1,0 +1,144 @@
+Index: app/src/main/res/layout/item_restaurant_manager.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"wrap_content\"\r\n    android:orientation=\"horizontal\"\r\n    android:padding=\"8dp\">\r\n\r\n    <ImageView\r\n        android:src=\"@drawable/isushi\"\r\n        android:layout_width=\"80dp\"\r\n        android:layout_height=\"80dp\"\r\n        android:layout_marginEnd=\"8dp\" />\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"0dp\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_weight=\"1\"\r\n        android:orientation=\"vertical\">\r\n\r\n        <TextView\r\n            android:id=\"@+id/txtrestaurant_Management_Name\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"Name: \"\r\n            android:textSize=\"16sp\"\r\n            android:textStyle=\"bold\"/>\r\n\r\n        <TextView\r\n            android:id=\"@+id/txtrestaurant_Management_Address\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"Address: \"\r\n            android:textSize=\"14sp\"\r\n            android:textColor=\"#666666\"/>\r\n\r\n        <TextView\r\n            android:id=\"@+id/txtrestaurant_Management_Phone\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"Phone: \"\r\n            android:textSize=\"14sp\"\r\n            android:textColor=\"#666666\"/>\r\n\r\n        <TextView\r\n            android:id=\"@+id/txtrestaurant_Management_Status\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"Status: \"\r\n            android:textSize=\"14sp\"\r\n            android:textColor=\"#666666\"/>\r\n    </LinearLayout>\r\n</LinearLayout>\r\n
+===================================================================
+diff --git a/app/src/main/res/layout/item_restaurant_manager.xml b/app/src/main/res/layout/item_restaurant_manager.xml
+--- a/app/src/main/res/layout/item_restaurant_manager.xml	(revision 46f775260b61920bb40813554553580547c314d0)
++++ b/app/src/main/res/layout/item_restaurant_manager.xml	(date 1741494536941)
+@@ -47,5 +47,14 @@
+             android:text="Status: "
+             android:textSize="14sp"
+             android:textColor="#666666"/>
++
+     </LinearLayout>
++    <Button
++        android:id="@+id/btnChangeStatus_Restaurant"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:text="Change"
++        android:layout_marginTop="8dp"
++        android:textColor="@android:color/white"/>
++
+ </LinearLayout>
+Index: app/src/main/java/com/example/f_food/Screen/admin_management/Restaurant_Management.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.f_food.Screen.admin_management;\r\n\r\nimport android.annotation.SuppressLint;\r\nimport android.os.Bundle;\r\nimport androidx.activity.EdgeToEdge;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.core.graphics.Insets;\r\nimport androidx.core.view.ViewCompat;\r\nimport androidx.core.view.WindowInsetsCompat;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\nimport com.example.f_food.Adapter.RestaurantManagementListAdapter;\r\nimport com.example.f_food.Entity.Restaurant;\r\nimport com.example.f_food.R;\r\nimport com.example.f_food.Repository.RestaurantRepository;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class Restaurant_Management extends AppCompatActivity {\r\n    private RecyclerView recyclerView;\r\n    private RestaurantManagementListAdapter adapter;\r\n    private List<Restaurant> restaurantList;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        EdgeToEdge.enable(this);\r\n        setContentView(R.layout.activity_restaurant_management);\r\n\r\n        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.restaurantManagementActivity), (v, insets) -> {\r\n            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());\r\n            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);\r\n            return insets;\r\n        });\r\n\r\n        recyclerView = findViewById(R.id.recyclerViewListRestaurant);\r\n        recyclerView.setLayoutManager(new LinearLayoutManager(this));\r\n\r\n        // Initialize repository and data\r\n        init();\r\n\r\n        // Set adapter after initializing data\r\n        adapter = new RestaurantManagementListAdapter(restaurantList);\r\n        recyclerView.setAdapter(adapter);\r\n    }\r\n\r\n    private void init() {\r\n        RestaurantRepository restaurantRepository = new RestaurantRepository(this);\r\n        restaurantList = restaurantRepository.getAllRestaurants();\r\n\r\n        if (restaurantList == null) {\r\n            restaurantList = new ArrayList<>(); // Prevent NullPointerException\r\n        }\r\n\r\n\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/app/src/main/java/com/example/f_food/Screen/admin_management/Restaurant_Management.java b/app/src/main/java/com/example/f_food/Screen/admin_management/Restaurant_Management.java
+--- a/app/src/main/java/com/example/f_food/Screen/admin_management/Restaurant_Management.java	(revision 46f775260b61920bb40813554553580547c314d0)
++++ b/app/src/main/java/com/example/f_food/Screen/admin_management/Restaurant_Management.java	(date 1741494850627)
+@@ -20,6 +20,7 @@
+     private RecyclerView recyclerView;
+     private RestaurantManagementListAdapter adapter;
+     private List<Restaurant> restaurantList;
++    private RestaurantRepository restaurantRepository;
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+@@ -37,21 +38,35 @@
+         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+ 
+         // Initialize repository and data
++        restaurantRepository = new RestaurantRepository(this);
+         init();
+ 
+-        // Set adapter after initializing data
+-        adapter = new RestaurantManagementListAdapter(restaurantList);
++        // Set adapter with item click listener
++        adapter = new RestaurantManagementListAdapter(restaurantList, this::updateRestaurantStatus);
+         recyclerView.setAdapter(adapter);
+     }
+ 
+     private void init() {
+-        RestaurantRepository restaurantRepository = new RestaurantRepository(this);
+         restaurantList = restaurantRepository.getAllRestaurants();
+ 
+         if (restaurantList == null) {
+             restaurantList = new ArrayList<>(); // Prevent NullPointerException
+         }
++    }
+ 
++    // Update restaurant status and refresh adapter
++    private void updateRestaurantStatus(int position) {
++        Restaurant restaurant = restaurantList.get(position);
++        if (restaurant.getStatus().equals("Open")) {
++            restaurant.setStatus("Close");
++        } else {
++            restaurant.setStatus("Open");
++        }
+ 
++        // Cập nhật trạng thái trong database (nếu có)
++        restaurantRepository.update(restaurant);
++
++        // Cập nhật lại RecyclerView
++        adapter.notifyItemChanged(position);
+     }
+ }
+Index: app/src/main/java/com/example/f_food/Adapter/RestaurantManagementListAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.f_food.Adapter;\r\n\r\nimport android.annotation.SuppressLint;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.example.f_food.Entity.Restaurant;\r\nimport com.example.f_food.R;\r\n\r\nimport java.util.List;\r\n\r\npublic class RestaurantManagementListAdapter extends RecyclerView.Adapter<RestaurantManagementListAdapter.ViewHolder> {\r\n    private List<Restaurant> restaurantList;\r\n\r\n    public RestaurantManagementListAdapter(List<Restaurant> restaurantList) {\r\n        this.restaurantList = restaurantList;\r\n    }\r\n\r\n    public static class ViewHolder extends RecyclerView.ViewHolder {\r\n     private TextView nameText, addressText, phoneText, statusText;\r\n\r\n        public ViewHolder(View itemView) {\r\n            super(itemView);\r\n            nameText = itemView.findViewById(R.id.txtrestaurant_Management_Name);\r\n            addressText = itemView.findViewById(R.id.txtrestaurant_Management_Address);\r\n            phoneText = itemView.findViewById(R.id.txtrestaurant_Management_Phone);\r\n            statusText = itemView.findViewById(R.id.txtrestaurant_Management_Status);\r\n        }\r\n    }\r\n\r\n    @NonNull\r\n    @Override\r\n    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {\r\n        View view = LayoutInflater.from(parent.getContext())\r\n                .inflate(R.layout.item_restaurant_manager, parent, false);\r\n        return new ViewHolder(view);\r\n    }\r\n\r\n\r\n\r\n    @SuppressLint(\"SetTextI18n\")\r\n    @Override\r\n    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {\r\n        Restaurant restaurant = restaurantList.get(position);\r\n        holder.nameText.setText(\"Name: \" + restaurant.getName());\r\n        holder.addressText.setText(\"Address: \" + restaurant.getAddress());\r\n        holder.phoneText.setText(\"Phone: \" + restaurant.getPhone());\r\n        holder.statusText.setText(\"Status: \" + restaurant.getStatus());\r\n    }\r\n\r\n\r\n    @Override\r\n    public int getItemCount() {\r\n        return restaurantList.size();\r\n    }\r\n\r\n}\r\n
+===================================================================
+diff --git a/app/src/main/java/com/example/f_food/Adapter/RestaurantManagementListAdapter.java b/app/src/main/java/com/example/f_food/Adapter/RestaurantManagementListAdapter.java
+--- a/app/src/main/java/com/example/f_food/Adapter/RestaurantManagementListAdapter.java	(revision 46f775260b61920bb40813554553580547c314d0)
++++ b/app/src/main/java/com/example/f_food/Adapter/RestaurantManagementListAdapter.java	(date 1741495036267)
+@@ -1,9 +1,11 @@
+ package com.example.f_food.Adapter;
+ 
+ import android.annotation.SuppressLint;
++import android.content.Context;
+ import android.view.LayoutInflater;
+ import android.view.View;
+ import android.view.ViewGroup;
++import android.widget.Button;
+ import android.widget.TextView;
+ 
+ import androidx.annotation.NonNull;
+@@ -16,13 +18,21 @@
+ 
+ public class RestaurantManagementListAdapter extends RecyclerView.Adapter<RestaurantManagementListAdapter.ViewHolder> {
+     private List<Restaurant> restaurantList;
++    private Context context;
+ 
+-    public RestaurantManagementListAdapter(List<Restaurant> restaurantList) {
++    private ViewHolder.OnStatusChangeListener statusChangeListener;
++    public RestaurantManagementListAdapter(List<Restaurant> restaurantList, ViewHolder.OnStatusChangeListener statusChangeListener) {
+         this.restaurantList = restaurantList;
++        this.statusChangeListener = statusChangeListener;
+     }
+-
+     public static class ViewHolder extends RecyclerView.ViewHolder {
+      private TextView nameText, addressText, phoneText, statusText;
++     private Button changestatus;
++
++
++        public interface OnStatusChangeListener {
++            void onStatusChange(int position);
++        }
+ 
+         public ViewHolder(View itemView) {
+             super(itemView);
+@@ -30,6 +40,7 @@
+             addressText = itemView.findViewById(R.id.txtrestaurant_Management_Address);
+             phoneText = itemView.findViewById(R.id.txtrestaurant_Management_Phone);
+             statusText = itemView.findViewById(R.id.txtrestaurant_Management_Status);
++            changestatus=itemView.findViewById(R.id.btnChangeStatus_Restaurant);
+         }
+     }
+ 
+@@ -51,6 +62,13 @@
+         holder.addressText.setText("Address: " + restaurant.getAddress());
+         holder.phoneText.setText("Phone: " + restaurant.getPhone());
+         holder.statusText.setText("Status: " + restaurant.getStatus());
++
++
++        holder.changestatus.setOnClickListener(v -> {
++            if (statusChangeListener != null) {
++                statusChangeListener.onStatusChange(position);
++            }
++        });
+     }
+ 
+ 
