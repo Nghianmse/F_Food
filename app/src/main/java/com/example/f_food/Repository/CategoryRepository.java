@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CategoryRepository {
-    private CategoryDAO categoryDAO;
+    private static CategoryDAO categoryDAO;
 
     public CategoryRepository(Context context) {
         RestaurantRoomDatabase db = RestaurantRoomDatabase.getInstance(context);
@@ -22,7 +22,7 @@ public class CategoryRepository {
         }
     }
 
-    public List<Category> getAllCategories() {
+    public static List<Category> getAllCategories() {
         return categoryDAO.getAllCategories();
     }
 

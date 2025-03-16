@@ -66,7 +66,7 @@ public class ManageFoodDetail extends AppCompatActivity {
                 runOnUiThread(() -> {
                     tvFoodTitle.setText(food.getName());
                     tvFoodPrice.setText("Giá: " + NumberFormat.getInstance(new Locale("vi", "VN")).format(food.getPrice()) + " VNĐ");
-                    tvFoodCategory.setText("Danh mục: " + food.getCategory());
+                    tvFoodCategory.setText("Danh mục: " + food.getCategoryId());
                     tvFoodDescription.setText("Mô tả về món ăn:\n" + food.getDescription());
 
                     if (food.getImageUrl() != null && !food.getImageUrl().isEmpty()) {
