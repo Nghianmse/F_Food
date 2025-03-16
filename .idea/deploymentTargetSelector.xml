@@ -15,6 +15,13 @@
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
       <SelectionState runConfigName="Restaurant_Management">
+      <SelectionState runConfigName="RestaurantSignUp">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="LoginActivity">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="ManageAddress">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

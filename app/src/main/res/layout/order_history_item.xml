@@ -16,74 +16,59 @@
 
         <!-- Ảnh món ăn -->
         <ImageView
-            android:id="@+id/ivOrder"
+            android:id="@+id/ivFood"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/login" />
+            android:scaleType="centerCrop"/>
 
         <!-- Thông tin món ăn -->
         <TextView
+            android:id="@+id/foodName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvOrderCode"
-            android:text="Mã đơn hàng: 1702010910355"
-            android:textColor="@android:color/black"
-            android:textSize="14sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/customerName"
-            android:text="Họ tên: Nguyen Dang Tin"
+            android:text="Tên món:"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
+        <!-- Phương thức thanh toán -->
         <TextView
+            android:id="@+id/paymentMethod"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/phoneNumber"
-            android:text="Số điện thoại: 0986767676"
-            android:textSize="14sp" />
+            android:text="Thanh toán:"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
 
+        <!-- Trạng thái đơn hàng -->
         <TextView
+            android:id="@+id/status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/address"
-            android:text="Địa chỉ: Chuong Duong, Hoan Kiem, Ha Noi"
-            android:textSize="14sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/menuItem"
-            android:text="Thực đơn: Bò sốt tiêu đen (160 000 VNĐ) - Số lượng: 1"
-            android:textSize="14sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/orderDate"
-            android:text="Ngày đặt hàng: 08-12-2023, 11:48 AM"
-            android:textSize="14sp" />
+            android:text="Trạng thái:"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
 
         <!-- Tổng tiền -->
         <TextView
+            android:id="@+id/totalPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/totalPrice"
-            android:text="Tổng Tiền: 160 000 VNĐ"
+            android:text="Tổng Tiền:"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
-        <TextView
+        <!-- Nút đánh giá -->
+        <Button
+            android:id="@+id/btnReview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/paymentMethod"
-            android:text="Thanh toán: Tiền mặt"
+            android:layout_marginTop="8dp"
+            android:text="Đánh giá"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:backgroundTint="@android:color/holo_blue_dark"
+            android:textColor="@android:color/white"
+            android:visibility="gone"/>
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

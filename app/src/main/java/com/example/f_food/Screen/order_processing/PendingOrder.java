@@ -10,10 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.f_food.Adapter.PendingOrderAdapter;
 import com.example.f_food.Entity.Order;
-import com.example.f_food.Entity.Restaurant;
 import com.example.f_food.R;
 import com.example.f_food.Repository.OrderRepository;
-import com.example.f_food.Repository.RestaurantRepository;
 
 import java.util.List;
 
@@ -21,7 +19,6 @@ public class PendingOrder extends AppCompatActivity {
     private RecyclerView rvPendingOrders;
     private PendingOrderAdapter adapter;
     private OrderRepository orderRepository;
-    private RestaurantRepository restaurantRepository;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,15 +29,12 @@ public class PendingOrder extends AppCompatActivity {
         rvPendingOrders.setLayoutManager(new LinearLayoutManager(this));
 
         orderRepository = new OrderRepository(this);
-        restaurantRepository = new RestaurantRepository(this);
-        List<Order> orders = orderRepository.getAllOrders();
-//        List<Restaurant> restaurants = restaurantRepository.getAllRestaurants();
+        List<Order> orders = orderRepository.getAllOrders(); // Lấy danh sách đơn hàng
 
+        // Khởi tạo adapter với listener
         adapter = new PendingOrderAdapter(this, orders, order ->
                 Toast.makeText(PendingOrder.this, "Order ID: " + order.getOrderId(), Toast.LENGTH_SHORT).show()
         );
-
-
 
         rvPendingOrders.setAdapter(adapter);
     }

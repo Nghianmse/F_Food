@@ -1,5 +1,6 @@
 package com.example.f_food.Adapter;
 
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -69,11 +70,15 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
             txtPhone.setText(restaurant.getPhone());
             txtStatus.setText(restaurant.getStatus());
             if(restaurant.getImage() != null && !restaurant.getImage().isEmpty()) {
-                Picasso.get()
-                        .load(restaurant.getImage())
-                        .resize(500, 500)
-                        .centerCrop()
-                        .into(imgRestaurant);
+                if (restaurant.getImage().startsWith("content://")) {
+                    imgRestaurant.setImageURI(Uri.parse(restaurant.getImage()));
+                } else {
+                    Picasso.get()
+                            .load(restaurant.getImage())
+                            .resize(500, 500)
+                            .centerCrop()
+                            .into(imgRestaurant);
+                }
             }
 
             // Xử lý sự kiện click
