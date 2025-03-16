@@ -1,9 +1,11 @@
 package com.example.f_food.Adapter;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,13 +18,21 @@ import java.util.List;
 
 public class RestaurantManagementListAdapter extends RecyclerView.Adapter<RestaurantManagementListAdapter.ViewHolder> {
     private List<Restaurant> restaurantList;
+    private Context context;
 
-    public RestaurantManagementListAdapter(List<Restaurant> restaurantList) {
+    private ViewHolder.OnStatusChangeListener statusChangeListener;
+    public RestaurantManagementListAdapter(List<Restaurant> restaurantList, ViewHolder.OnStatusChangeListener statusChangeListener) {
         this.restaurantList = restaurantList;
+        this.statusChangeListener = statusChangeListener;
     }
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
-     private TextView nameText, addressText, phoneText, statusText;
+        private TextView nameText, addressText, phoneText, statusText;
+        private Button changestatus;
+
+
+        public interface OnStatusChangeListener {
+            void onStatusChange(int position);
+        }
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -30,6 +40,7 @@ public class RestaurantManagementListAdapter extends RecyclerView.Adapter<Restau
             addressText = itemView.findViewById(R.id.txtrestaurant_Management_Address);
             phoneText = itemView.findViewById(R.id.txtrestaurant_Management_Phone);
             statusText = itemView.findViewById(R.id.txtrestaurant_Management_Status);
+            changestatus=itemView.findViewById(R.id.btnChangeStatus_Restaurant);
         }
     }
 
@@ -51,6 +62,13 @@ public class RestaurantManagementListAdapter extends RecyclerView.Adapter<Restau
         holder.addressText.setText("Address: " + restaurant.getAddress());
         holder.phoneText.setText("Phone: " + restaurant.getPhone());
         holder.statusText.setText("Status: " + restaurant.getStatus());
+
+
+        holder.changestatus.setOnClickListener(v -> {
+            if (statusChangeListener != null) {
+                statusChangeListener.onStatusChange(position);
+            }
+        });
     }
 
 

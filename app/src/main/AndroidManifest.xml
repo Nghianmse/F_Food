@@ -79,6 +79,9 @@
             android:name=".Screen.authentication_authorization.RestaurantSignUp"
             android:exported="true" />
         <activity
+            android:name=".Screen.authentication_authorization.SignUp"
+            android:exported="true" />
+        <activity
             android:name=".Screen.features_customer.ManageAddress"
             android:exported="true" />
         <activity
@@ -97,8 +100,30 @@
             android:name=".Screen.features_customer.ViewRestaurantList"
             android:exported="true" />
         <activity
+
+            android:name=".Screen.admin_management.Restaurant_Management"
+            android:exported="true" />
+        <activity
+            android:name=".Screen.admin_management.Customer_Management"
+            android:exported="true" />
+        <activity
+            android:name=".Screen.admin_management.Payment_Transactions_Management"
+            android:exported="true" />
+        <activity
+            android:name=".Screen.admin_management.Policy_Management"
+            android:exported="true" />
+        <activity
+            android:name=".Screen.admin_management.Shipper_Management"
+            android:exported="true" />
+        <activity
+            android:name=".Screen.admin_management.AdminScreen"
+            android:exported="true" />
+
+        <!-- Main Activity -->
+
             android:name=".Screen.features_customer.ProductListRestaurant"
             android:exported="true" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">

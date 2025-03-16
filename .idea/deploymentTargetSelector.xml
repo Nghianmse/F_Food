@@ -3,6 +3,20 @@
   <component name="deploymentTargetSelector">
     <selectionStates>
       <SelectionState runConfigName="OrderTracking">
+      <SelectionState runConfigName="Payment_Transactions_Management">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="AdminScreen">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="Customer_Management">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="SignUp">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="Restaurant_Management">
+      <SelectionState runConfigName="RestaurantSignUp">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
       <SelectionState runConfigName="PendingOrder">
