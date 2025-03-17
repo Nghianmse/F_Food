@@ -22,7 +22,8 @@ public interface OrderDAO {
 
     @Query("SELECT * FROM Orders WHERE user_id = :userId")
     List<Order> getOrdersByUserId(int userId);
-
+    @Query("UPDATE Orders SET order_status = :newStatus WHERE order_id = :orderId")
+    void updateOrderStatus(int orderId, String newStatus);
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Order order);
 

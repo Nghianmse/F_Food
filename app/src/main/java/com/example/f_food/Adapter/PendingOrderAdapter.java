@@ -11,9 +11,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.f_food.Entity.Food;
 import com.example.f_food.Entity.Order;
 import com.example.f_food.Entity.Restaurant;
 import com.example.f_food.R;
+import com.example.f_food.Repository.OrderRepository;
 import com.example.f_food.Repository.RestaurantRepository;
 import com.example.f_food.Screen.order_processing.AcceptShippingOrder;
 
@@ -22,6 +24,7 @@ import java.util.List;
 public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapter.ViewHolder> {
     private final List<Order> orderList;
     private final RestaurantRepository restaurantRepository;
+    private final OrderRepository orderRepository;
     private final Context context;
     private final OnOrderClickListener listener; // Lưu listener
 
@@ -36,6 +39,7 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
         this.orderList = orderList;
         this.listener = listener;
         this.restaurantRepository = new RestaurantRepository(context);
+        this.orderRepository = new OrderRepository(context);
     }
 
     @NonNull
