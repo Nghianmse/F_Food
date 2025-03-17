@@ -1,3 +1,0 @@
-com.example.f_food.test
-style WhiteBackgroundDialogTheme
-style WhiteBackgroundTheme

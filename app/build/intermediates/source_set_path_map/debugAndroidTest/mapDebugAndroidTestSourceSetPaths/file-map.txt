@@ -1,5 +1,0 @@
-com.example.f_food.test.app-core-1.6.1-0 D:\PRM392\caches\8.9\transforms\298d8545d0fa2242df5fff73728c5498\transformed\core-1.6.1\res
-com.example.f_food.test.app-androidTest-1 D:\Project_PRM392\F_Food\app\build\generated\res\resValues\androidTest\debug
-com.example.f_food.test.app-mergeDebugAndroidTestResources-2 D:\Project_PRM392\F_Food\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
-com.example.f_food.test.app-mergeDebugAndroidTestResources-3 D:\Project_PRM392\F_Food\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
-com.example.f_food.test.app-debugAndroidTest-4 D:\Project_PRM392\F_Food\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources
