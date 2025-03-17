@@ -20,11 +20,7 @@ import com.example.f_food.Entity.Review;
 import com.example.f_food.Entity.User;
 import com.example.f_food.Entity.OrderDetail;
 
-@Database(entities = {Restaurant.class, Food.class, User.class, Policy.class, Order.class, OrderDetail.class, Review.class, Category.class, Address.class}, version = 14, exportSchema = false)
-
-
-
-@Database(entities = {Restaurant.class, Food.class, User.class, Policy.class, Order.class, Shipper.class, Payment.class }, version = 7, exportSchema = false)
+@Database(entities = {Restaurant.class, Food.class, User.class, Policy.class, Order.class, OrderDetail.class, Review.class, Category.class, Address.class, Shipper.class, Payment.class}, version = 16, exportSchema = false)
 
 public abstract class RestaurantRoomDatabase extends RoomDatabase {
 
@@ -36,8 +32,6 @@ public abstract class RestaurantRoomDatabase extends RoomDatabase {
     public abstract UserDAO userDAO();
 
     public abstract  OrderDAO orderDAO();
-
-    public  abstract  ShipperDAO shipperDAO();
     public abstract PaymentDAO paymentDAO();
 
     public abstract  CategoryDAO categoryDAO();
@@ -46,6 +40,7 @@ public abstract class RestaurantRoomDatabase extends RoomDatabase {
    public abstract  ReviewDAO reviewDAO();
 
     public abstract  AddressDAO addressDAO();
+    public abstract  ShipperDAO shipperDAO();
     private static volatile RestaurantRoomDatabase INSTANCE;
 
     public static RestaurantRoomDatabase getInstance(Context context) {

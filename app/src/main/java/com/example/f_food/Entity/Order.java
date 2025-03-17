@@ -32,7 +32,10 @@ public class Order {
     @ColumnInfo(name = "updated_at")
     private String updatedAt;
 
-    public Order(int userId, int restaurantId, double totalPrice, String paymentMethod, String orderStatus, String createdAt, String updatedAt) {
+    @ColumnInfo(name = "shipper_id")
+    private int shipperId;
+
+    public Order(int userId, int restaurantId, double totalPrice, String paymentMethod, String orderStatus, String createdAt, String updatedAt, int shipperId) {
         this.userId = userId;
         this.restaurantId = restaurantId;
         this.totalPrice = totalPrice;
@@ -40,6 +43,14 @@ public class Order {
         this.orderStatus = orderStatus;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.shipperId = shipperId;
+    }
+    public int getShipperId() {
+        return shipperId;
+    }
+
+    public void setShipperId(int shipperId) {
+        this.shipperId = shipperId;
     }
 
     public int getOrderId() {

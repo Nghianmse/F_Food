@@ -2,7 +2,17 @@
 <project version="4">
   <component name="AndroidLayouts">
     <layouts>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_order_tracking.xml">
+        <config>
+          <theme>@style/Theme.F_Food</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_payment_transactions_management.xml">
+        <config>
+          <theme>@style/Theme.F_Food</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/order_history_item.xml">
         <config>
           <theme>@style/Theme.F_Food</theme>
         </config>
@@ -14,7 +24,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="75449742-cd38-4dd1-8b88-ebd5b290f810" name="Changes" comment="add">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/f_food/DAO/ShipperWithOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/f_food/Adapter/OrderTrackingAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/f_food/Adapter/OrderTrackingAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/f_food/DAO/OrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/f_food/DAO/OrderDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/f_food/DAO/RestaurantRoomDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/f_food/DAO/RestaurantRoomDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/f_food/DAO/ShipperDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/f_food/DAO/ShipperDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/f_food/Entity/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/f_food/Entity/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/f_food/Repository/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/f_food/Repository/OrderRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/f_food/Screen/order_processing/AcceptShippingOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/f_food/Screen/order_processing/AcceptShippingOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/order_tracking_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/order_tracking_item.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -25,11 +46,18 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\My pc\.android\avd\Pixel_8_API_27.avd)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\caoth\.android\avd\Pixel_8_Pro_API_27_1.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -48,7 +76,7 @@
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
     "url": "https://github.com/bachnvse1/F_Food.git",
-    "accountId": "b9d6f57f-9149-476a-96e6-1233510ffb6b"
+    "accountId": "7cc67eb9-1e4c-472b-b5be-f762030c70e0"
   }
 }]]></component>
   <component name="ProblemsViewState">
@@ -71,10 +99,15 @@
     "Android App.AdminScreen.executor": "Run",
     "Android App.Customer_Management.executor": "Run",
     "Android App.FoodDetailActivity.executor": "Run",
+    "Android App.OrderTracking.executor": "Run",
     "Android App.Payment_Transactions_Management.executor": "Run",
+    "Android App.PendingOrder.executor": "Run",
     "Android App.Restaurant_Management.executor": "Run",
+    "Android App.ShipperLogin.executor": "Run",
+    "Android App.Shipper_Management.executor": "Run",
     "Android App.SignUp.executor": "Run",
     "Android App.ViewRestaurantList.executor": "Run",
+    "PROJECT_TRUSTED_KEY": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
@@ -82,11 +115,12 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "com.google.services.firebase.aqiPopupShown": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true"
+    "git-widget-placeholder": "OrderTracking",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/project_prm/F_Food"
   }
 }]]></component>
-  <component name="RunManager" selected="Android App.AdminScreen">
+  <component name="RunManager" selected="Android App.OrderTracking">
     <configuration name="AdminScreen" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false" temporary="true">
       <module name="F_Food.app.main" />
       <option name="DEPLOY" value="true" />
@@ -155,7 +189,7 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Customer_Management" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false" temporary="true">
+    <configuration name="OrderTracking" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false" temporary="true">
       <module name="F_Food.app.main" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
@@ -216,14 +250,14 @@
         <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
       </Profilers>
       <option name="DEEP_LINK" value="" />
-      <option name="ACTIVITY_CLASS" value="com.example.f_food.Screen.admin_management.Customer_Management" />
+      <option name="ACTIVITY_CLASS" value="com.example.f_food.Screen.features_customer.OrderTracking" />
       <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
       <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
       <method v="2">
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Payment_Transactions_Management" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false" temporary="true">
+    <configuration name="PendingOrder" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false" temporary="true">
       <module name="F_Food.app.main" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
@@ -284,14 +318,14 @@
         <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
       </Profilers>
       <option name="DEEP_LINK" value="" />
-      <option name="ACTIVITY_CLASS" value="com.example.f_food.Screen.admin_management.Payment_Transactions_Management" />
+      <option name="ACTIVITY_CLASS" value="com.example.f_food.Screen.order_processing.PendingOrder" />
       <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
       <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
       <method v="2">
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Restaurant_Management" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false" temporary="true">
+    <configuration name="ShipperLogin" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false" temporary="true">
       <module name="F_Food.app.main" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
@@ -352,14 +386,14 @@
         <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
       </Profilers>
       <option name="DEEP_LINK" value="" />
-      <option name="ACTIVITY_CLASS" value="com.example.f_food.Screen.admin_management.Restaurant_Management" />
+      <option name="ACTIVITY_CLASS" value="com.example.f_food.Screen.authentication_authorization.ShipperLogin" />
       <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
       <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
       <method v="2">
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SignUp" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false" temporary="true">
+    <configuration name="Shipper_Management" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false" temporary="true">
       <module name="F_Food.app.main" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
@@ -420,7 +454,7 @@
         <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
       </Profilers>
       <option name="DEEP_LINK" value="" />
-      <option name="ACTIVITY_CLASS" value="com.example.f_food.Screen.authentication_authorization.SignUp" />
+      <option name="ACTIVITY_CLASS" value="com.example.f_food.Screen.admin_management.Shipper_Management" />
       <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
       <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
       <method v="2">
@@ -429,11 +463,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Android App.OrderTracking" />
+        <item itemvalue="Android App.Shipper_Management" />
+        <item itemvalue="Android App.PendingOrder" />
+        <item itemvalue="Android App.ShipperLogin" />
         <item itemvalue="Android App.AdminScreen" />
-        <item itemvalue="Android App.Restaurant_Management" />
-        <item itemvalue="Android App.Customer_Management" />
-        <item itemvalue="Android App.SignUp" />
-        <item itemvalue="Android App.Payment_Transactions_Management" />
       </list>
     </recent_temporary>
   </component>
@@ -459,6 +493,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add" />
-    <option name="LAST_COMMIT_MESSAGE" value="add" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
 </project>
