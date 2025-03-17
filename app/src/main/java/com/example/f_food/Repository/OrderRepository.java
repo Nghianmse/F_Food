@@ -8,6 +8,7 @@ import com.example.f_food.DAO.OrderDetailDAO;
 import com.example.f_food.DAO.RestaurantRoomDatabase;
 import com.example.f_food.DAO.RestaurantDAO;
 import com.example.f_food.DAO.FoodDAO;
+import com.example.f_food.DAO.ShipperWithOrder;
 import com.example.f_food.Entity.OrderDetail;
 import com.example.f_food.Entity.Food;
 import com.example.f_food.Entity.Order;
@@ -107,14 +108,24 @@ public class OrderRepository {
     public List<FoodWithOrder> getImageByOrderId(int orderId) {
         return orderDAO.getImageByOrderId(orderId);
     }
+    public void updateOrderShipper(int orderId, int shipperId) {
+        Order order = orderDAO.getOrderById(orderId);
+        if (order != null) {
+            order.setShipperId(shipperId);
+            orderDAO.update(order);
+        }
+    }
+    public ShipperWithOrder getShipperWithOrder(int orderId) {
+        return orderDAO.getShipperWithOrder(orderId);
+    }
 
     private void insertSampleData() {
         List<Order> sampleOrders = Arrays.asList(
-                new Order(1, 1, 15.99, "Credit Card", "Pending", "2025-03-05 10:00:00", "2025-03-05 10:00:00"),
-                new Order(2, 2, 22.50, "E-Wallet", "Preparing", "2025-03-05 10:10:00", "2025-03-05 10:15:00"),
-                new Order(3, 3, 9.99, "COD", "Delivered", "2025-03-05 11:00:00", "2025-03-05 12:00:00"),
-                new Order(4, 4, 30.75, "Credit Card", "Cancelled", "2025-03-05 12:30:00", "2025-03-05 12:45:00"),
-                new Order(5, 2, 18.25, "E-Wallet", "Pending", "2025-03-05 13:00:00", "2025-03-05 13:05:00")
+                new Order(1, 1, 15.99, "Credit Card", "Pending", "2025-03-05 10:00:00", "2025-03-05 10:00:00",1),
+                new Order(2, 2, 22.50, "E-Wallet", "Preparing", "2025-03-05 10:10:00", "2025-03-05 10:15:00",12),
+                new Order(3, 3, 9.99, "COD", "Delivered", "2025-03-05 11:00:00", "2025-03-05 12:00:00",13),
+                new Order(4, 4, 30.75, "Credit Card", "Cancelled", "2025-03-05 12:30:00", "2025-03-05 12:45:00",14),
+                new Order(5, 2, 18.25, "E-Wallet", "Pending", "2025-03-05 13:00:00", "2025-03-05 13:05:00",15)
         );
 
         for (Order order : sampleOrders) {

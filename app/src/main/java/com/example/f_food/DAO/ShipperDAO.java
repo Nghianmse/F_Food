@@ -42,4 +42,7 @@ public interface ShipperDAO {
 
     @Query("DELETE FROM Shippers")
     void deleteAll();
+
+    @Query("SELECT Users.FullName FROM Users INNER JOIN Shippers ON Shippers.UserID = Users.UserID WHERE Shippers.UserID = :userId")
+    String getShipperNameByUserId(int userId);
 }

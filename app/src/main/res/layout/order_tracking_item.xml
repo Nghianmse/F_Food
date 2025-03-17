@@ -56,9 +56,10 @@
             android:id="@+id/findingShipperText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Đang tìm kiếm shipper"
-            android:textColor="@android:color/holo_orange_dark"
+            android:text="Đang tìm kiếm shipper...."
+            android:textColor="#4285F4"
             android:textSize="14sp"
             android:visibility="gone" />
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>

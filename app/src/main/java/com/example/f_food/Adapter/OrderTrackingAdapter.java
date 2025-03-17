@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.f_food.DAO.FoodWithOrder;
+import com.example.f_food.DAO.ShipperWithOrder;
 import com.example.f_food.Repository.OrderRepository;
 import com.example.f_food.Entity.Order;
 import com.example.f_food.R;
@@ -66,8 +67,15 @@ public class OrderTrackingAdapter extends RecyclerView.Adapter<OrderTrackingAdap
         // Check the order status and set the appropriate text
         if ("Preparing".equals(order.getOrderStatus())) {
             holder.findingShipperText.setVisibility(View.VISIBLE);
-        } else {
-            holder.findingShipperText.setVisibility(View.GONE);
+        } else if ("Delivering".equals(order.getOrderStatus())){
+            holder.findingShipperText.setVisibility(View.VISIBLE);
+            ShipperWithOrder shipperWithOrder = orderRepository.getShipperWithOrder(order.getOrderId());
+            holder.findingShipperText.setText("Shipper: " + shipperWithOrder.getShipperName() + " - " +shipperWithOrder.getShipperPhone() );
+            holder.findingShipperText.setTextColor(holder.itemView.getContext().getResources().getColor(android.R.color.holo_orange_dark));
+        }else if ("Delivered".equals(order.getOrderStatus())) {
+            holder.findingShipperText.setVisibility(View.VISIBLE);
+            holder.findingShipperText.setText("Đơn hàng đã được giao thành công");
+            holder.findingShipperText.setTextColor(holder.itemView.getContext().getResources().getColor(android.R.color.holo_green_dark));
         }
     }
 
@@ -82,7 +90,7 @@ public class OrderTrackingAdapter extends RecyclerView.Adapter<OrderTrackingAdap
     }
 
     public static class OrderViewHolder extends RecyclerView.ViewHolder {
-        TextView totalPrice, paymentMethod, foodName, status, findingShipperText  ;
+        TextView totalPrice, paymentMethod, foodName, status, findingShipperText, shipperName  ;
         ImageView ivFood;
 
         public OrderViewHolder(View itemView) {

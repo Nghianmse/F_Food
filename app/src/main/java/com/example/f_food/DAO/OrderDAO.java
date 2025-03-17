@@ -61,4 +61,14 @@ public interface OrderDAO {
 
     @Query("SELECT * FROM Orders WHERE order_status IN ('Preparing', 'Delivering', 'Delivered')")
     List<Order> getFilteredOrders();
+
+    @Query("SELECT Orders.order_id AS orderId, Orders.shipper_id AS shipperId, " +
+            "Users.FullName AS shipperName, Users.Phone AS shipperPhone " +
+            "FROM Orders " +
+            "INNER JOIN Shippers ON Orders.shipper_id = Shippers.ShipperID " +
+            "INNER JOIN Users ON Shippers.UserID = Users.UserID " +
+            "WHERE Orders.order_id = :orderId")
+    ShipperWithOrder getShipperWithOrder(int orderId);
+
+
 }
