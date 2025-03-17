@@ -4,26 +4,51 @@ import android.content.Context;
 
 import com.example.f_food.DAO.FoodWithOrder;
 import com.example.f_food.DAO.OrderDAO;
+import com.example.f_food.DAO.OrderDetailDAO;
 import com.example.f_food.DAO.RestaurantRoomDatabase;
 import com.example.f_food.DAO.RestaurantDAO;
+import com.example.f_food.DAO.FoodDAO;
+import com.example.f_food.Entity.OrderDetail;
+import com.example.f_food.Entity.Food;
 import com.example.f_food.Entity.Order;
 import com.example.f_food.Entity.Restaurant;
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderRepository {
     private OrderDAO orderDAO;
     private RestaurantDAO restaurantDAO;
 
+    private OrderDetailDAO orderDetailDAO;
+    private FoodDAO foodDAO;
+
+
     public OrderRepository(Context context) {
         RestaurantRoomDatabase db = RestaurantRoomDatabase.getInstance(context);
         orderDAO = db.orderDAO();
         restaurantDAO = db.restaurantDAO();
+        orderDetailDAO = db.orderDetailDAO();
+        foodDAO = db.foodDAO();
 
         // Kiểm tra nếu chưa có dữ liệu, thì thêm dữ liệu mẫu
         if (orderDAO.getAllOrders().isEmpty()) {
             insertSampleData();
         }
+    }
+
+    // Lấy danh sách món ăn từ OrderDetail theo orderId
+    public List<Food> getFoodListByOrderId(int orderId) {
+        List<OrderDetail> orderDetails = orderDetailDAO.getOrderDetailsByOrderId(orderId);
+        List<Food> foodList = new ArrayList<>();
+
+        for (OrderDetail detail : orderDetails) {
+            Food food = foodDAO.getFoodById(detail.getFoodId());
+            if (food != null) {
+                foodList.add(food);
+            }
+        }
+        return foodList;
     }
 
     public List<Order> getAllOrders() {
@@ -45,6 +70,14 @@ public class OrderRepository {
             return (restaurant != null) ? restaurant.getAddress() : "Unknown Address";
         }
         return "Unknown Address";
+    }
+
+    public void updateOrderStatus(int orderId, String newStatus) {
+        Order order = orderDAO.getOrderById(orderId);
+        if (order != null) {
+            order.setOrderStatus(newStatus);
+            orderDAO.update(order);
+        }
     }
 
     public void deleteById(int id) {
