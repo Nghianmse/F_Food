@@ -58,7 +58,7 @@ public class RestaurantLogIn extends AppCompatActivity {
     private void handleLogin() {
         String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
-
+//aa
         if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
             return;

@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.f_food.entity.User;
 import com.example.f_food.R;
 import com.example.f_food.repository.UserRepository;
+import com.example.f_food.screen.admin_management.AdminScreen;
 import com.example.f_food.screen.features_customer.ManageAddress;
 import com.example.f_food.screen.features_customer.ViewRestaurantList;
 import com.squareup.picasso.Picasso;
@@ -28,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin, btnLoginForPartner;
     private TextView tvForgotPassword;
     private UserRepository userRepository;
+    Button reigister;
     ImageView imgLogoLogin;
 
     @Override
@@ -42,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLoginForPartner = findViewById(R.id.btnLoginForPartner);  // Initialize the Login for Partner button
         tvForgotPassword = findViewById(R.id.tvForgotPassword);
         imgLogoLogin = findViewById(R.id.imgLogoLogin);
+        reigister=findViewById(R.id.btnRegister);
 
         Picasso.get()
                 .load(R.drawable.login)
@@ -56,6 +59,10 @@ public class LoginActivity extends AppCompatActivity {
 
         // Xử lý sự kiện khi nhấn nút đăng nhập cho partner
         btnLoginForPartner.setOnClickListener(v -> navigateToRestaurantLogIn());
+        reigister.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, SignUp.class);
+            startActivity(intent);
+        });
     }
 
     private void handleLogin() {
@@ -87,7 +94,21 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                     return;
-                } else {
+                } else if ("Admin".equals(user.getUserType())) {
+                    // Lưu userId vào SharedPreferences
+                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putInt("userId", user.getUserId()); // Giả sử `getId()` trả về userId
+                    editor.apply();
+
+                    Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+
+                    // Chuyển sang màn hình OrderHistory
+                    Intent intent = new Intent(this, AdminScreen.class);
+                    startActivity(intent);
+                    finish();
+                    return;
+                }else {
                     showAlertDialog("Email hoặc mật khẩu không đúng!");
                     return;
                 }

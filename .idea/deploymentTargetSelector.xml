@@ -15,6 +15,7 @@
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
       <SelectionState runConfigName="OrderAccepted">
+      <SelectionState runConfigName="HomeStart">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

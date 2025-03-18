@@ -23,6 +23,12 @@ public interface FoodDAO {
     @Query("SELECT * FROM Foods WHERE restaurant_id = :restaurantId")
     List<Food> getFoodsByRestaurantId(int restaurantId);
 
+    @Query("SELECT * FROM Foods WHERE category_id = :categoryId")
+    List<Food> getFoodsByCategoryId(int categoryId);
+
+    @Query("SELECT * FROM Foods WHERE name LIKE '%' || :name || '%'")
+    List<Food> getFoodsByName(String name);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Food food);
 

@@ -52,9 +52,9 @@ public  void getShipperByUserId(int userid){
 
     private void insertSampleData() {
         List<Shipper> sampleShippers = Arrays.asList(
-                new Shipper(1, 101, "Active"),
-                new Shipper(2, 102, "Inactive"),
-                new Shipper(3, 103, "Pending")
+                new Shipper(1, 1, "Active"),
+                new Shipper(2, 2, "Inactive"),
+                new Shipper(3, 3, "Active")
         );
 
         for (Shipper shipper : sampleShippers) {
