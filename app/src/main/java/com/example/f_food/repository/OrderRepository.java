@@ -114,7 +114,7 @@ public class OrderRepository {
             orderDAO.update(order);
         }
     }
-    public com.example.f_food.DAO.ShipperWithOrder getShipperWithOrder(int orderId) {
+    public com.example.f_food.dao.ShipperWithOrder getShipperWithOrder(int orderId) {
         return orderDAO.getShipperWithOrder(orderId);
     }
 
