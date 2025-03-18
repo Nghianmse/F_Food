@@ -119,6 +119,17 @@
             android:textColor="@color/gray"
             android:textSize="18sp"
             android:textStyle="italic" />
+        <Button
+            android:id="@+id/btnManageAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="53dp"
+            android:background="@drawable/rounded_purple_bg"
+            android:text="Quản lý địa chỉ"
+            android:textColor="@color/white"
+            android:layout_constraintTop_toBottomOf="@id/btnEdit"
+            android:layout_constraintStart_toStartOf="parent"
+            android:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="2dp"/>
 
         <Button
             android:id="@+id/btnEdit"
@@ -127,7 +138,8 @@
             android:background="@drawable/rounded_purple_bg"
             android:padding="12dp"
             android:text="Chỉnh sửa"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:layout_marginTop="6dp"/>
     </LinearLayout>
 
 

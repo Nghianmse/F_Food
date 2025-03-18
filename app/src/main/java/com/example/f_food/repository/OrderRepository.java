@@ -120,11 +120,11 @@ public class OrderRepository {
 
     private void insertSampleData() {
         List<Order> sampleOrders = Arrays.asList(
-                new Order(1, 1, 15.99, "Credit Card", "Pending", "2025-03-05 10:00:00", "2025-03-05 10:00:00"),
-                new Order(2, 2, 22.50, "E-Wallet", "Preparing", "2025-03-05 10:10:00", "2025-03-05 10:15:00"),
-                new Order(3, 3, 9.99, "COD", "Delivered", "2025-03-05 11:00:00", "2025-03-05 12:00:00"),
-                new Order(4, 4, 30.75, "Credit Card", "Cancelled", "2025-03-05 12:30:00", "2025-03-05 12:45:00"),
-                new Order(5, 2, 18.25, "E-Wallet", "Pending", "2025-03-05 13:00:00", "2025-03-05 13:05:00")
+                new Order(1, 1, 15.99, "Credit Card", "Pending", "2025-03-05 10:00:00", "2025-03-05 10:00:00",1),
+                new Order(2, 2, 22.50, "E-Wallet", "Preparing", "2025-03-05 10:10:00", "2025-03-05 10:15:00",1),
+                new Order(3, 3, 9.99, "COD", "Delivered", "2025-03-05 11:00:00", "2025-03-05 12:00:00",1),
+                new Order(4, 4, 30.75, "Credit Card", "Cancelled", "2025-03-05 12:30:00", "2025-03-05 12:45:00",1),
+                new Order(5, 2, 18.25, "E-Wallet", "Pending", "2025-03-05 13:00:00", "2025-03-05 13:05:00",1)
         );
 
         for (Order order : sampleOrders) {

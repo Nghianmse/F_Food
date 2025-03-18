@@ -1,10 +1,21 @@
-package com.example.f_food.DAO;
+package com.example.f_food.dao;
 
 import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.f_food.dao.AddressDAO;
+import com.example.f_food.dao.CategoryDAO;
+import com.example.f_food.dao.FoodDAO;
+import com.example.f_food.dao.OrderDAO;
+import com.example.f_food.dao.OrderDetailDAO;
+import com.example.f_food.dao.PaymentDAO;
+import com.example.f_food.dao.PolicyDAO;
+import com.example.f_food.dao.RestaurantDAO;
+import com.example.f_food.dao.ReviewDAO;
+import com.example.f_food.dao.ShipperDAO;
+import com.example.f_food.dao.UserDAO;
 import com.example.f_food.entity.Address;
 import com.example.f_food.entity.Category;
 import com.example.f_food.entity.Food;
@@ -24,20 +35,20 @@ public abstract class RestaurantRoomDatabase extends RoomDatabase {
     public abstract RestaurantDAO restaurantDAO();
 
     public abstract FoodDAO foodDAO();
-    public  abstract  PolicyDAO policyDAO();
+    public  abstract PolicyDAO policyDAO();
 
     public abstract UserDAO userDAO();
 
-    public abstract  OrderDAO orderDAO();
+    public abstract OrderDAO orderDAO();
     public abstract PaymentDAO paymentDAO();
 
-    public abstract  CategoryDAO categoryDAO();
-    public abstract  OrderDetailDAO orderDetailDAO();
+    public abstract CategoryDAO categoryDAO();
+    public abstract OrderDetailDAO orderDetailDAO();
 
-   public abstract  ReviewDAO reviewDAO();
+   public abstract ReviewDAO reviewDAO();
 
-    public abstract  AddressDAO addressDAO();
-    public abstract  ShipperDAO shipperDAO();
+    public abstract AddressDAO addressDAO();
+    public abstract ShipperDAO shipperDAO();
     private static volatile RestaurantRoomDatabase INSTANCE;
 
     public static RestaurantRoomDatabase getInstance(Context context) {
