@@ -17,7 +17,7 @@ public class MenuManagement extends AppCompatActivity {
     private RecyclerView recyclerView;
     private FoodListAdapter adapter;
     private FoodRepository repository;
-    private final int restaurantId = 1; // ID nhà hàng bạn muốn lấy dữ liệu.
+    private final int restaurantId = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

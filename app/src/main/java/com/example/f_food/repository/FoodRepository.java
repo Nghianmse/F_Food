@@ -34,6 +34,14 @@ public class FoodRepository {
         return foodDAO.getFoodsByRestaurantId(restaurantId);
     }
 
+    public List<Food> getFoodsByName(String name) {
+        return foodDAO.getFoodsByName(name);
+    }
+
+    public List<Food> getFoodsByCategoryId(int categoryId) {
+        return foodDAO.getFoodsByCategoryId(categoryId);
+    }
+
     public void deleteById(int id) {
         foodDAO.deleteById(id);
     }

@@ -20,6 +20,9 @@ public interface CategoryDAO {
     @Query("SELECT * FROM Categories WHERE category_id = :id")
     Category getCategoryById(int id);
 
+    @Query("SELECT * FROM Categories WHERE name = :name")
+    Category getCategoryByName(String name);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Category category);
 

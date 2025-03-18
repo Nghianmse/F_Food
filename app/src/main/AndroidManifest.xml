@@ -20,9 +20,9 @@
         android:theme="@style/Theme.F_Food"
         tools:targetApi="31">
         <activity
-            android:name=".screen.admin_management.AddPolicy"
-            android:exported="false" />
 
+            android:name=".screen.features_customer.HomeStart"
+            android:exported="true" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
