@@ -68,7 +68,7 @@ public class OrderTrackingAdapter extends RecyclerView.Adapter<OrderTrackingAdap
             holder.findingShipperText.setVisibility(View.VISIBLE);
         } else if ("Delivering".equals(order.getOrderStatus())){
             holder.findingShipperText.setVisibility(View.VISIBLE);
-            com.example.f_food.DAO.ShipperWithOrder shipperWithOrder = orderRepository.getShipperWithOrder(order.getOrderId());
+            com.example.f_food.dao.ShipperWithOrder shipperWithOrder = orderRepository.getShipperWithOrder(order.getOrderId());
             holder.findingShipperText.setText("Shipper: " + shipperWithOrder.getShipperName() + " - " +shipperWithOrder.getShipperPhone() );
             holder.findingShipperText.setTextColor(holder.itemView.getContext().getResources().getColor(android.R.color.holo_orange_dark));
         }else if ("Delivered".equals(order.getOrderStatus())) {
