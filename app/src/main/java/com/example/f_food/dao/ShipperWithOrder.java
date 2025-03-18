@@ -1,4 +1,4 @@
-package com.example.f_food.DAO;
+package com.example.f_food.dao;
 
 public class ShipperWithOrder {
 

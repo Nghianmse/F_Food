@@ -29,6 +29,10 @@ public class CategoryRepository {
     public Category getCategoryById(int id) {
         return categoryDAO.getCategoryById(id);
     }
+    public Category getCategoryByName(String name) {
+        return categoryDAO.getCategoryByName(name);
+    }
+
 
     public void deleteById(int id) {
         categoryDAO.deleteById(id);
