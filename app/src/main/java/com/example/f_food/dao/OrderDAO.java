@@ -69,4 +69,6 @@ public interface OrderDAO {
             "INNER JOIN Users ON Shippers.UserID = Users.UserID " +
             "WHERE Orders.order_id = :orderId")
     com.example.f_food.dao.ShipperWithOrder getShipperWithOrder(int orderId);
+
+    ShipperWithOrder getShipperWithOrder(int orderId);
 }
