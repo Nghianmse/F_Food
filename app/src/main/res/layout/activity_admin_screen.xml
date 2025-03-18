@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:id="@+id/adminscreen_activity"
-    tools:context=".Screen.admin_management.AdminScreen">
+    tools:context=".screen.admin_management.AdminScreen">
 
     <ImageView
         android:id="@+id/logo"

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#E0E0E0"
     android:id="@+id/ManageFoodDetail"
-    tools:context=".Screen.features_restaurant_management.ManageFoodDetail">
+    tools:context=".screen.features_restaurant_management.ManageFoodDetail">
 
     <!-- Tiêu đề món ăn -->
     <TextView

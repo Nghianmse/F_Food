@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Screen.features_restaurant_management.CustomerSupport"
+    tools:context=".screen.features_restaurant_management.CustomerSupport"
     android:id="@+id/customerSupportActivity">
 
     <!-- Home Icon -->

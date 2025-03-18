@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Screen.features_customer.CustomerProfile"
+    tools:context=".screen.features_customer.CustomerProfile"
     android:id="@+id/customerProfile"
     >
 

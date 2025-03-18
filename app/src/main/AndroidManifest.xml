@@ -22,112 +22,111 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
         <activity
-            android:name=".Screen.features_restaurant_management.AddFoodActivity"
+            android:name=".screen.features_restaurant_management.AddFoodActivity"
             android:exported="true" />
         <activity
-            android:name=".Screen.features_customer.activity_checkout"
+            android:name=".screen.features_customer.activity_checkout"
             android:exported="true" />
         <activity
-            android:name=".Screen.features_customer.activity_cart"
+            android:name=".screen.features_customer.activity_cart"
             android:exported="true" />
         <activity
-            android:name=".Screen.features_customer.OrderHistoryDetail"
+            android:name=".screen.features_customer.OrderHistoryDetail"
             android:exported="false" />
         <activity
-            android:name=".Screen.authentication_authorization.ShipperSignUp"
+            android:name=".screen.authentication_authorization.ShipperSignUp"
             android:exported="false" />
         <activity
-            android:name=".Screen.authentication_authorization.ShipperLogin"
+            android:name=".screen.authentication_authorization.ShipperLogin"
             android:exported="true" />
         <activity
-            android:name=".Screen.order_processing.DeliveryStatusUpdate"
+            android:name=".screen.order_processing.DeliveryStatusUpdate"
             android:exported="true" />
         <activity
-            android:name=".Screen.features_restaurant_management.UpdateFood"
+            android:name=".screen.features_restaurant_management.UpdateFood"
             android:exported="false" />
         <activity
-            android:name=".Screen.features_restaurant_management.ManageFoodDetail"
+            android:name=".screen.features_restaurant_management.ManageFoodDetail"
             android:exported="true" />
         <activity
-            android:name=".Screen.features_customer.CustomerProfile"
+            android:name=".screen.features_customer.CustomerProfile"
             android:exported="true" />
         <activity
-            android:name=".Screen.features_restaurant_management.RestaurantNotifications"
+            android:name=".screen.features_restaurant_management.RestaurantNotifications"
             android:exported="true" />
         <activity
-            android:name=".Screen.features_restaurant_management.RestaurantSalesReport"
+            android:name=".screen.features_restaurant_management.RestaurantSalesReport"
             android:exported="true" />
         <activity
-            android:name=".Screen.features_restaurant_management.RestaurantOrders"
+            android:name=".screen.features_restaurant_management.RestaurantOrders"
             android:exported="true" />
         <activity
-            android:name=".Screen.features_restaurant_management.MenuManagement"
+            android:name=".screen.features_restaurant_management.MenuManagement"
             android:exported="true" />
         <activity
-            android:name=".Screen.features_restaurant_management.CustomerSupport"
+            android:name=".screen.features_restaurant_management.CustomerSupport"
             android:exported="true" />
         <activity
-            android:name=".Screen.order_processing.AcceptShippingOrder"
+            android:name=".screen.order_processing.AcceptShippingOrder"
             android:exported="true" />
         <activity
-            android:name=".Screen.order_processing.DeliveryHistory"
+            android:name=".screen.order_processing.DeliveryHistory"
             android:exported="true" />
         <activity
-            android:name=".Screen.order_processing.PendingOrder"
+            android:name=".screen.order_processing.PendingOrder"
             android:exported="true" />
         <activity
-            android:name=".Screen.features_customer.FoodDetailActivity"
+            android:name=".screen.features_customer.FoodDetailActivity"
             android:exported="true" />
         <activity
-            android:name=".Screen.authentication_authorization.RestaurantLogIn"
+            android:name=".screen.authentication_authorization.RestaurantLogIn"
             android:exported="true" />
         <activity
-            android:name=".Screen.authentication_authorization.RestaurantSignUp"
+            android:name=".screen.authentication_authorization.RestaurantSignUp"
             android:exported="true" />
         <activity
-            android:name=".Screen.authentication_authorization.SignUp"
+            android:name=".screen.authentication_authorization.SignUp"
             android:exported="true" />
         <activity
-            android:name=".Screen.features_customer.ManageAddress"
+            android:name=".screen.features_customer.ManageAddress"
             android:exported="true" />
         <activity
-            android:name=".Screen.features_customer.ReviewAndRating"
+            android:name=".screen.features_customer.ReviewAndRating"
             android:exported="true" />
         <activity
-            android:name=".Screen.features_customer.OrderTracking"
+            android:name=".screen.features_customer.OrderTracking"
             android:exported="true" />
         <activity
-            android:name=".Screen.features_customer.OrderHistory"
+            android:name=".screen.features_customer.OrderHistory"
             android:exported="true" />
         <activity
-            android:name=".Screen.authentication_authorization.LoginActivity"
+            android:name=".screen.authentication_authorization.LoginActivity"
             android:exported="true" />
         <activity
-            android:name=".Screen.features_customer.ViewRestaurantList"
+            android:name=".screen.features_customer.ViewRestaurantList"
             android:exported="true" />
         <activity
 
-            android:name=".Screen.admin_management.Restaurant_Management"
+            android:name=".screen.admin_management.Restaurant_Management"
             android:exported="true" />
         <activity
-            android:name=".Screen.admin_management.Customer_Management"
+            android:name=".screen.admin_management.Customer_Management"
             android:exported="true" />
         <activity
-            android:name=".Screen.admin_management.Payment_Transactions_Management"
+            android:name=".screen.admin_management.Payment_Transactions_Management"
             android:exported="true" />
         <activity
-            android:name=".Screen.admin_management.Policy_Management"
+            android:name=".screen.admin_management.Policy_Management"
             android:exported="true" />
         <activity
-            android:name=".Screen.admin_management.Shipper_Management"
+            android:name=".screen.admin_management.Shipper_Management"
             android:exported="true" />
         <activity
-            android:name=".Screen.admin_management.AdminScreen"
+            android:name=".screen.admin_management.AdminScreen"
             android:exported="true" />
 
-        <!-- Main Activity -->
-
-            android:name=".Screen.features_customer.ProductListRestaurant"
+        <activity
+            android:name=".screen.features_customer.ProductListRestaurant"
             android:exported="true" />
 
         <activity
