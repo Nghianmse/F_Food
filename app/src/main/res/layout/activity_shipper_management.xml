@@ -8,7 +8,7 @@
     android:padding="16dp"
     android:background="@color/white"
     android:id="@+id/layout_ShipperManagement"
-    tools:context=".Screen.admin_management.Shipper_Management">
+    tools:context=".screen.admin_management.Shipper_Management">
 
     <!-- Header với nút Back và tiêu đề -->
     <LinearLayout

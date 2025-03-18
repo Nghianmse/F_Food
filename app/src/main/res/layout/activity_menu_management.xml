@@ -5,7 +5,7 @@
     android:id="@+id/menuManagementActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Screen.features_restaurant_management.MenuManagement">
+    tools:context=".screen.features_restaurant_management.MenuManagement">
 
     <!-- Thanh tìm kiếm -->
     <LinearLayout

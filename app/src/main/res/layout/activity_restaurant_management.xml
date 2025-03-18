@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:id="@+id/restaurantManagementActivity"
-    tools:context=".Screen.admin_management.Restaurant_Management">
+    tools:context=".screen.admin_management.Restaurant_Management">
 
     <LinearLayout
         android:layout_width="match_parent"

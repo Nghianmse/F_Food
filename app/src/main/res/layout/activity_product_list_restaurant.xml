@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:weightSum="3"
     android:id="@+id/foodListRestaurant"
-    tools:context=".Screen.features_customer.ProductListRestaurant">
+    tools:context=".screen.features_customer.ProductListRestaurant">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="0dp"

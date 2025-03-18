@@ -5,7 +5,7 @@
     android:id="@+id/restaurantSalesReportActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Screen.features_restaurant_management.RestaurantSalesReport">
+    tools:context=".screen.features_restaurant_management.RestaurantSalesReport">
 
     <!-- Nút Home -->
     <ImageView
