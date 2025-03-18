@@ -30,6 +30,7 @@
         <activity
             android:name=".screen.features_restaurant_management.AddFoodActivity"
             android:exported="true" />
+
         <activity
             android:name=".screen.features_customer.activity_checkout"
             android:exported="true" />
@@ -131,6 +132,9 @@
             android:exported="true" />
         <activity
             android:name=".screen.features_customer.ProductListRestaurant"
+            android:exported="true" />
+        <activity
+            android:name=".screen.admin_management.AddPolicy"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

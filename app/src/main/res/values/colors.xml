@@ -15,4 +15,6 @@
     <color name="gray_dark">#757575</color>
     <color name="yellow">#FFC107</color>
     <color name="brown">#9C6644</color>
+    <color name="bottom_nav_color">#FF5722</color>
+
 </resources>
