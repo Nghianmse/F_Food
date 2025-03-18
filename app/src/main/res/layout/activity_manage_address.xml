@@ -84,7 +84,6 @@
             android:text="Nhà Riêng"
             android:layout_marginStart="16dp"/>
     </RadioGroup>
-
     <!-- Nút Hoàn thành -->
     <Button
         android:id="@+id/btnComplete"

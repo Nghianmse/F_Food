@@ -20,6 +20,11 @@
           <theme>@style/Theme.F_Food</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_customer_profile.xml">
+        <config>
+          <theme>@style/Theme.F_Food</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_delivery_history.xml">
         <config>
           <theme>@style/Theme.F_Food</theme>
@@ -56,6 +61,14 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
+
+    <list default="true" id="d2e04b38-6a05-481e-a6aa-03c278d8f706" name="Changes" comment="update">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/f_food/dao/OrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/f_food/dao/OrderDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/f_food/dao/ShipperWithOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/f_food/dao/ShipperWithOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/f_food/repository/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/f_food/repository/OrderRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/f_food/screen/features_customer/CustomerProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/f_food/screen/features_customer/CustomerProfile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_customer_profile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_customer_profile.xml" afterDir="false" />
     <list default="true" id="d2e04b38-6a05-481e-a6aa-03c278d8f706" name="Changes" comment="gsdf">
       <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/f_food/adapter/HomeCustomerAdapter.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/f_food/screen/features_customer/HomeStart.java" afterDir="false" />
@@ -77,6 +90,7 @@
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/f_food/screen/features_restaurant_management/MenuManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/f_food/screen/features_restaurant_management/MenuManagement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +100,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\ADMIN\.android\avd\Pixel_8_API_27.avd)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\caoth\.android\avd\Pixel_8_Pro_API_27_1.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -108,12 +122,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;bachnvse1&quot;
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "history": [
+    {
+      "state": "OPEN",
+      "author": "Bachnvhe172297"
+    }
+  ],
+  "lastFilter": {
+    "state": "OPEN",
+    "author": "Bachnvhe172297"
   }
-}</component>
+}]]></component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/bachnvse1/F_Food.git&quot;,
@@ -155,7 +175,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "Link__Screen",
+    "git-widget-placeholder": "OrderTracking",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true"
   }
@@ -421,6 +441,13 @@
       <option name="project" value="LOCAL" />
       <updated>1742309874591</updated>
     </task>
+    <task id="LOCAL-00005" summary="update">
+      <option name="closed" value="true" />
+      <created>1742317383230</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1742317383230</updated>
     <task id="LOCAL-00005" summary="gsdf">
       <option name="closed" value="true" />
       <created>1742311829002</created>
@@ -431,6 +458,17 @@
     </task>
     <option name="localTasksCounter" value="6" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fix xml" />
