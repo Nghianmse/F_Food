@@ -8,6 +8,7 @@ import com.example.f_food.dao.OrderDetailDAO;
 import com.example.f_food.dao.RestaurantRoomDatabase;
 import com.example.f_food.dao.RestaurantDAO;
 import com.example.f_food.dao.FoodDAO;
+import com.example.f_food.dao.ShipperWithOrder;
 import com.example.f_food.entity.OrderDetail;
 import com.example.f_food.entity.Food;
 import com.example.f_food.entity.Order;
@@ -114,7 +115,7 @@ public class OrderRepository {
             orderDAO.update(order);
         }
     }
-    public com.example.f_food.DAO.ShipperWithOrder getShipperWithOrder(int orderId) {
+    public ShipperWithOrder getShipperWithOrder(int orderId) {
         return orderDAO.getShipperWithOrder(orderId);
     }
 
