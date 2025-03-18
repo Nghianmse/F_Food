@@ -47,6 +47,13 @@
             android:text="Status: "
             android:textSize="14sp"
             android:textColor="#666666"/>
+        <!-- Gạch dưới phân cách -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp" />
 
     </LinearLayout>
     <Button

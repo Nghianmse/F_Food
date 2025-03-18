@@ -4,6 +4,9 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Entity(tableName = "Policies")
 public class Policy {
 
@@ -18,20 +21,28 @@ public class Policy {
     private String description;
 
     @ColumnInfo(name = "created_at")
-    private String createdAt;
+    private String createdAt; // Sử dụng String để lưu trữ ngày giờ
 
-
-
-    public Policy(int id,String title, String description, String createdAt) {
-        this.policyId=id;
+    // Constructor không có ID (dùng để tạo mới Policy)
+    public Policy(String title, String description, String createdAt) {
         this.title = title;
         this.description = description;
         this.createdAt = createdAt;
     }
 
+    // Constructor có ID (dùng để cập nhật hoặc truy vấn Policy)
+    public Policy(int policyId, String title, String description, String createdAt) {
+        this.policyId = policyId;
+        this.title = title;
+        this.description = description;
+        this.createdAt = createdAt;
+    }
+
+    // Constructor mặc định (Room yêu cầu)
     public Policy() {
     }
 
+    // Getter và Setter
     public int getPolicyId() {
         return policyId;
     }
@@ -64,4 +75,10 @@ public class Policy {
         this.createdAt = createdAt;
     }
 
+    // Phương thức tiện ích để lấy thời gian hiện tại dưới dạng String
+    public static String getCurrentTimeAsString() {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return now.format(formatter);
+    }
 }

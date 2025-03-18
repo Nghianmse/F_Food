@@ -1,8 +1,10 @@
 package com.example.f_food.screen.admin_management;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -22,10 +24,10 @@ import java.util.List;
 
 public class Shipper_Management extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private ShipperManagementAdapter adapter;
+    private ShipperManagementAdapter shipperManagementAdapter;
     private ShipperRepository shipperRepository;
     private List<Shipper> shipperList;
-    private Button back;
+    private ImageView back;
 
 
     @SuppressLint("MissingInflatedId")
@@ -45,7 +47,12 @@ public class Shipper_Management extends AppCompatActivity {
         // Lấy danh sách shipper từ SQLite
         shipperList = shipperRepository.getAllShippers();
         back=findViewById(R.id.btnBack_Shipper_Management);
-        back.setOnClickListener(v->finish());
+        back.setOnClickListener(v -> {
+            Intent intent = new Intent(Shipper_Management.this, AdminScreen.class);
+            startActivity(intent);
+            finish(); // Để đóng màn hiện tại nếu không cần quay lại
+        });
+
         // Ánh xạ RecyclerView
         recyclerView = findViewById(R.id.recyclerViewShipperManagement);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -55,8 +62,8 @@ public class Shipper_Management extends AppCompatActivity {
             Toast.makeText(this, "No shippers available", Toast.LENGTH_SHORT).show();
         } else {
             // Khởi tạo Adapter và gán vào RecyclerView
-            adapter = new ShipperManagementAdapter(this, shipperList);
-            recyclerView.setAdapter(adapter);
+            shipperManagementAdapter = new ShipperManagementAdapter(this, shipperList);
+            recyclerView.setAdapter(shipperManagementAdapter);
         }
 
     }

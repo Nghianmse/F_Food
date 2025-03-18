@@ -38,4 +38,12 @@
             android:textStyle="bold"/>
 
     </LinearLayout>
+    <Button
+        android:id="@+id/btnManagement_Delete_Policy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:layout_marginStart="8dp" />
 </LinearLayout>

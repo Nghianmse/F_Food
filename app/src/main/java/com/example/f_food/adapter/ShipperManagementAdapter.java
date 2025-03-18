@@ -51,16 +51,26 @@ public class ShipperManagementAdapter extends RecyclerView.Adapter<ShipperManage
         holder.txtShipperName.setText("Name: " + (user != null ? user.getFullName() : "Unknown"));
         holder.txtShipperEmail.setText("Email: " + (user != null ? user.getEmail() : "Unknown"));
         holder.txtShipperPhone.setText("Phone: " + (user != null ? user.getPhone() : "Unknown"));
-        holder.txtShipperCreatedAt.setText("Created At: " + (user != null ? user.getCreatedAt() : "Unknown"));
+        holder.txtShipperCreatedAt.setText("Status: " + (user != null ? shipper.getStatus() : "Unknown"));
 
         // Xóa shipper
+        String statusText = shipper.getStatus().equals("Active") ? "Deactivate" : "Activate";
+        holder.btnDelete.setText(statusText);
+
+        // Xử lý sự kiện khi nhấn vào nút
         holder.btnDelete.setOnClickListener(v -> {
-            shipperRepository.deleteById(shipper.getShipperId());
-            shipperList.remove(position);
-            notifyItemRemoved(position);
-            notifyItemRangeChanged(position, shipperList.size());
-            Toast.makeText(context, "Deleted shipper " + shipper.getShipperId(), Toast.LENGTH_SHORT).show();
-        });
+            // Đảo trạng thái từ Active -> InActive và ngược lại
+            String newStatus = shipper.getStatus().equals("Active") ? "InActive" : "Active";
+
+            // Cập nhật trạng thái trong database
+
+
+            // Cập nhật trong danh sách shipper và UI
+            shipper.setStatus(newStatus);
+            shipperRepository.update(shipper);
+            notifyItemChanged(position);
+
+            Toast.makeText(context, "Change Status" + newStatus, Toast.LENGTH_SHORT).show(); });
     }
 
     @Override
