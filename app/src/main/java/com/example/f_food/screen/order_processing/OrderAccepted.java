@@ -3,14 +3,13 @@ package com.example.f_food.screen.order_processing;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.f_food.R;
-import com.example.f_food.adapter.DeliveryHistoryAdapter;
+import com.example.f_food.adapter.OrderAcceptedAdapter;
 import com.example.f_food.entity.Order;
 import com.example.f_food.repository.OrderRepository;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -18,58 +17,55 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DeliveryHistory extends AppCompatActivity {
-    private RecyclerView recyclerView;
-    private DeliveryHistoryAdapter orderAdapter;
+public class OrderAccepted extends AppCompatActivity {
+    private RecyclerView rvOrderAccepted;
+    private OrderAcceptedAdapter adapter;
     private OrderRepository orderRepository;
     private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_delivery_history);
+        setContentView(R.layout.activity_order_accepted);
 
-        recyclerView = findViewById(R.id.rv_orders);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        rvOrderAccepted = findViewById(R.id.rv_order_accepted);
+        rvOrderAccepted.setLayoutManager(new LinearLayoutManager(this));
 
         orderRepository = new OrderRepository(this);
         List<Order> allOrders = orderRepository.getAllOrders();
 
-        List<Order> filteredOrders = allOrders.stream()
-                .filter(order -> order.getOrderStatus().equalsIgnoreCase("Delivered") ||
-                        order.getOrderStatus().equalsIgnoreCase("Cancelled"))
+        // 🔹 Lọc danh sách chỉ lấy các đơn hàng có trạng thái "Preparing"
+        List<Order> preparingOrders = allOrders.stream()
+                .filter(order -> order.getOrderStatus().equalsIgnoreCase("Preparing"))
                 .collect(Collectors.toList());
 
-        orderAdapter = new DeliveryHistoryAdapter(this, filteredOrders);
-        recyclerView.setAdapter(orderAdapter);
+        // 🔹 Khởi tạo adapter với danh sách đã lọc
+        adapter = new OrderAcceptedAdapter(this, preparingOrders);
+        rvOrderAccepted.setAdapter(adapter);
 
-        // ✅ Làm đậm icon `nav_orders` khi vào màn hình DeliveryHistory
+        // 🟢 Xử lý điều hướng với BottomNavigationView
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setSelectedItemId(R.id.nav_orders);
+        bottomNavigationView.setSelectedItemId(R.id.nav_delivery);
 
-        // ✅ Xử lý khi bấm vào `nav_home` để quay lại `PendingOrder`
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
 
-                if (itemId == R.id.nav_home) { // 🔹 Quay lại PendingOrder
-                    Intent intent = new Intent(DeliveryHistory.this, PendingOrder.class);
-                    startActivity(intent);
+                if (itemId == R.id.nav_home) {
+                    startActivity(new Intent(OrderAccepted.this, PendingOrder.class));
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     return true;
-                } else if (itemId == R.id.nav_orders) { // 🔹 Giữ nguyên trang
-                    return true;
-                } else if (itemId == R.id.nav_delivery) { // 🔹 Chuyển sang DeliveryStatusUpdate
-                    Intent intent = new Intent(DeliveryHistory.this, OrderAccepted.class);
-                    startActivity(intent);
+                } else if (itemId == R.id.nav_orders) {
+                    startActivity(new Intent(OrderAccepted.this, DeliveryHistory.class));
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     return true;
+                } else if (itemId == R.id.nav_delivery) {
+                    return true; // Giữ nguyên trang OrderAccepted
                 }
 
                 return false;
             }
         });
-
     }
 }

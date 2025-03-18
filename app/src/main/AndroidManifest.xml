@@ -20,6 +20,10 @@
         android:theme="@style/Theme.F_Food"
         tools:targetApi="31">
         <activity
+            android:name=".screen.order_processing.OrderAccepted"
+            android:exported="true"
+            android:windowSoftInputMode="stateHidden"/>
+
 
             android:name=".screen.features_customer.HomeStart"
             android:exported="true" />
@@ -77,7 +81,8 @@
             android:exported="true" />
         <activity
             android:name=".screen.order_processing.DeliveryHistory"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".screen.order_processing.PendingOrder"
             android:exported="true" />

@@ -8,6 +8,13 @@
       <SelectionState runConfigName="ViewRestaurantList">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+      <SelectionState runConfigName="PendingOrder">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="DeliveryHistory">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="OrderAccepted">
       <SelectionState runConfigName="HomeStart">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
