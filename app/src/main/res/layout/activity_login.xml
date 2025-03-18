@@ -54,6 +54,12 @@
         android:background="@android:drawable/editbox_background"
         android:padding="12dp"
         android:inputType="textPassword"/>
+    <CheckBox
+    android:id="@+id/cbRememberMe"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Remember me"
+    android:layout_marginTop="8dp"/>
 
     <!-- Forgot Password -->
     <TextView
