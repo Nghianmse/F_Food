@@ -18,6 +18,7 @@ import com.example.f_food.entity.User;
 import com.example.f_food.R;
 import com.example.f_food.repository.UserRepository;
 import com.example.f_food.screen.admin_management.AdminScreen;
+import com.example.f_food.screen.features_customer.HomeStart;
 import com.example.f_food.screen.features_customer.ManageAddress;
 import com.example.f_food.screen.features_customer.ViewRestaurantList;
 import com.squareup.picasso.Picasso;
@@ -102,7 +103,8 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
 
                     // Chuyển sang màn hình OrderHistory
-                    Intent intent = new Intent(this, ViewRestaurantList.class);
+                    Intent intent = new Intent(this, HomeStart.class);
+                    intent.putExtra("fullName", user.getFullName());
                     startActivity(intent);
                     finish();
                     return;
