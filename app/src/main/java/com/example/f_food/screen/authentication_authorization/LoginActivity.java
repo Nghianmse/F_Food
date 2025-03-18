@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     private UserRepository userRepository;
     Button reigister;
     ImageView imgLogoLogin;
+    private CheckBox cbRememberMe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         tvForgotPassword = findViewById(R.id.tvForgotPassword);
         imgLogoLogin = findViewById(R.id.imgLogoLogin);
         reigister=findViewById(R.id.btnRegister);
+        cbRememberMe = findViewById(R.id.cbRememberMe);
 
         Picasso.get()
                 .load(R.drawable.login)
@@ -84,7 +87,16 @@ public class LoginActivity extends AppCompatActivity {
                     // Lưu userId vào SharedPreferences
                     SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
                     SharedPreferences.Editor editor = preferences.edit();
-                    editor.putInt("userId", user.getUserId()); // Giả sử `getId()` trả về userId
+                    editor.putInt("userId", user.getUserId());
+
+                    // Save email and password if "Remember Me" is checked
+                    if (cbRememberMe.isChecked()) {
+                        editor.putString("email", email);
+                        editor.putString("password", password);
+                    } else {
+                        editor.remove("email");
+                        editor.remove("password");
+                    }
                     editor.apply();
 
                     Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
@@ -98,17 +110,17 @@ public class LoginActivity extends AppCompatActivity {
                     // Lưu userId vào SharedPreferences
                     SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
                     SharedPreferences.Editor editor = preferences.edit();
-                    editor.putInt("userId", user.getUserId()); // Giả sử `getId()` trả về userId
+                    editor.putInt("userId", user.getUserId());
                     editor.apply();
 
                     Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
 
-                    // Chuyển sang màn hình OrderHistory
+                    // Chuyển sang màn hình AdminScreen
                     Intent intent = new Intent(this, AdminScreen.class);
                     startActivity(intent);
                     finish();
                     return;
-                }else {
+                } else {
                     showAlertDialog("Email hoặc mật khẩu không đúng!");
                     return;
                 }
@@ -118,6 +130,7 @@ public class LoginActivity extends AppCompatActivity {
         // Nếu không tìm thấy user phù hợp
         showAlertDialog("Email hoặc mật khẩu không đúng!");
     }
+
     private void showAlertDialog(String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message)
