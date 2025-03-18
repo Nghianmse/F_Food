@@ -1,4 +1,4 @@
-package com.example.f_food.dao;
+package com.example.f_food.DAO;
 
 import android.content.Context;
 import androidx.room.Database;
@@ -29,16 +29,15 @@ public abstract class RestaurantRoomDatabase extends RoomDatabase {
     public abstract UserDAO userDAO();
 
     public abstract  OrderDAO orderDAO();
-
-    public  abstract  ShipperDAO shipperDAO();
     public abstract PaymentDAO paymentDAO();
 
     public abstract  CategoryDAO categoryDAO();
     public abstract  OrderDetailDAO orderDetailDAO();
 
-    public abstract  ReviewDAO reviewDAO();
+   public abstract  ReviewDAO reviewDAO();
 
     public abstract  AddressDAO addressDAO();
+    public abstract  ShipperDAO shipperDAO();
     private static volatile RestaurantRoomDatabase INSTANCE;
 
     public static RestaurantRoomDatabase getInstance(Context context) {

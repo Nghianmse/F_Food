@@ -1,4 +1,4 @@
-package com.example.f_food.adapter;
+package com.example.f_food.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -66,8 +66,15 @@ public class OrderTrackingAdapter extends RecyclerView.Adapter<OrderTrackingAdap
         // Check the order status and set the appropriate text
         if ("Preparing".equals(order.getOrderStatus())) {
             holder.findingShipperText.setVisibility(View.VISIBLE);
-        } else {
-            holder.findingShipperText.setVisibility(View.GONE);
+        } else if ("Delivering".equals(order.getOrderStatus())){
+            holder.findingShipperText.setVisibility(View.VISIBLE);
+            ShipperWithOrder shipperWithOrder = orderRepository.getShipperWithOrder(order.getOrderId());
+            holder.findingShipperText.setText("Shipper: " + shipperWithOrder.getShipperName() + " - " +shipperWithOrder.getShipperPhone() );
+            holder.findingShipperText.setTextColor(holder.itemView.getContext().getResources().getColor(android.R.color.holo_orange_dark));
+        }else if ("Delivered".equals(order.getOrderStatus())) {
+            holder.findingShipperText.setVisibility(View.VISIBLE);
+            holder.findingShipperText.setText("Đơn hàng đã được giao thành công");
+            holder.findingShipperText.setTextColor(holder.itemView.getContext().getResources().getColor(android.R.color.holo_green_dark));
         }
     }
 
@@ -82,7 +89,7 @@ public class OrderTrackingAdapter extends RecyclerView.Adapter<OrderTrackingAdap
     }
 
     public static class OrderViewHolder extends RecyclerView.ViewHolder {
-        TextView totalPrice, paymentMethod, foodName, status, findingShipperText  ;
+        TextView totalPrice, paymentMethod, foodName, status, findingShipperText, shipperName  ;
         ImageView ivFood;
 
         public OrderViewHolder(View itemView) {

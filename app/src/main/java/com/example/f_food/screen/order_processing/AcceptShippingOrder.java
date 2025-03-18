@@ -88,8 +88,8 @@ public class AcceptShippingOrder extends AppCompatActivity {
         builder.setMessage("Bạn có chắc chắn muốn chấp nhận đơn hàng #" + orderId + " không?");
         builder.setPositiveButton("Chấp nhận", (dialog, which) -> {
             // Gọi phương thức cập nhật trạng thái đơn hàng
-            orderRepository.updateOrderStatus(orderId, "Preparing");
-            Toast.makeText(AcceptShippingOrder.this, "Đơn hàng #" + orderId + " đã chuyển sang trạng thái 'Preparing'!", Toast.LENGTH_SHORT).show();
+            orderRepository.updateOrderStatus(orderId, "Delivering");
+            Toast.makeText(AcceptShippingOrder.this, "Đơn hàng #" + orderId + " đã chuyển sang trạng thái 'public abstract  AddressDAO addressDAO();'!", Toast.LENGTH_SHORT).show();
         });
         builder.setNegativeButton("Hủy", (dialog, which) -> dialog.dismiss());
         builder.show();

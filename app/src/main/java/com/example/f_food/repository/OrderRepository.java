@@ -1,4 +1,4 @@
-package com.example.f_food.repository;
+package com.example.f_food.Repository;
 
 import android.content.Context;
 
@@ -106,6 +106,16 @@ public class OrderRepository {
 
     public List<FoodWithOrder> getImageByOrderId(int orderId) {
         return orderDAO.getImageByOrderId(orderId);
+    }
+    public void updateOrderShipper(int orderId, int shipperId) {
+        Order order = orderDAO.getOrderById(orderId);
+        if (order != null) {
+            order.setShipperId(shipperId);
+            orderDAO.update(order);
+        }
+    }
+    public ShipperWithOrder getShipperWithOrder(int orderId) {
+        return orderDAO.getShipperWithOrder(orderId);
     }
 
     private void insertSampleData() {
