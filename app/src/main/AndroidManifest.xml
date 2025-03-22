@@ -50,7 +50,7 @@
             android:exported="true" />
         <activity
             android:name=".screen.features_restaurant_management.UpdateFood"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".screen.features_restaurant_management.ManageFoodDetail"
             android:exported="true" />
