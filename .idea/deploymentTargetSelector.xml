@@ -2,13 +2,13 @@
 <project version="4">
   <component name="deploymentTargetSelector">
     <selectionStates>
-      <SelectionState runConfigName="app">
+      <SelectionState runConfigName="RestaurantOrders">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="ViewRestaurantList">
+      <SelectionState runConfigName="OrderTracking">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="HomeStart">
+      <SelectionState runConfigName="PendingOrder">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
