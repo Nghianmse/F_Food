@@ -7,17 +7,34 @@
     android:background="@android:color/white"
     android:id="@+id/manageAddress">
 
-    <!-- Tiêu đề -->
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Địa chỉ mới"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_gravity="center_horizontal"
-        android:paddingBottom="10dp" />
+    <!-- Header with Home Icon and Title -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+
+        <!-- Home Icon (aligned to the left) -->
+        <ImageButton
+            android:id="@+id/homeIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_home"
+            android:contentDescription="Home Icon"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"/>
+
+        <!-- Title (Địa chỉ mới, centered) -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Địa chỉ mới"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:layout_alignParentTop="true"/>
+    </RelativeLayout>
 
     <Button
         android:id="@+id/btnCurrentLocation"
@@ -25,7 +42,6 @@
         android:layout_height="wrap_content"
         android:text="Lấy vị trí hiện tại"
         android:layout_marginTop="10dp"/>
-
 
     <!-- Nhập địa chỉ (Tỉnh/Thành phố, Quận/Huyện, Phường/Xã) -->
     <EditText
@@ -84,6 +100,7 @@
             android:text="Nhà Riêng"
             android:layout_marginStart="16dp"/>
     </RadioGroup>
+
     <!-- Nút Hoàn thành -->
     <Button
         android:id="@+id/btnComplete"

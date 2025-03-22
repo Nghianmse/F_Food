@@ -1,28 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-    <component name="deploymentTargetSelector">
-        <selectionStates>
-            <SelectionState runConfigName="LoginActivity">
-                <option name="selectionMode" value="DROPDOWN" />
-            </SelectionState>
-            <SelectionState runConfigName="HomeStart">
-                <option name="selectionMode" value="DROPDOWN" />
-            </SelectionState>
-        </selectionStates>
-    </component>
   <component name="deploymentTargetSelector">
     <selectionStates>
+      <SelectionState runConfigName="GoogleMaps">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="OrderTracking">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="Address">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
       <SelectionState runConfigName="LoginActivity">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="PendingOrder">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="DeliveryHistory">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="OrderAccepted">
-      <SelectionState runConfigName="HomeStart">
+      <SelectionState runConfigName="OrderHistory">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
