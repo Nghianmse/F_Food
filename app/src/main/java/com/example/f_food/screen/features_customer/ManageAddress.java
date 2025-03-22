@@ -10,6 +10,7 @@ import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,6 +52,11 @@ public class ManageAddress extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+        // Kiểm tra nếu người dùng chưa đăng nhập
+        if (!isUserLoggedIn()) {
+            showAlertDialog("Bạn chưa đăng nhập, bạn vui lòng đăng nhập để thao tác.");
+            return;
+        }
         setContentView(R.layout.activity_manage_address);
 
         etAddress = findViewById(R.id.etAddress);
@@ -60,11 +66,7 @@ public class ManageAddress extends AppCompatActivity {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-        // Kiểm tra nếu người dùng chưa đăng nhập
-        if (!isUserLoggedIn()) {
-            showAlertDialog("Bạn chưa đăng nhập, bạn vui lòng đăng nhập để thao tác.");
-            return;
-        }
+
 
         btnCurrentLocation.setOnClickListener(v -> requestNewLocation());
         btnComplete.setOnClickListener(v -> saveAddress());
@@ -171,8 +173,8 @@ public class ManageAddress extends AppCompatActivity {
 
     // Kiểm tra người dùng đã đăng nhập chưa
     private boolean isUserLoggedIn() {
-        SharedPreferences preferences = getSharedPreferences("userPreferences", MODE_PRIVATE);
-        int userId = preferences.getInt("userId", -1);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        int userId = preferences.getInt("userId", -1); // Sử dụng PreferenceManager thay vì getSharedPreferences
         return userId != -1;
     }
 

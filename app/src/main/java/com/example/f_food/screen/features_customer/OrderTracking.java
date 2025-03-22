@@ -3,6 +3,7 @@ package com.example.f_food.screen.features_customer;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -79,14 +80,14 @@ public class OrderTracking extends AppCompatActivity {
 
     // Kiểm tra người dùng đã đăng nhập chưa
     private boolean isUserLoggedIn() {
-        SharedPreferences preferences = getSharedPreferences("userPreferences", MODE_PRIVATE);
-        int userId = preferences.getInt("userId", -1);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        int userId = preferences.getInt("userId", -1); // Sử dụng PreferenceManager thay vì getSharedPreferences
         return userId != -1;
     }
 
     // Lấy userId của người dùng đã đăng nhập
     private int getLoggedInUserId() {
-        SharedPreferences preferences = getSharedPreferences("userPreferences", MODE_PRIVATE);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         return preferences.getInt("userId", -1); // Trả về -1 nếu không tìm thấy userId
     }
 

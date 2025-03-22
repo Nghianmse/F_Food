@@ -17,6 +17,7 @@ import com.example.f_food.R;
 import com.example.f_food.adapter.AddressAdapter;
 import com.example.f_food.dao.RestaurantRoomDatabase;
 import com.example.f_food.dao.AddressWithUser;
+import com.example.f_food.screen.authentication_authorization.LoginActivity;
 
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -41,7 +42,7 @@ public class Address extends AppCompatActivity {
         int userId = preferences.getInt("userId", -1);  // Default value is -1 if userId is not found
 
         if (userId == -1) {
-            Toast.makeText(this, "User ID not found!", Toast.LENGTH_SHORT).show();
+            showAlertDialog("Bạn chưa đăng nhập, vui lòng đăng nhập để thao tác.");
             return;  // Exit if no userId is found
         }
 
@@ -75,5 +76,19 @@ public class Address extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+
+    }
+    private void showAlertDialog(String message) {
+        new android.app.AlertDialog.Builder(this)
+                .setMessage(message)
+                .setPositiveButton("OK", (dialog, which) -> {
+                    dialog.dismiss();
+                    // Chuyển sang màn hình đăng nhập
+                    Intent intent = new Intent(Address.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish(); // Kết thúc Activity hiện tại
+                })
+                .create()
+                .show();
     }
 }
