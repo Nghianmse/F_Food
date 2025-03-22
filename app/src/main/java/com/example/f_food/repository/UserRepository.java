@@ -54,10 +54,10 @@ public class UserRepository {
 
     private void insertSampleData() {
         List<User> sampleUsers = Arrays.asList(
-                new User(1, "John Doe", "a@gmail.com", "123", "0123456789", "Customer", "2023-01-01 10:00:00", "2023-01-01 10:00:00"),
-                new User(2, "Alice Smith", "alice@example.com", "password456", "0987654321", "Restaurant", "2023-01-02 11:00:00", "2023-01-02 11:00:00"),
-                new User(3, "Bob Johnson", "bob@example.com", "password789", "0112233445", "Shipper", "2023-01-03 12:00:00", "2023-01-03 12:00:00"),
-                new User(4, "Admin User", "admin@example.com", "adminpass", "0223344556", "Admin", "2023-01-04 13:00:00", "2023-01-04 13:00:00")
+                new User(1, "John Doe", "a@gmail.com", "123", "0123456789", "Customer", "2023-01-01 10:00:00", "2023-01-01 10:00:00",true),
+                new User(2, "Alice Smith", "alice@example.com", "password456", "0987654321", "Restaurant", "2023-01-02 11:00:00", "2023-01-02 11:00:00",true),
+                new User(3, "Bob Johnson", "bob@example.com", "password789", "0112233445", "Shipper", "2023-01-03 12:00:00", "2023-01-03 12:00:00",true),
+                new User(4, "Admin User", "admin@example.com", "adminpass", "0223344556", "Admin", "2023-01-04 13:00:00", "2023-01-04 13:00:00",true)
         );
 
         for (User user : sampleUsers) {
