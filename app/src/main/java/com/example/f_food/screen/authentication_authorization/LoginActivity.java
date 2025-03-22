@@ -16,8 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.f_food.entity.User;
 import com.example.f_food.R;
+import com.example.f_food.repository.AddressRepository;
 import com.example.f_food.repository.UserRepository;
 import com.example.f_food.screen.admin_management.AdminScreen;
+import com.example.f_food.screen.features_customer.Address;
 import com.example.f_food.screen.features_customer.HomeStart;
 import com.example.f_food.screen.features_customer.ManageAddress;
 import com.example.f_food.screen.features_customer.ViewRestaurantList;
@@ -31,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin, btnLoginForPartner;
     private TextView tvForgotPassword;
     private UserRepository userRepository;
+    private AddressRepository addressRepository;
     Button reigister;
     ImageView imgLogoLogin;
     private CheckBox cbRememberMe;
@@ -58,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Khởi tạo repository
         userRepository = new UserRepository(this);
+        addressRepository = new AddressRepository(this);
         // Xử lý sự kiện khi nhấn nút đăng nhập
         btnLogin.setOnClickListener(v -> handleLogin());
 
@@ -103,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
 
                     // Chuyển sang màn hình OrderHistory
-                    Intent intent = new Intent(this, HomeStart.class);
+                    Intent intent = new Intent(this, Address.class);
                     intent.putExtra("fullName", user.getFullName());
                     startActivity(intent);
                     finish();

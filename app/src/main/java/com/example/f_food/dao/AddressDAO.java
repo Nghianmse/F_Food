@@ -22,8 +22,11 @@ public interface AddressDAO {
     List<Address> getAllAddresses();
 
     // Lấy địa chỉ theo ID người dùng
-    @Query("SELECT * FROM Address WHERE userId = :userId")
-    List<Address> getAddressesByUserId(int userId);
+    @Query("SELECT User.FullName AS username, Address.address, Address.detailAddress, Address.isDefault, Address.addressType " +
+            "FROM Address " +
+            "INNER JOIN Users AS User ON Address.userId = User.UserID " +
+            "WHERE Address.userId = :userId")
+    List<AddressWithUser> getAddressesByUserId(int userId);
 
     // Xóa địa chỉ theo ID
     @Delete
