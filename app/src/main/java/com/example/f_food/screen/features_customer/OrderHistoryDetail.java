@@ -1,6 +1,7 @@
 package com.example.f_food.screen.features_customer;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -82,5 +83,12 @@ public class OrderHistoryDetail extends AppCompatActivity {
             float averageRating = totalRating / reviews.size();
             ratingBar.setRating(averageRating);
         }
+    }
+    private void hideSystemUI() {
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
+                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
+                        View.SYSTEM_UI_FLAG_FULLSCREEN
+        );
     }
 }

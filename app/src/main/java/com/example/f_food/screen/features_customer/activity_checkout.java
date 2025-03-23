@@ -1,6 +1,7 @@
 package com.example.f_food.screen.features_customer;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,7 +33,12 @@ public class activity_checkout extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        hideSystemUI(); // Ẩn ngay khi khởi chạy
 
+        // Đảm bảo hệ thống vẫn ẩn khi người dùng chạm vào màn hình
+        getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(
+                visibility -> hideSystemUI()
+        );
         recyclerView = findViewById(R.id.recyclerCheckout);
         txtTotalPrice = findViewById(R.id.totalPrice);
 
@@ -51,5 +57,12 @@ public class activity_checkout extends AppCompatActivity {
             }
             txtTotalPrice.setText(String.format("Total: Rp %.2f", totalPrice));
         }
+    }
+    private void hideSystemUI() {
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
+                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
+                        View.SYSTEM_UI_FLAG_FULLSCREEN
+        );
     }
 }
