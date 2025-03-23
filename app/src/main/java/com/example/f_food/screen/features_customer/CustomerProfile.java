@@ -47,6 +47,7 @@ public class CustomerProfile extends AppCompatActivity {
         AddressRepository addressRepository = new AddressRepository(this);
 
         RestaurantRoomDatabase db = RestaurantRoomDatabase.getInstance(this);
+
         int userId = getLoggedInUserId();
         // Lấy user info
         User user = db.userDAO().getUserById(userId);

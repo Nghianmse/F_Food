@@ -81,4 +81,11 @@ public interface OrderDAO {
     ShipperWithOrder getShipperWithOrder(int orderId);
     @Query("SELECT * FROM Orders WHERE restaurant_id = :restaurantId")
     List<Order> getOrdersByRestaurantId(int restaurantId);
+    @Query("SELECT o.order_id, o.user_id, od.food_id, f.name AS food_name, f.image_url AS image_url " +
+            "FROM Orders o " +
+            "INNER JOIN OrderDetails od ON o.order_id = od.order_id " +
+            "INNER JOIN Foods f ON od.food_id = f.food_id " +
+            "WHERE o.order_id = :orderId")
+    List<FoodWithOrder> getFoodsByOrderId(int orderId);
+
 }
