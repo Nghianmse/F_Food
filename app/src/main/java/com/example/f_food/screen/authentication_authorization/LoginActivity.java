@@ -32,7 +32,7 @@ import java.util.List;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText etEmail, etPassword;
-    private Button btnLogin, btnLoginForPartner;
+    private Button btnLogin, btnLoginForPartner, btnLoginForShipper;
     private TextView tvForgotPassword;
     private UserRepository userRepository;
     private AddressRepository addressRepository;
@@ -49,7 +49,8 @@ public class LoginActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
-        btnLoginForPartner = findViewById(R.id.btnLoginForPartner);  // Initialize the Login for Partner button
+        btnLoginForPartner = findViewById(R.id.btnLoginForPartner);
+        btnLoginForShipper = findViewById(R.id.btnLoginForShipper);
         tvForgotPassword = findViewById(R.id.tvForgotPassword);
         imgLogoLogin = findViewById(R.id.imgLogoLogin);
         reigister=findViewById(R.id.btnRegister);
@@ -69,8 +70,14 @@ public class LoginActivity extends AppCompatActivity {
 
         // Xử lý sự kiện khi nhấn nút đăng nhập cho partner
         btnLoginForPartner.setOnClickListener(v -> navigateToRestaurantLogIn());
+        btnLoginForShipper.setOnClickListener(v -> navigateToShipperLogIn());
         reigister.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, SignUp.class);
+            startActivity(intent);
+        });
+
+        tvForgotPassword.setOnClickListener(v->{
+            Intent intent = new Intent(LoginActivity.this, ForgotPassActivity.class);
             startActivity(intent);
         });
     }
@@ -152,6 +159,11 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, RestaurantLogIn.class);  // Assuming RestaurantLogInActivity is your target activity
         startActivity(intent);
     }
+
+    private void navigateToShipperLogIn() {
+        Intent intent = new Intent(this, ShipperLogin.class);  // Assuming RestaurantLogInActivity is your target activity
+        startActivity(intent);
+      
     @Override
     protected void onStop() {
         super.onStop();

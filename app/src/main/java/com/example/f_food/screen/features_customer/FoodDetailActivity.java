@@ -45,9 +45,11 @@ public class FoodDetailActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
-                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        hideSystemUI(); // Ẩn ngay khi khởi chạy
+
+        // Đảm bảo hệ thống vẫn ẩn khi người dùng chạm vào màn hình
+        getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(
+                visibility -> hideSystemUI()
         );
         foodRepository = new FoodRepository(this);
         Intent intent = getIntent();
@@ -81,5 +83,12 @@ public class FoodDetailActivity extends AppCompatActivity {
                     .centerCrop()
                     .into(dishImage);
         }
+    }
+    private void hideSystemUI() {
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
+                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
+                        View.SYSTEM_UI_FLAG_FULLSCREEN
+        );
     }
 }

@@ -95,6 +95,14 @@ public class OrderHistoryDetail extends AppCompatActivity {
         }
     }
 
+    private void hideSystemUI() {
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
+                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
+                        View.SYSTEM_UI_FLAG_FULLSCREEN
+        );
+
+
     // Kiểm tra người dùng đã đăng nhập chưa
     private boolean isUserLoggedIn() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);

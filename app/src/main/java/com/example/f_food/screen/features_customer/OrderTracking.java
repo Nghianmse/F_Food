@@ -6,11 +6,9 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ImageButton;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.f_food.adapter.OrderTrackingAdapter;
 import com.example.f_food.dao.RestaurantRoomDatabase;
 import com.example.f_food.entity.Order;
@@ -77,6 +75,14 @@ public class OrderTracking extends AppCompatActivity {
             });
         }).start();
     }
+
+    private void hideSystemUI() {
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
+                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
+                        View.SYSTEM_UI_FLAG_FULLSCREEN
+        );
+
 
     // Kiểm tra người dùng đã đăng nhập chưa
     private boolean isUserLoggedIn() {
