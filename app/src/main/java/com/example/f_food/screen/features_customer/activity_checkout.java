@@ -108,17 +108,20 @@ public class activity_checkout extends AppCompatActivity {
                     .setTitle("Xác nhận đặt hàng")
                     .setMessage("Bạn có chắc chắn muốn đặt hàng không?")
                     .setPositiveButton("Có", (dialog, which) -> {
-                        Order o = new Order();
-                        o.setUserId(uId);
-                        o.setRestaurantId(restaurantRepository.getRestaurantByUserId(uId).getRestaurantId());
-                        o.setTotalPrice(totalPrice2);
-                        o.setPaymentMethod("COD");
-                        o.setOrderStatus("Pending");
-                        o.setCreatedAt(new Date().toString());
-                        o.setUpdatedAt(new Date().toString());
-                        orderRepository.insert(o);
+
 
                         for (CartItem item : selectedItems) {
+
+                            Order o = new Order();
+                            o.setUserId(uId);
+                            o.setRestaurantId(item.getProduct().getRestaurantId());
+                            o.setTotalPrice(item.getProduct().getPrice() * item.getQuantity());
+                            o.setPaymentMethod("COD");
+                            o.setOrderStatus("Pending");
+                            o.setCreatedAt(new Date().toString());
+                            o.setUpdatedAt(new Date().toString());
+                            orderRepository.insert(o);
+
                             OrderDetail orderDetail = new OrderDetail();
                             orderDetail.setOrderId(orderRepository.getLastInsertedOrder().getOrderId());
                             orderDetail.setFoodId(item.getProduct().getFoodId());

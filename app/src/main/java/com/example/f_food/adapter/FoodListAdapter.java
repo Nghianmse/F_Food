@@ -100,18 +100,10 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.ViewHo
                 productStockStatus.setTextColor(Color.RED);
             }
             itemView.setOnClickListener(v -> {
-                if (food.getStockStatus().equals("Out of Stock")) {
-                    new AlertDialog.Builder(context)
-                            .setTitle("Thông báo")
-                            .setMessage("Sản phẩm đã hết hàng!")
-                            .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
-                            .show();
-                } else {
+
                     listener.onItemClick(food.getFoodId());
-                }
+
             });
-
-
         }
     }
 }

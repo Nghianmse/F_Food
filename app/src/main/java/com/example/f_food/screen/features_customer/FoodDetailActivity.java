@@ -1,5 +1,6 @@
 package com.example.f_food.screen.features_customer;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -58,12 +59,16 @@ public class FoodDetailActivity extends AppCompatActivity {
         init(food);
         cartManager = CartManager.getInstance();
         addToCart = findViewById(R.id.addToCart);
-        addToCart.setOnClickListener(v -> {
-            cartManager.addToCart(food);
-            Intent intent1 = new Intent(FoodDetailActivity.this, activity_cart.class);
-            startActivity(intent1);
-        });
 
+        addToCart.setOnClickListener(v -> {
+            if (food != null && "Available".equals(food.getStockStatus())) { // Kiểm tra trạng thái
+                cartManager.addToCart(food);
+                Intent intent1 = new Intent(FoodDetailActivity.this, activity_cart.class);
+                startActivity(intent1);
+            } else {
+                showAlert("Thông báo", "Sản phẩm không có sẵn để thêm vào giỏ hàng.");
+            }
+        });
     }
 
     private void init(Food food) {
@@ -91,4 +96,12 @@ public class FoodDetailActivity extends AppCompatActivity {
                         View.SYSTEM_UI_FLAG_FULLSCREEN
         );
     }
+    private void showAlert(String title, String message) {
+        new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                .show();
+    }
+
 }

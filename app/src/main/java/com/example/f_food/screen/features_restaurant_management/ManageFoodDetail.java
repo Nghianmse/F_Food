@@ -42,7 +42,7 @@ public class ManageFoodDetail extends AppCompatActivity {
         tvFoodCategory = findViewById(R.id.tvFoodCategory);
         tvFoodDescription = findViewById(R.id.tvFoodDescription);
         btnUpdateFood = findViewById(R.id.btnUpdateFood);
-
+        tvFoodStatus = findViewById(R.id.tvFoodStatus);
         // Lấy foodId từ Intent
         foodId = getIntent().getIntExtra("food_id", -1);
         foodRepository = new FoodRepository(getApplicationContext());
