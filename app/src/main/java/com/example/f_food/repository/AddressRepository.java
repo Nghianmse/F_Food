@@ -3,6 +3,7 @@ package com.example.f_food.repository;
 import android.content.Context;
 
 import com.example.f_food.dao.AddressDAO;
+import com.example.f_food.dao.AddressWithUser;
 import com.example.f_food.dao.RestaurantRoomDatabase;
 import com.example.f_food.entity.Address;
 
@@ -28,10 +29,10 @@ public class AddressRepository {
     }
 
     // Lấy địa chỉ theo ID người dùng
-    public List<Address> getAddressesByUserId(int userId) {
+    /*public List<AddressWithUser> getAddressesByUserId(int userId) {
         return addressDAO.getAddressesByUserId(userId);
     }
-
+*/
     // Xóa địa chỉ
     public void delete(Address address) {
         addressDAO.delete(address);

@@ -3,13 +3,18 @@ package com.example.f_food.screen.features_customer;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -18,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.example.f_food.R;
+import com.example.f_food.screen.authentication_authorization.LoginActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -46,6 +52,11 @@ public class ManageAddress extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+        // Kiểm tra nếu người dùng chưa đăng nhập
+        if (!isUserLoggedIn()) {
+            showAlertDialog("Bạn chưa đăng nhập, bạn vui lòng đăng nhập để thao tác.");
+            return;
+        }
         setContentView(R.layout.activity_manage_address);
 
         etAddress = findViewById(R.id.etAddress);
@@ -55,8 +66,17 @@ public class ManageAddress extends AppCompatActivity {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
+
+
         btnCurrentLocation.setOnClickListener(v -> requestNewLocation());
         btnComplete.setOnClickListener(v -> saveAddress());
+        ImageButton homeIcon = findViewById(R.id.homeIcon);
+        homeIcon.setOnClickListener(v -> {
+            // Start HomeStart Activity when the home icon is clicked
+            Intent intent = new Intent(ManageAddress.this, HomeStart.class);
+            startActivity(intent);
+            finish(); // Optionally finish the current activity if you don't want to return to it
+        });
     }
 
     // Kiểm tra quyền truy cập vị trí
@@ -82,30 +102,17 @@ public class ManageAddress extends AppCompatActivity {
             return;
         }
 
-        locationRequest = new LocationRequest.Builder(1000)
-                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                .build();
-
-        locationCallback = new LocationCallback() {
-            @Override
-            public void onLocationResult(LocationResult locationResult) {
-                if (locationResult == null) {
-                    Toast.makeText(ManageAddress.this, "Không thể lấy vị trí!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                for (Location location : locationResult.getLocations()) {
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, location -> {
                     if (location != null) {
                         double latitude = location.getLatitude();
                         double longitude = location.getLongitude();
-                        fetchAddressFromLatLng(latitude, longitude); // Sử dụng Google Maps API
-                        fusedLocationClient.removeLocationUpdates(locationCallback); // Ngừng cập nhật sau khi lấy xong vị trí
+                        fetchAddressFromLatLng(latitude, longitude);
+                    } else {
+                        Toast.makeText(this, "Không thể lấy vị trí!", Toast.LENGTH_SHORT).show();
                     }
-                }
-            }
-        };
-
-        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
+                })
+                .addOnFailureListener(e -> Toast.makeText(this, "Lỗi khi lấy vị trí: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 
     // Sử dụng Google Maps Geocoding API để lấy địa chỉ từ tọa độ
@@ -162,6 +169,28 @@ public class ManageAddress extends AppCompatActivity {
         }
 
         Toast.makeText(this, "Lưu địa chỉ thành công!", Toast.LENGTH_SHORT).show();
+    }
+
+    // Kiểm tra người dùng đã đăng nhập chưa
+    private boolean isUserLoggedIn() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        int userId = preferences.getInt("userId", -1); // Sử dụng PreferenceManager thay vì getSharedPreferences
+        return userId != -1;
+    }
+
+    // Hiển thị hộp thoại thông báo và chuyển sang màn hình đăng nhập
+    private void showAlertDialog(String message) {
+        new android.app.AlertDialog.Builder(this)
+                .setMessage(message)
+                .setPositiveButton("OK", (dialog, which) -> {
+                    dialog.dismiss();
+                    // Chuyển sang màn hình đăng nhập
+                    Intent intent = new Intent(ManageAddress.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                })
+                .create()
+                .show();
     }
 
     @Override

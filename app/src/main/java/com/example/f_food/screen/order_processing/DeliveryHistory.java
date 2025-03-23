@@ -2,6 +2,7 @@ package com.example.f_food.screen.order_processing;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -40,6 +41,13 @@ public class DeliveryHistory extends AppCompatActivity {
                         order.getOrderStatus().equalsIgnoreCase("Cancelled"))
                 .collect(Collectors.toList());
 
+        Intent intent = getIntent();
+        String userName = intent.getStringExtra("userName");
+        String userPhone = intent.getStringExtra("userPhone");
+        String userEmail = intent.getStringExtra("email");
+        String userPassword = intent.getStringExtra("password");
+        Log.d("DeliveryHistory", "Tên: " + userEmail + ", Email: " + userEmail);
+
         orderAdapter = new DeliveryHistoryAdapter(this, filteredOrders);
         recyclerView.setAdapter(orderAdapter);
 
@@ -55,13 +63,27 @@ public class DeliveryHistory extends AppCompatActivity {
 
                 if (itemId == R.id.nav_home) { // 🔹 Quay lại PendingOrder
                     Intent intent = new Intent(DeliveryHistory.this, PendingOrder.class);
+                    intent.putExtra("email", userEmail);
+                    intent.putExtra("password", userPassword);
+                    intent.putExtra("userName", userName);
+                    intent.putExtra("userPhone", userPhone);
                     startActivity(intent);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     return true;
                 } else if (itemId == R.id.nav_orders) { // 🔹 Giữ nguyên trang
+                    Intent intent = new Intent( DeliveryHistory.this, DeliveryHistory.class);
+                    intent.putExtra("email", userEmail);
+                    intent.putExtra("password", userPassword);
+                    intent.putExtra("userName", userName);
+                    intent.putExtra("userPhone", userPhone);
+                    startActivity(intent);
                     return true;
                 } else if (itemId == R.id.nav_delivery) { // 🔹 Chuyển sang DeliveryStatusUpdate
                     Intent intent = new Intent(DeliveryHistory.this, OrderAccepted.class);
+                    intent.putExtra("email", userEmail);
+                    intent.putExtra("password", userPassword);
+                    intent.putExtra("userName", userName);
+                    intent.putExtra("userPhone", userPhone);
                     startActivity(intent);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     return true;

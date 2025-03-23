@@ -1,7 +1,10 @@
 package com.example.f_food.screen.features_customer;
 
 import android.app.AlertDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -13,6 +16,7 @@ import com.example.f_food.dao.RestaurantRoomDatabase;
 import com.example.f_food.dao.ReviewDAO;
 import com.example.f_food.entity.Review;
 import com.example.f_food.R;
+import com.example.f_food.screen.authentication_authorization.LoginActivity;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -35,6 +39,12 @@ public class ReviewAndRating extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_and_rating);
 
+        // Check if the user is logged in
+        if (!isUserLoggedIn()) {
+            showAlertDialog("Bạn chưa đăng nhập, bạn vui lòng đăng nhập để tiếp tục.");
+            return;  // Exit the activity if not logged in
+        }
+
         // Bind UI components
         textViewFoodName = findViewById(R.id.textViewFoodName);
         imageViewFood = findViewById(R.id.imageViewFood);
@@ -52,10 +62,8 @@ public class ReviewAndRating extends AppCompatActivity {
             foodName = getIntent().getStringExtra("food_name");
             foodImage = getIntent().getStringExtra("food_image");
             restaurantId = getIntent().getIntExtra("restaurant_id", -1);
-            foodId = getIntent().getIntExtra("food_id", -1); // Lấy food_id từ Intent, -1 là giá trị mặc định nếu không có
-            userId = getIntent().getIntExtra("user_id", -1);
-
-            // Set data to UI
+            foodId = getIntent().getIntExtra("food_id", -1); // Get food_id from Intent, -1 is default if not found
+            userId = getLoggedInUserId();  // Get logged-in user ID
             textViewFoodName.setText(foodName);
             if (foodImage != null && !foodImage.isEmpty()) {
                 Picasso.get().load(foodImage).resize(500, 500).centerCrop().into(imageViewFood);
@@ -71,7 +79,7 @@ public class ReviewAndRating extends AppCompatActivity {
                 Toast.makeText(this, "Please enter a rating and feedback!", Toast.LENGTH_SHORT).show();
                 return;
             }
-            // Lấy thời gian hiện tại
+            // Get current time
             String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
             // Save the review into Room Database
             Review review = new Review(userId, restaurantId, (int) rating, feedback, currentTime, foodName, foodImage); // Pass the foodName and foodImage
@@ -86,5 +94,33 @@ public class ReviewAndRating extends AppCompatActivity {
                     })
                     .show();
         });
+    }
+
+    // Check if user is logged in
+    private boolean isUserLoggedIn() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        int userId = preferences.getInt("userId", -1); // Sử dụng PreferenceManager thay vì getSharedPreferences
+        return userId != -1;
+    }
+
+    // Get logged-in userId
+    private int getLoggedInUserId() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        return preferences.getInt("userId", -1); // Trả về -1 nếu không tìm thấy userId
+    }
+
+    // Show alert dialog and redirect to Login screen if not logged in
+    private void showAlertDialog(String message) {
+        new AlertDialog.Builder(this)
+                .setMessage(message)
+                .setPositiveButton("OK", (dialog, which) -> {
+                    dialog.dismiss();
+                    // Navigate to Login screen
+                    Intent intent = new Intent(ReviewAndRating.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                })
+                .create()
+                .show();
     }
 }

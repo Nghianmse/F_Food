@@ -4,30 +4,34 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.widget.Toast;
-import android.widget.Button;
 
 import com.example.f_food.R;
 import com.example.f_food.adapter.FoodAcceptShippingAdapter;
+import com.example.f_food.dao.OrderDetailDAO;
+import com.example.f_food.entity.Food;
 import com.example.f_food.entity.OrderDetail;
-import com.example.f_food.entity.User;
 import com.example.f_food.repository.FoodRepository;
 import com.example.f_food.repository.OrderDetailRepository;
 import com.example.f_food.repository.OrderRepository;
-import com.example.f_food.repository.UserRepository;
-import com.example.f_food.screen.authentication_authorization.ShipperLogin;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
 
-public class AcceptShippingOrder extends AppCompatActivity {
+public class DeliveryDetails extends AppCompatActivity {
     private TextView tvOrderId, tvRestaurantAddress, tvDeliveryAddress, tvDeliveryTime, tvCost;
     private RecyclerView foodRecyclerView;
     private Button acceptButton;
@@ -40,8 +44,7 @@ public class AcceptShippingOrder extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_accept_shipping_order);
-
+        setContentView(R.layout.activity_delivery_details);
 
         Intent intent = getIntent();
         String userName = intent.getStringExtra("userName");
@@ -61,8 +64,7 @@ public class AcceptShippingOrder extends AppCompatActivity {
         tvDeliveryAddress = findViewById(R.id.deliveryAddress);
         tvDeliveryTime = findViewById(R.id.deliveryTime);
         tvCost = findViewById(R.id.foodCost);
-        foodRecyclerView = findViewById(R.id.foodListAcceptShipping);
-        acceptButton = findViewById(R.id.acceptButton);
+        foodRecyclerView = findViewById(R.id.foodDeliveryDetails);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         foodRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -92,17 +94,20 @@ public class AcceptShippingOrder extends AppCompatActivity {
             Log.d("AcceptShippingOrder", "Không có món ăn nào trong đơn hàng.");
         }
 
-        // Nút Accept
-        acceptButton.setOnClickListener(v -> showConfirmationDialog(orderId));
 
+
+        // 🚀 Xử lý sự kiện chuyển màn hình khi bấm vào BottomNavigationView
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setSelectedItemId(R.id.nav_orders);
+
+        // ✅ Xử lý khi bấm vào `nav_home` để quay lại `PendingOrder`
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
 
-                if (itemId == R.id.nav_home) { // 🔹 Giữ nguyên trang
-                    Intent intent = new Intent(AcceptShippingOrder.this, AcceptShippingOrder.class);
+                if (itemId == R.id.nav_home) { // 🔹 Quay lại PendingOrder
+                    Intent intent = new Intent(DeliveryDetails.this, PendingOrder.class);
                     intent.putExtra("email", userEmail);
                     intent.putExtra("password", userPassword);
                     intent.putExtra("userName", userName);
@@ -110,22 +115,22 @@ public class AcceptShippingOrder extends AppCompatActivity {
                     startActivity(intent);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     return true;
-                } else if (itemId == R.id.nav_orders) { // 🔹 Chuyển sang DeliveryHistory
-                    Intent intent = new Intent(AcceptShippingOrder.this, DeliveryHistory.class);
+                } else if (itemId == R.id.nav_orders) { // 🔹 Giữ nguyên trang
+                    Intent intent = new Intent( DeliveryDetails.this, DeliveryHistory.class);
                     intent.putExtra("email", userEmail);
                     intent.putExtra("password", userPassword);
                     intent.putExtra("userName", userName);
                     intent.putExtra("userPhone", userPhone);
                     startActivity(intent);
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     return true;
                 } else if (itemId == R.id.nav_delivery) { // 🔹 Chuyển sang DeliveryStatusUpdate
-                    Intent intent = new Intent(AcceptShippingOrder.this, DeliveryHistory.class);
+                    Intent intent = new Intent(DeliveryDetails.this, OrderAccepted.class);
                     intent.putExtra("email", userEmail);
                     intent.putExtra("password", userPassword);
                     intent.putExtra("userName", userName);
                     intent.putExtra("userPhone", userPhone);
                     startActivity(intent);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     return true;
                 }
 
@@ -134,15 +139,5 @@ public class AcceptShippingOrder extends AppCompatActivity {
         });
     }
 
-    private void showConfirmationDialog(int orderId) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Xác nhận đơn hàng");
-        builder.setMessage("Bạn có chắc chắn muốn chấp nhận đơn hàng #" + orderId + " không?");
-        builder.setPositiveButton("Chấp nhận", (dialog, which) -> {
-            orderRepository.updateOrderStatus(orderId, "Delivering");
-            Toast.makeText(this, "Đơn hàng #" + orderId + " đã chuyển sang trạng thái 'Delivering'!", Toast.LENGTH_SHORT).show();
-        });
-        builder.setNegativeButton("Hủy", (dialog, which) -> dialog.dismiss());
-        builder.show();
-    }
+
 }

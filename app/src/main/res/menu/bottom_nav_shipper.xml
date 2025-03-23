@@ -4,21 +4,21 @@
     <item
         android:id="@+id/nav_home"
         android:icon="@drawable/baseline_home_24"
-        android:title="" />
+        android:title="Pending Order" />
 
     <item
         android:id="@+id/nav_orders"
         android:icon="@android:drawable/ic_menu_agenda"
-        android:title="" />
+        android:title="Delivery History" />
 
     <item
         android:id="@+id/nav_delivery"
         android:icon="@drawable/baseline_local_shipping_24"
-        android:title="" />
+        android:title="Order Accepted" />
 
     <item
         android:id="@+id/nav_profile"
         android:icon="@drawable/baseline_account_box_24"
-        android:title="" />
+        android:title="Profile" />
 
 </menu>

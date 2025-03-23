@@ -55,7 +55,7 @@ public class CustomerProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Handle review icon click
-                Intent reviewIntent = new Intent(CustomerProfile.this, ReviewAndRating.class);
+                Intent reviewIntent = new Intent(CustomerProfile.this, OrderTracking.class);
                 startActivity(reviewIntent);
             }
         });
