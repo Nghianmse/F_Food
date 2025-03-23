@@ -55,7 +55,7 @@ public class RestaurantOrders extends AppCompatActivity {
         adapter = new OrdersRestaurantAdapter(this, orderList, new OrdersRestaurantAdapter.OnOrderClickListener() {
             @Override
             public void onAcceptClick(Order order) {
-                order.setOrderStatus("Delivered");
+                order.setOrderStatus("Preparing");
                 db.orderDAO().update(order);
                 loadOrders();
             }

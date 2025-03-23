@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,8 @@ public class MenuManagement extends AppCompatActivity {
     private FoodListAdapter adapter;
     private FoodRepository repository;
 
+    Button btnAddFood;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +35,7 @@ public class MenuManagement extends AppCompatActivity {
         int uid = getLoggedInUserId();
         int rid = restaurantRepository.getRestaurantByUserId(uid).getRestaurantId();
         recyclerView = findViewById(R.id.recyclerViewFoods);
+        btnAddFood = findViewById(R.id.btnAddFood);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         repository = new FoodRepository(this);
@@ -45,6 +49,11 @@ public class MenuManagement extends AppCompatActivity {
         });
 
         recyclerView.setAdapter(adapter);
+
+        btnAddFood.setOnClickListener(v->{
+            Intent intent = new Intent(MenuManagement.this, AddFoodActivity.class);
+            startActivity(intent);
+        });
     }
     private int getLoggedInUserId() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
