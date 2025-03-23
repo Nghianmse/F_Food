@@ -102,7 +102,7 @@ public class AcceptShippingOrder extends AppCompatActivity {
                 int itemId = item.getItemId();
 
                 if (itemId == R.id.nav_home) { // 🔹 Giữ nguyên trang
-                    Intent intent = new Intent(AcceptShippingOrder.this, AcceptShippingOrder.class);
+                    Intent intent = new Intent(AcceptShippingOrder.this, PendingOrder.class);
                     intent.putExtra("email", userEmail);
                     intent.putExtra("password", userPassword);
                     intent.putExtra("userName", userName);

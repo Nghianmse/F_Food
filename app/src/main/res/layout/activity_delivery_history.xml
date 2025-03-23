@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".screen.order_processing.DeliveryHistory">
 
-    <!-- Title -->
+    <!-- Tiêu đề -->
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Delivery history"
+        android:text="Lịch sử giao hàng"
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
 
-    <!-- Search Bar -->
+    <!-- Thanh tìm kiếm -->
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="50dp"
@@ -49,13 +49,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Search"
+                android:hint="Tìm kiếm đơn hàng"
                 android:padding="8dp"
                 android:background="@android:color/transparent"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Status Filter -->
+    <!-- Bộ lọc trạng thái -->
     <LinearLayout
         android:id="@+id/status_filter"
         android:layout_width="0dp"
@@ -68,7 +68,7 @@
         app:layout_constraintEnd_toEndOf="parent">
     </LinearLayout>
 
-    <!-- List of Orders -->
+    <!-- Danh sách đơn hàng -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_orders"
         android:layout_width="0dp"
@@ -79,6 +79,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="16dp" />
 
+    <!-- Thanh điều hướng dưới -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="380sp"

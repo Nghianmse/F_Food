@@ -62,9 +62,6 @@
             android:name=".screen.features_customer.activity_checkout"
             android:exported="true" />
         <activity
-            android:name=".screen.features_customer.HomeStart"
-            android:exported="true" />
-        <activity
             android:name=".screen.features_customer.activity_cart"
             android:exported="true" />
         <activity

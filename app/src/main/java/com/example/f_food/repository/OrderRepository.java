@@ -124,11 +124,6 @@ public class OrderRepository {
         return orderDAO.getShipperWithOrder(orderId);
     }
 
-
-        public ShipperWithOrder getShipperWithOrder(int orderId){
-            return orderDAO.getShipperWithOrder(orderId);
-        }
-
         private void insertSampleData () {
             List<Order> sampleOrders = Arrays.asList(
 

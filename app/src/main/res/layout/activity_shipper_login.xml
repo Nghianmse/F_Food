@@ -30,7 +30,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Shipper"
+        android:text="Đăng nhập cho Shipper"
         android:textSize="14sp"
         android:textColor="@android:color/darker_gray"
         android:layout_marginBottom="16dp"/>
@@ -59,7 +59,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Forget password"
+        android:text="Quên mật khẩu?"
         android:textSize="14sp"
         android:textColor="@android:color/holo_blue_light"
         android:layout_marginTop="8dp"
@@ -71,7 +71,7 @@
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Login"
+        android:text="Đăng nhập"
         android:textSize="16sp"
         android:backgroundTint="@android:color/holo_blue_dark"
         android:textColor="@android:color/white"
@@ -81,7 +81,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="If you don't have an account, click to Register"
+        android:text="Nếu chưa có tài khoản, bạn có thể Đăng ký"
         android:textSize="14sp"
         android:textColor="@android:color/darker_gray"
         android:layout_marginTop="8dp"
@@ -92,7 +92,7 @@
         android:id="@+id/btnRegister"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Register"
+        android:text="Đăng ký"
         android:textSize="16sp"
         android:backgroundTint="@android:color/holo_green_light"
         android:textColor="@android:color/white"
@@ -103,7 +103,7 @@
         android:id="@+id/btnLoginForCustomer"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Login for Customer"
+        android:text="Đăng nhập cho Shipper"
         android:textSize="16sp"
         android:backgroundTint="@android:color/holo_blue_light"
         android:textColor="@android:color/white"
