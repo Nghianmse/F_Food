@@ -109,15 +109,25 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:src="@drawable/icdelivery"
-                    android:contentDescription="Biểu tượng địa chỉ giao"
-                    android:layout_marginEnd="12dp"/>
+                    android:contentDescription="Biểu tượng giao hàng"
+                    android:layout_marginEnd="12dp" />
 
                 <TextView
                     android:id="@+id/deliveryAddress"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Địa chỉ giao hàng: ......." />
+                    android:layout_weight="1"
+                    android:text="Địa chỉ giao: ......." />
+
+                <ImageButton
+                    android:id="@+id/btnOpenMap"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/baseline_location_searching_24"
+                    android:contentDescription="Mở Google Maps" />
             </LinearLayout>
+
         </androidx.cardview.widget.CardView>
 
         <!-- Thời gian giao -->
@@ -183,7 +193,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/foodDeliveryDetails"
                         android:layout_width="match_parent"
-                        android:layout_height="130dp"
+                        android:layout_height="103dp"
                         android:padding="8dp"
                         android:scrollbars="vertical" />
 
@@ -192,6 +202,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tổng tiền: ...₫" />
+
+                    <TextView
+                        android:id="@+id/DeliCost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Phí ship: ...₫" />
+
                 </LinearLayout>
 
             </LinearLayout>

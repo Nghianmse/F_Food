@@ -115,14 +115,24 @@
                     android:layout_height="32dp"
                     android:src="@drawable/icdelivery"
                     android:contentDescription="Biểu tượng giao hàng"
-                    android:layout_marginEnd="12dp"/>
+                    android:layout_marginEnd="12dp" />
 
                 <TextView
                     android:id="@+id/deliveryAddress"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Địa chỉ giao hàng: ......." />
+                    android:layout_weight="1"
+                    android:text="Địa chỉ giao: ......." />
+
+                <ImageButton
+                    android:id="@+id/btnOpenMap"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/baseline_location_searching_24"
+                    android:contentDescription="Mở Google Maps" />
             </LinearLayout>
+
         </androidx.cardview.widget.CardView>
 
         <!-- Thời gian giao -->
@@ -187,15 +197,23 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/foodListAcceptShipping"
                         android:layout_width="match_parent"
-                        android:layout_height="130dp"
+                        android:layout_height="86dp"
                         android:padding="8dp"
                         android:scrollbars="vertical" />
+
 
                     <TextView
                         android:id="@+id/foodCost"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tổng tiền: ...₫" />
+
+                    <TextView
+                        android:id="@+id/DeliCost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Phí ship: ...₫" />
+
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

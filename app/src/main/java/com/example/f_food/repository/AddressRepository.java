@@ -80,4 +80,12 @@ public class AddressRepository {
         }
     }
 
+    public String getFullAddress(Address address) {
+        if (address != null) {
+            return address.getDetailAddress() + ", " + address.getAddress();
+        } else {
+            return "Địa chỉ không tồn tại";
+        }
+    }
+
 }

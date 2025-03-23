@@ -1,5 +1,7 @@
 package com.example.f_food.screen.features_customer;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -13,6 +15,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 public class GoogleMaps extends FragmentActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
@@ -34,11 +37,30 @@ public class GoogleMaps extends FragmentActivity implements OnMapReadyCallback {
         mMap = googleMap;
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
-        // Tọa độ của 2G7G+M2 Thạch Thất, Hanoi, Vietnam
-        LatLng thachThat = new LatLng(21.0031, 105.5321);
+        // Nhận intent
+        Intent intent = getIntent();
+        double originLat = intent.getDoubleExtra("origin_lat", 0.0);
+        double originLng = intent.getDoubleExtra("origin_lng", 0.0);
+        double destLat = intent.getDoubleExtra("dest_lat", 0.0);
+        double destLng = intent.getDoubleExtra("dest_lng", 0.0);
 
-        // Thêm marker và di chuyển camera đến vị trí
-        mMap.addMarker(new MarkerOptions().position(thachThat).title("Thạch Thất, Hà Nội"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(thachThat, 15));
+        LatLng origin = new LatLng(originLat, originLng);
+        LatLng destination = new LatLng(destLat, destLng);
+
+        // Marker
+        mMap.addMarker(new MarkerOptions().position(origin).title("Nhà hàng"));
+        mMap.addMarker(new MarkerOptions().position(destination).title("Nơi giao hàng"));
+
+        // Camera
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(origin, 15));
+
+        // Polyline (vẽ đường nối)
+        mMap.addPolyline(new PolylineOptions()
+                .add(origin, destination)
+                .width(8)
+                .color(Color.BLUE)
+                .geodesic(true));
     }
+
+
 }
