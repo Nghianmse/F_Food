@@ -1,6 +1,7 @@
 package com.example.f_food.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.f_food.entity.Order;
 import com.example.f_food.R;
+import com.example.f_food.entity.Restaurant;
+import com.example.f_food.repository.RestaurantRepository;
+import com.example.f_food.screen.order_processing.DeliveryDetails;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,9 +29,11 @@ public class DeliveryHistoryAdapter extends RecyclerView.Adapter<DeliveryHistory
     private Context context;
     private List<Order> orderList;
 
+    private final RestaurantRepository restaurantRepository;
     public DeliveryHistoryAdapter(Context context, List<Order> orderList) {
         this.context = context;
         this.orderList = orderList;
+        this.restaurantRepository = new RestaurantRepository(context);
     }
 
     public void setOrders(List<Order> orders) {
@@ -60,10 +66,18 @@ public class DeliveryHistoryAdapter extends RecyclerView.Adapter<DeliveryHistory
             holder.imgStatus.setImageResource(R.drawable.iccheck); // Icon mặc định nếu không khớp
         }
 
+        Restaurant restaurant = restaurantRepository.getRestaurantById(order.getRestaurantId());
+        String restaurantAddress = (restaurant != null) ? restaurant.getAddress() : "Unknown Address";
 
-        holder.btnDetails.setOnClickListener(v ->
-                Toast.makeText(context, "Details for Order ID: " + order.getOrderId(), Toast.LENGTH_SHORT).show()
-        );
+        holder.btnDetails.setOnClickListener(v -> {
+            Intent intent = new Intent(context, DeliveryDetails.class);
+            intent.putExtra("orderId", order.getOrderId());
+            intent.putExtra("restaurantAddress", restaurantAddress);
+            intent.putExtra("deliveryAddress", "vcvcvcv");
+            intent.putExtra("deliveryTime", formattedDate);
+            context.startActivity(intent);
+        });
+
     }
 
     @Override
@@ -90,7 +104,7 @@ public class DeliveryHistoryAdapter extends RecyclerView.Adapter<DeliveryHistory
             SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 
             // Định dạng hiển thị mới (Chỉ ngày/tháng + giờ/phút)
-            SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+            SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM HH:mm", Locale.getDefault());
 
             Date date = inputFormat.parse(createdAt);
             return outputFormat.format(date);

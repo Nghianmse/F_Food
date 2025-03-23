@@ -5,37 +5,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.f_food.R;
 import com.example.f_food.entity.Food;
+import com.example.f_food.R;
 import com.example.f_food.entity.OrderDetail;
 import com.example.f_food.repository.FoodRepository;
 
 import java.util.List;
-
-public class FoodAcceptShippingAdapter extends RecyclerView.Adapter<FoodAcceptShippingAdapter.FoodViewHolder> {
-
+public class DeliveryDetailsAdapter extends RecyclerView.Adapter<FoodAcceptShippingAdapter.FoodViewHolder> {
     private List<OrderDetail> orderDetailList;
     private FoodRepository foodRepository;
 
-    public FoodAcceptShippingAdapter(Context context, List<OrderDetail> orderDetailList) {
+    public DeliveryDetailsAdapter(Context context, List<OrderDetail> orderDetailList) {
         this.orderDetailList = orderDetailList;
         this.foodRepository = new FoodRepository(context); // Khởi tạo để tra cứu tên món ăn
     }
 
     @NonNull
     @Override
-    public FoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FoodAcceptShippingAdapter.FoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_food_accept_shipping, parent, false);
-        return new FoodViewHolder(view);
+                .inflate(R.layout.item_delivery_details, parent, false);
+        return new FoodAcceptShippingAdapter.FoodViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FoodViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull FoodAcceptShippingAdapter.FoodViewHolder holder, int position) {
         OrderDetail orderDetail = orderDetailList.get(position);
 
         // Lấy thông tin món ăn từ foodId
@@ -64,4 +61,5 @@ public class FoodAcceptShippingAdapter extends RecyclerView.Adapter<FoodAcceptSh
             foodPrice = itemView.findViewById(R.id.foodPrice);
         }
     }
+
 }

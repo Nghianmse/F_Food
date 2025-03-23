@@ -115,6 +115,9 @@ public class OrderRepository {
             orderDAO.update(order);
         }
     }
+    public double getTotalPriceByOrderId(int orderId) {
+        return orderDAO.getTotalPriceByOrderId(orderId);
+    }
     public ShipperWithOrder getShipperWithOrder(int orderId) {
         return orderDAO.getShipperWithOrder(orderId);
     }

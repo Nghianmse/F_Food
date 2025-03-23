@@ -14,6 +14,7 @@ import com.example.f_food.entity.User;
 import com.example.f_food.MainActivity;
 import com.example.f_food.R;
 import com.example.f_food.repository.UserRepository;
+import com.example.f_food.screen.order_processing.PendingOrder;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -38,6 +39,7 @@ public class ShipperLogin extends AppCompatActivity {
         tvForgotPassword = findViewById(R.id.tvForgotPassword);
         imgLogoLogin = findViewById(R.id.imgLogoLogin);
         btnRegister = findViewById(R.id.btnRegister);
+
 
         Picasso.get()
                 .load(R.drawable.login)
@@ -74,7 +76,11 @@ public class ShipperLogin extends AppCompatActivity {
                     Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
 
                     // Chuyển sang màn hình khác sau khi đăng nhập
-                    Intent intent = new Intent(this, MainActivity.class);
+                    Intent intent = new Intent(this, PendingOrder.class);
+                    intent.putExtra("userName", user.getFullName()); // hoặc user.getName()
+                    intent.putExtra("userPhone", user.getPhone());   // hoặc getPhoneNumber()
+                    intent.putExtra("email", user.getEmail());
+                    intent.putExtra("password", user.getPassword());
                     startActivity(intent);
                     finish();
                     return;
