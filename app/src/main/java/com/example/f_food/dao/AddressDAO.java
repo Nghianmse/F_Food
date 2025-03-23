@@ -39,4 +39,7 @@ public interface AddressDAO {
     // Xóa địa chỉ theo addressId
     @Query("DELETE FROM Address WHERE addressId = :id")
     void deleteById(int id);
+    //Lấy địa chỉ default của user;
+    @Query("SELECT * FROM Address WHERE userId = :userId AND isDefault = 1 LIMIT 1")
+    Address getDefaultAddressForUser(int userId);
 }

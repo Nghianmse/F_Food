@@ -76,4 +76,6 @@ public interface OrderDAO {
             "WHERE Orders.order_id = :orderId")
 
     ShipperWithOrder getShipperWithOrder(int orderId);
+    @Query("SELECT * FROM Orders WHERE restaurant_id = :restaurantId")
+    List<Order> getOrdersByRestaurantId(int restaurantId);
 }

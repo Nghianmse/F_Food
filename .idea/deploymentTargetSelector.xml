@@ -2,6 +2,13 @@
 <project version="4">
   <component name="deploymentTargetSelector">
     <selectionStates>
+      <SelectionState runConfigName="RestaurantOrders">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="OrderTracking">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="PendingOrder">
       <SelectionState runConfigName="OrderHistory">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
