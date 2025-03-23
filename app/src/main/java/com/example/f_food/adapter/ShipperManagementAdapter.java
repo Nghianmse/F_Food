@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.f_food.entity.Shipper;
@@ -51,17 +52,38 @@ public class ShipperManagementAdapter extends RecyclerView.Adapter<ShipperManage
         holder.txtShipperName.setText("Name: " + (user != null ? user.getFullName() : "Unknown"));
         holder.txtShipperEmail.setText("Email: " + (user != null ? user.getEmail() : "Unknown"));
         holder.txtShipperPhone.setText("Phone: " + (user != null ? user.getPhone() : "Unknown"));
-        holder.txtShipperCreatedAt.setText("Created At: " + (user != null ? user.getCreatedAt() : "Unknown"));
+        holder.txtShipperCreatedAt.setText("Status: " + (user != null ? shipper.getStatus() : "Unknown"));
 
         // Xóa shipper
+        String statusText = shipper.getStatus().equals("Active") ? "Deactivate" : "Activate";
+        holder.btnDelete.setText(statusText);
+
+        // Xử lý sự kiện khi nhấn vào nút
         holder.btnDelete.setOnClickListener(v -> {
-            shipperRepository.deleteById(shipper.getShipperId());
-            shipperList.remove(position);
-            notifyItemRemoved(position);
-            notifyItemRangeChanged(position, shipperList.size());
-            Toast.makeText(context, "Deleted shipper " + shipper.getShipperId(), Toast.LENGTH_SHORT).show();
+            // Tạo một AlertDialog xác nhận
+            new AlertDialog.Builder(context)
+                    .setMessage("Are you sure you want to change the status of this shipper?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", (dialog, id) -> {
+                        // Đảo trạng thái từ Active -> InActive và ngược lại
+                        String newStatus = shipper.getStatus().equals("Active") ? "InActive" : "Active";
+
+                        // Cập nhật trạng thái trong database
+                        shipper.setStatus(newStatus);
+                        shipperRepository.update(shipper);
+                        notifyItemChanged(position);
+
+                        // Hiển thị thông báo
+                        Toast.makeText(context, "Status changed to " + newStatus, Toast.LENGTH_SHORT).show();
+                    })
+                    .setNegativeButton("No", (dialog, id) -> {
+                        // Không làm gì khi người dùng chọn "No"
+                    })
+                    .create()
+                    .show();
         });
     }
+
 
     @Override
     public int getItemCount() {

@@ -1,5 +1,6 @@
 plugins {
-    alias(libs.plugins.android.application)
+    id 'com.android.application'
+    id 'com.google.gms.google-services' // Áp dụng plugin Google Services
 }
 
 android {
@@ -36,7 +37,8 @@ dependencies {
     implementation libs.constraintlayout
     // Các dependencies khác
     implementation 'org.projectlombok:lombok:1.18.30'
-    implementation libs.room.runtime// Thêm Lombok
+    implementation libs.room.runtime
+    implementation libs.firebase.functions// Thêm Lombok
     annotationProcessor 'org.projectlombok:lombok:1.18.30' // Annotation processor cho Lombok
     implementation libs.room.common
     testImplementation libs.junit
@@ -54,7 +56,9 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
-    implementation 'com.google.android.gms:play-services-location:18.0.0'
-    implementation 'com.google.android.gms:play-services-maps:17.0.1'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
     implementation 'com.google.android.gms:play-services-places:17.0.0'
+    implementation 'com.sun.mail:android-mail:1.6.2'
+    implementation 'com.sun.mail:android-activation:1.6.2'
 }
+

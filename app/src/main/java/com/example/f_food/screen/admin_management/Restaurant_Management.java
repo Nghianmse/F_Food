@@ -1,9 +1,14 @@
 package com.example.f_food.screen.admin_management;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -22,7 +27,7 @@ public class Restaurant_Management extends AppCompatActivity {
     private RestaurantManagementListAdapter adapter;
     private List<Restaurant> restaurantList;
     private RestaurantRepository restaurantRepository;
-    private Button back;
+    private ImageView back;
 
 
     @Override
@@ -37,7 +42,12 @@ public class Restaurant_Management extends AppCompatActivity {
             return insets;
         });
         back=findViewById(R.id.btnBack_Restaurant_Management);
-        back.setOnClickListener(v->finish());
+        back.setOnClickListener(v -> {
+            Intent intent = new Intent(Restaurant_Management.this, AdminScreen.class);
+            startActivity(intent);
+            finish(); // Để đóng màn hiện tại nếu không cần quay lại
+        });
+
         recyclerView = findViewById(R.id.recyclerViewListRestaurant);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -58,19 +68,36 @@ public class Restaurant_Management extends AppCompatActivity {
         }
     }
 
-    // Update restaurant status and refresh adapter
+
     private void updateRestaurantStatus(int position) {
         Restaurant restaurant = restaurantList.get(position);
-        if (restaurant.getStatus().equals("Open")) {
-            restaurant.setStatus("Close");
-        } else {
-            restaurant.setStatus("Open");
-        }
 
-        // Cập nhật trạng thái trong database (nếu có)
-        restaurantRepository.update(restaurant);
+        // Create an AlertDialog to confirm the status change
+        new AlertDialog.Builder(this)
+                .setTitle("Change Status")
+                .setMessage("Are you sure you want to change the status of this restaurant?")
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    // If user clicks Yes, update the restaurant status
+                    if (restaurant.getStatus().equals("Open")) {
+                        restaurant.setStatus("Close");
+                    } else {
+                        restaurant.setStatus("Open");
+                    }
 
-        // Cập nhật lại RecyclerView
-        adapter.notifyItemChanged(position);
+                    // Update status in the database (if applicable)
+                    restaurantRepository.update(restaurant);
+
+                    // Notify the adapter that the item has been changed
+                    adapter.notifyItemChanged(position);
+
+                    // Show a success message
+                    Toast.makeText(Restaurant_Management.this, "Status updated successfully", Toast.LENGTH_SHORT).show();
+                })
+                .setNegativeButton("No", (dialog, which) -> {
+                    // If user clicks No, do nothing (dialog will close)
+                    dialog.dismiss();
+                })
+                .show();
     }
+
 }

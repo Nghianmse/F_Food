@@ -9,6 +9,13 @@
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
       <SelectionState runConfigName="PendingOrder">
+      <SelectionState runConfigName="OrderHistory">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="Address">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="ManageAddress">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

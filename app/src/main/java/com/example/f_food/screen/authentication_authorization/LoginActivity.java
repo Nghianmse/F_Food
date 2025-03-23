@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,8 +16,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.f_food.entity.User;
 import com.example.f_food.R;
+import com.example.f_food.repository.AddressRepository;
 import com.example.f_food.repository.UserRepository;
+import com.example.f_food.screen.admin_management.AdminScreen;
+import com.example.f_food.screen.features_customer.Address;
+import com.example.f_food.screen.features_customer.HomeStart;
 import com.example.f_food.screen.features_customer.ManageAddress;
+import com.example.f_food.screen.features_customer.OrderHistory;
+import com.example.f_food.screen.features_customer.OrderTracking;
 import com.example.f_food.screen.features_customer.ViewRestaurantList;
 import com.squareup.picasso.Picasso;
 
@@ -25,10 +32,13 @@ import java.util.List;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText etEmail, etPassword;
-    private Button btnLogin, btnLoginForPartner;
+    private Button btnLogin, btnLoginForPartner, btnLoginForShipper;
     private TextView tvForgotPassword;
     private UserRepository userRepository;
+    private AddressRepository addressRepository;
+    Button reigister;
     ImageView imgLogoLogin;
+    private CheckBox cbRememberMe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +49,12 @@ public class LoginActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
-        btnLoginForPartner = findViewById(R.id.btnLoginForPartner);  // Initialize the Login for Partner button
+        btnLoginForPartner = findViewById(R.id.btnLoginForPartner);
+        btnLoginForShipper = findViewById(R.id.btnLoginForShipper);
         tvForgotPassword = findViewById(R.id.tvForgotPassword);
         imgLogoLogin = findViewById(R.id.imgLogoLogin);
+        reigister=findViewById(R.id.btnRegister);
+        cbRememberMe = findViewById(R.id.cbRememberMe);
 
         Picasso.get()
                 .load(R.drawable.login)
@@ -51,11 +64,22 @@ public class LoginActivity extends AppCompatActivity {
 
         // Khởi tạo repository
         userRepository = new UserRepository(this);
+        addressRepository = new AddressRepository(this);
         // Xử lý sự kiện khi nhấn nút đăng nhập
         btnLogin.setOnClickListener(v -> handleLogin());
 
         // Xử lý sự kiện khi nhấn nút đăng nhập cho partner
         btnLoginForPartner.setOnClickListener(v -> navigateToRestaurantLogIn());
+        btnLoginForShipper.setOnClickListener(v -> navigateToShipperLogIn());
+        reigister.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, SignUp.class);
+            startActivity(intent);
+        });
+
+        tvForgotPassword.setOnClickListener(v->{
+            Intent intent = new Intent(LoginActivity.this, ForgotPassActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void handleLogin() {
@@ -77,13 +101,37 @@ public class LoginActivity extends AppCompatActivity {
                     // Lưu userId vào SharedPreferences
                     SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
                     SharedPreferences.Editor editor = preferences.edit();
-                    editor.putInt("userId", user.getUserId()); // Giả sử `getId()` trả về userId
+                    editor.putInt("userId", user.getUserId());
+
+                    // Save email and password if "Remember Me" is checked
+                    if (cbRememberMe.isChecked()) {
+                        editor.putString("email", email);
+                        editor.putString("password", password);
+                    } else {
+                        editor.remove("email");
+                        editor.remove("password");
+                    }
                     editor.apply();
 
                     Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
 
                     // Chuyển sang màn hình OrderHistory
-                    Intent intent = new Intent(this, ViewRestaurantList.class);
+                    Intent intent = new Intent(this, HomeStart.class);
+                    intent.putExtra("fullName", user.getFullName());
+                    startActivity(intent);
+                    finish();
+                    return;
+                } else if ("Admin".equals(user.getUserType())) {
+                    // Lưu userId vào SharedPreferences
+                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putInt("userId", user.getUserId());
+                    editor.apply();
+
+                    Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+
+                    // Chuyển sang màn hình AdminScreen
+                    Intent intent = new Intent(this, AdminScreen.class);
                     startActivity(intent);
                     finish();
                     return;
@@ -97,6 +145,7 @@ public class LoginActivity extends AppCompatActivity {
         // Nếu không tìm thấy user phù hợp
         showAlertDialog("Email hoặc mật khẩu không đúng!");
     }
+
     private void showAlertDialog(String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message)
@@ -109,5 +158,20 @@ public class LoginActivity extends AppCompatActivity {
     private void navigateToRestaurantLogIn() {
         Intent intent = new Intent(this, RestaurantLogIn.class);  // Assuming RestaurantLogInActivity is your target activity
         startActivity(intent);
+    }
+
+    private void navigateToShipperLogIn() {
+        Intent intent = new Intent(this, ShipperLogin.class);  // Assuming RestaurantLogInActivity is your target activity
+        startActivity(intent);
+      
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        // Xóa userId khỏi SharedPreferences ngay khi ứng dụng bị dừng lại
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove("userId");
+        editor.apply();
     }
 }

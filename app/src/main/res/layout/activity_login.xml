@@ -5,7 +5,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="24dp"
-    android:background="@android:color/white"
+    android:background="#FFF3E0"
     android:id="@+id/login">
 
     <!-- Logo -->
@@ -16,7 +16,7 @@
         android:src="@drawable/login"
         android:layout_gravity="center"/>
 
-    <!-- App Name -->
+    <!-- Tên ứng dụng -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,16 +26,16 @@
         android:textColor="@android:color/black"
         android:layout_marginTop="16dp"/>
 
-    <!-- Subtitle -->
+    <!-- Tiêu đề phụ -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Log In to continue"
+        android:text="Đăng nhập để tiếp tục"
         android:textSize="14sp"
         android:textColor="@android:color/darker_gray"
         android:layout_marginBottom="16dp"/>
 
-    <!-- Email Input -->
+    <!-- Ô nhập Email -->
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
@@ -45,69 +45,94 @@
         android:padding="12dp"
         android:inputType="textEmailAddress"/>
 
-    <!-- Password Input -->
+    <!-- Ô nhập mật khẩu -->
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="Password"
+        android:hint="Mật khẩu"
         android:background="@android:drawable/editbox_background"
         android:padding="12dp"
         android:inputType="textPassword"/>
 
-    <!-- Forgot Password -->
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Forget password"
-        android:textSize="14sp"
-        android:textColor="@android:color/holo_blue_light"
-        android:layout_marginTop="8dp"
-        android:layout_gravity="end"
-        android:id="@+id/tvForgotPassword"/>
-    <!-- Login Button -->
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="8dp">
+
+        <!-- Checkbox "Nhớ tài khoản" -->
+        <CheckBox
+            android:id="@+id/cbRememberMe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nhớ tài khoản"/>
+
+        <!-- Quên mật khẩu -->
+        <TextView
+            android:id="@+id/tvForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quên mật khẩu?"
+            android:textSize="14sp"
+            android:textColor="@android:color/holo_blue_light"
+            android:gravity="end"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <!-- Nút đăng nhập -->
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Login"
+        android:text="Đăng nhập"
         android:textSize="16sp"
         android:backgroundTint="@android:color/holo_blue_dark"
         android:textColor="@android:color/white"
         android:layout_marginTop="16dp"/>
 
-    <!-- "If you don't have an account" Text -->
+    <!-- "Nếu chưa có tài khoản" -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="If you don't have an account, click to Register"
+        android:text="Nếu chưa có tài khoản, nhấn để đăng ký"
         android:textSize="14sp"
         android:textColor="@android:color/darker_gray"
         android:layout_marginTop="8dp"
         android:layout_gravity="center"/>
 
-    <!-- Register Button -->
+    <!-- Nút đăng ký -->
     <Button
         android:id="@+id/btnRegister"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Register"
+        android:text="Đăng ký"
         android:textSize="16sp"
         android:backgroundTint="@android:color/holo_green_light"
         android:textColor="@android:color/white"
         android:layout_marginTop="8dp"/>
 
-    <!-- Login for Partner Button -->
+    <!-- Nút đăng nhập cho đối tác -->
     <Button
         android:id="@+id/btnLoginForPartner"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Login for Partner"
+        android:text="Đăng nhập cho Đối tác"
         android:textSize="16sp"
         android:backgroundTint="@android:color/holo_blue_light"
         android:textColor="@android:color/white"
         android:layout_marginTop="8dp"/>
 
-
+    <!-- Nút đăng nhập cho shipper -->
+    <Button
+        android:id="@+id/btnLoginForShipper"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Đăng nhập cho Shipper"
+        android:textSize="16sp"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="8dp"/>
 
 </LinearLayout>

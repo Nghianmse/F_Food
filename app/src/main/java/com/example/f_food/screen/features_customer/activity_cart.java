@@ -3,6 +3,7 @@ package com.example.f_food.screen.features_customer;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -40,7 +41,12 @@ public class activity_cart extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        hideSystemUI(); // Ẩn ngay khi khởi chạy
 
+        // Đảm bảo hệ thống vẫn ẩn khi người dùng chạm vào màn hình
+        getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(
+                visibility -> hideSystemUI()
+        );
         // Ánh xạ View
         recyclerCart = findViewById(R.id.recyclerCart);
         recyclerCart.setLayoutManager(new LinearLayoutManager(this));
@@ -101,4 +107,12 @@ public class activity_cart extends AppCompatActivity {
                 .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
                 .show();
     }
+    private void hideSystemUI() {
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
+                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
+                        View.SYSTEM_UI_FLAG_FULLSCREEN
+        );
+    }
+
 }

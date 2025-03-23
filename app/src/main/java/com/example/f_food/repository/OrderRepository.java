@@ -117,6 +117,13 @@ public class OrderRepository {
         }
     }
 
+    public double getTotalPriceByOrderId(int orderId) {
+        return orderDAO.getTotalPriceByOrderId(orderId);
+    }
+    public ShipperWithOrder getShipperWithOrder(int orderId) {
+        return orderDAO.getShipperWithOrder(orderId);
+    }
+
 
         public ShipperWithOrder getShipperWithOrder(int orderId){
             return orderDAO.getShipperWithOrder(orderId);

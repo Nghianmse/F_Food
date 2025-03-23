@@ -1,8 +1,10 @@
 package com.example.f_food.screen.admin_management;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,9 +25,7 @@ import java.util.List;
 
 public class Payment_Transactions_Management extends AppCompatActivity {
 
-    private Button back;
-
-
+    private ImageView back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +40,12 @@ public class Payment_Transactions_Management extends AppCompatActivity {
         PaymentRepository paymentRepository = new PaymentRepository(this);
         List<Payment> paymentList = paymentRepository.getAllPayments();
         back = findViewById(R.id.btnBack_Transactions_Management);
-        back.setOnClickListener(v->finish());
+        back.setOnClickListener(v -> {
+            Intent intent = new Intent(Payment_Transactions_Management.this, AdminScreen.class);
+            startActivity(intent);
+            finish(); // Để đóng màn hiện tại nếu không cần quay lại
+        });
+
         // Initialize RecyclerView
         @SuppressLint({"MissingInflatedId", "LocalSuppress"})
         RecyclerView recyclerView = findViewById(R.id.transaction_management_list);

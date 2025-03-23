@@ -107,19 +107,17 @@ public class HomeCustomerAdapter extends RecyclerView.Adapter<HomeCustomerAdapte
             } else {
                 productStockStatus.setTextColor(Color.RED);
             }
-//            itemView.setOnClickListener(v -> {
-//                if (food.getStockStatus().equals("Out of Stock")) {
-//                    new AlertDialog.Builder(context)
-//                            .setTitle("Thông báo")
-//                            .setMessage("Sản phẩm đã hết hàng!")
-//                            .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
-//                            .show();
-//                } else {
-//                    listener.onItemClick(food.getFoodId());
-//                }
-//            });
-//
-
+            itemView.setOnClickListener(v -> {
+                if (food.getStockStatus().equals("Out of Stock")) {
+                    new AlertDialog.Builder(context)
+                            .setTitle("Thông báo")
+                            .setMessage("Sản phẩm đã hết hàng!")
+                            .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                            .show();
+                } else {
+                    listener.onItemClick(food.getFoodId());
+                }
+            });
         }
     }
 }

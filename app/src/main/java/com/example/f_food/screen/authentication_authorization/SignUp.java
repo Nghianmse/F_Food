@@ -91,7 +91,7 @@ public class SignUp extends AppCompatActivity {
         }
 
         // Tạo đối tượng User mới và thêm vào cơ sở dữ liệu
-        User newUser = new User(0, name, emailText, pass, phoneText, "Customer", "2024-03-14 12:00:00", "2024-03-14 12:00:00");
+        User newUser = new User(0, name, emailText, pass, phoneText, "Customer", "2024-03-14 12:00:00", "2024-03-14 12:00:00",true);
         userRepository.insert(newUser);
 
         Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();
