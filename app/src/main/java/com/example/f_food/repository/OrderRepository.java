@@ -60,10 +60,9 @@ public class OrderRepository {
         return orderDAO.getOrderById(id);
     }
 
-    public List<Order> getOrdersByUserId(int userId) {
-        return orderDAO.getOrdersByUserId(userId);
+    public List<Order> getOrdersByShipperId(int shipperId) {
+        return orderDAO.getOrdersByUserId(shipperId);
     }
-
     public String getRestaurantAddressByOrderId(int orderId) {
         Order order = orderDAO.getOrderById(orderId);
         if (order != null) {
@@ -73,10 +72,11 @@ public class OrderRepository {
         return "Unknown Address";
     }
 
-    public void updateOrderStatus(int orderId, String newStatus) {
+    public void updateOrderStatus(int orderId, String newStatus, int shipperId) {
         Order order = orderDAO.getOrderById(orderId);
         if (order != null) {
             order.setOrderStatus(newStatus);
+            order.setShipperId(shipperId);
             orderDAO.update(order);
         }
     }

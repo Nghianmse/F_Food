@@ -1,7 +1,9 @@
 package com.example.f_food.screen.order_processing;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +28,7 @@ import com.example.f_food.entity.Food;
 import com.example.f_food.repository.FoodRepository;
 import com.example.f_food.repository.OrderDetailRepository;
 import com.example.f_food.repository.OrderRepository;
+import com.example.f_food.repository.ShipperRepository;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
@@ -43,6 +46,7 @@ public class DeliveryStatusUpdate extends AppCompatActivity {
     private OrderDetailRepository orderDetailRepository;
 
     private List<Food> foodList;
+    private int shipperId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +57,8 @@ public class DeliveryStatusUpdate extends AppCompatActivity {
         orderRepository = new OrderRepository(this);
         orderDetailRepository = new OrderDetailRepository(this);
         foodRepository = new FoodRepository(this);
-
+        ShipperRepository shipperRepository = new ShipperRepository(this);
+        shipperId = shipperRepository.getShipperByUserId(getLoggedInUserId()).getShipperId();
         // 🟢 Ánh xạ các thành phần giao diện
         tvOrderId = findViewById(R.id.orderId);
         tvRestaurantAddress = findViewById(R.id.restaurantAddress);
@@ -111,7 +116,7 @@ public class DeliveryStatusUpdate extends AppCompatActivity {
 
             if (!newStatus.isEmpty()) {
                 // 🟢 Gọi update vào DB
-                orderRepository.updateOrderStatus(orderId, newStatus);
+                orderRepository.updateOrderStatus(orderId, newStatus, shipperId);
 
                 Toast.makeText(DeliveryStatusUpdate.this,
                         "Order #" + orderId + " updated to '" + newStatus + "'",
@@ -171,5 +176,10 @@ public class DeliveryStatusUpdate extends AppCompatActivity {
         });
 
     }
+    private int getLoggedInUserId() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        return preferences.getInt("userId", -1);
+    }
+
 
 }

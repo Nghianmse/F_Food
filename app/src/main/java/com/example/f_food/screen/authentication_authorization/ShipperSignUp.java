@@ -11,9 +11,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.f_food.entity.Restaurant;
+import com.example.f_food.entity.Shipper;
 import com.example.f_food.entity.User;
 import com.example.f_food.R;
 import com.example.f_food.repository.RestaurantRepository;
+import com.example.f_food.repository.ShipperRepository;
 import com.example.f_food.repository.UserRepository;
 
 import java.text.SimpleDateFormat;
@@ -22,6 +24,8 @@ import java.util.Date;
 public class ShipperSignUp extends AppCompatActivity {
     private UserRepository userRepository;
     private RestaurantRepository restaurantRepository;
+
+    private ShipperRepository shipperRepository;
 
     private EditText etFullName, etEmail, etPhoneNumber, etAddress, etPassword, etConfirmPassword;
     private Button btnConfirm;
@@ -35,7 +39,7 @@ public class ShipperSignUp extends AppCompatActivity {
         // Initialize repositories
         userRepository = new UserRepository(this);
         restaurantRepository = new RestaurantRepository(this);
-
+        shipperRepository = new ShipperRepository(this);
         // Initialize UI components
         etFullName = findViewById(R.id.etFullName);
         etEmail = findViewById(R.id.etEmail);
@@ -93,19 +97,19 @@ public class ShipperSignUp extends AppCompatActivity {
         int userId = insertedUser.getUserId();
 
         // Create and insert restaurant
-        Restaurant restaurant = new Restaurant();
-        restaurant.setUserId(userId);
-        restaurant.setName(fullName + " Shipper");  // or another way to set the restaurant name
-        restaurant.setAddress(address);
-        restaurant.setPhone(phoneNumber);
-        restaurant.setStatus("Open");
-        restaurant.setCreatedAt(currentDateTime);
+        Shipper shipper = new Shipper();
 
-        restaurantRepository.insert(restaurant);
+        shipper.setUserId(userId);
+
+        shipper.setStatus("Active");
+
+
+        shipperRepository.insert(shipper);
 
         // Provide feedback to the user
         Toast.makeText(this, "Shipper registered successfully", Toast.LENGTH_SHORT).show();
         // Optionally, navigate back or to another screen
+        navigateToShipperLogIn();
 
 
     }

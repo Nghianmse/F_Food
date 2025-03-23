@@ -81,7 +81,7 @@ public class PendingOrder extends AppCompatActivity {
         List<Order> allOrders = orderRepository.getAllOrders(); // Lấy danh sách đơn hàng
 
         List<Order> orders = allOrders.stream()
-                .filter(order -> order.getOrderStatus().equalsIgnoreCase("Pending"))
+                .filter(order -> order.getOrderStatus().equalsIgnoreCase("Preparing"))
                 .collect(Collectors.toList());
 
         // Kiểm tra nếu không có đơn hàng nào đang "Pending"

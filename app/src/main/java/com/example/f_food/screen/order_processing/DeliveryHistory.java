@@ -1,7 +1,9 @@
 package com.example.f_food.screen.order_processing;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MenuItem;
 
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.f_food.R;
 import com.example.f_food.adapter.DeliveryHistoryAdapter;
+import com.example.f_food.dao.RestaurantRoomDatabase;
 import com.example.f_food.entity.Order;
 import com.example.f_food.repository.OrderRepository;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -34,7 +37,10 @@ public class DeliveryHistory extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         orderRepository = new OrderRepository(this);
-        List<Order> allOrders = orderRepository.getAllOrders();
+
+        int shipperId = RestaurantRoomDatabase.getInstance(this).shipperDAO().getShipperByUserId(getLoggedInUserId()).getShipperId();
+
+        List<Order> allOrders = orderRepository.getOrdersByShipperId(shipperId);
 
         List<Order> filteredOrders = allOrders.stream()
                 .filter(order -> order.getOrderStatus().equalsIgnoreCase("Delivered") ||
@@ -93,5 +99,12 @@ public class DeliveryHistory extends AppCompatActivity {
             }
         });
 
+
     }
+
+    private int getLoggedInUserId() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        return preferences.getInt("userId", -1);
+    }
+
 }

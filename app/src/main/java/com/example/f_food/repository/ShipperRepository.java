@@ -35,8 +35,8 @@ public class ShipperRepository {
     public void deleteById(int id) {
         shipperDAO.deleteById(id);
     }
-public  void getShipperByUserId(int userid){
-        shipperDAO.getShipperByUserId(userid);
+    public Shipper getShipperByUserId(int userid){
+        return shipperDAO.getShipperByUserId(userid);
 }
     public void insert(Shipper shipper) {
         shipperDAO.insert(shipper);
