@@ -2,20 +2,13 @@
 <project version="4">
   <component name="deploymentTargetSelector">
     <selectionStates>
-      <SelectionState runConfigName="RestaurantOrders">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="OrderTracking">
+      <SelectionState runConfigName="Unnamed">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
       <SelectionState runConfigName="PendingOrder">
-      <SelectionState runConfigName="OrderHistory">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="Address">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="ManageAddress">
+      <SelectionState runConfigName="AcceptShippingOrder">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

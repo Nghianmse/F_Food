@@ -14,10 +14,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="Order Details"
+        android:text="Xác nhận đơn hàng"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:gravity="center"/>
+        android:gravity="center" />
 
     <!-- Container chứa thông tin đơn hàng -->
     <LinearLayout
@@ -27,7 +27,7 @@
         android:orientation="vertical"
         android:gravity="center_vertical">
 
-        <!-- Order ID -->
+        <!-- Mã đơn hàng -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -47,18 +47,18 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:src="@drawable/icshoppingcart"
-                    android:contentDescription="Order Icon"
-                    android:layout_marginEnd="12dp"/>
+                    android:contentDescription="Biểu tượng đơn hàng"
+                    android:layout_marginEnd="12dp" />
 
                 <TextView
                     android:id="@+id/orderId"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Order ID: ..." />
+                    android:text="Mã đơn: ..." />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Restaurant Address -->
+        <!-- Địa chỉ nhà hàng -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -78,18 +78,18 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:src="@drawable/icrestaurant"
-                    android:contentDescription="Restaurant Icon"
-                    android:layout_marginEnd="12dp"/>
+                    android:contentDescription="Biểu tượng nhà hàng"
+                    android:layout_marginEnd="12dp" />
 
                 <TextView
                     android:id="@+id/restaurantAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Restaurant address: ......." />
+                    android:text="Địa chỉ nhà hàng: ......." />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Delivery Address -->
+        <!-- Địa chỉ giao hàng -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -109,18 +109,28 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:src="@drawable/icdelivery"
-                    android:contentDescription="Delivery Icon"
-                    android:layout_marginEnd="12dp"/>
+                    android:contentDescription="Biểu tượng giao hàng"
+                    android:layout_marginEnd="12dp" />
 
                 <TextView
                     android:id="@+id/deliveryAddress"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Delivery address: ......." />
+                    android:layout_weight="1"
+                    android:text="Địa chỉ giao: ......." />
+
+                <ImageButton
+                    android:id="@+id/btnOpenMap"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/baseline_location_searching_24"
+                    android:contentDescription="Mở Google Maps" />
             </LinearLayout>
+
         </androidx.cardview.widget.CardView>
 
-        <!-- Delivery Time -->
+        <!-- Thời gian giao -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -140,18 +150,18 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:src="@drawable/icclock"
-                    android:contentDescription="Clock Icon"
-                    android:layout_marginEnd="12dp"/>
+                    android:contentDescription="Biểu tượng thời gian"
+                    android:layout_marginEnd="12dp" />
 
                 <TextView
                     android:id="@+id/deliveryTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Delivery time: ....." />
+                    android:text="Thời gian giao: ....." />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Food Order (tăng chiều cao) -->
+        <!-- Món ăn -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -171,19 +181,19 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:src="@drawable/icfood"
-                    android:contentDescription="Food Icon"
-                    android:layout_marginEnd="12dp"/>
+                    android:contentDescription="Biểu tượng món ăn"
+                    android:layout_marginEnd="12dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="149dp"
                     android:orientation="vertical">
 
                     <!-- Danh sách món ăn -->
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/foodListAcceptShipping"
                         android:layout_width="match_parent"
-                        android:layout_height="130dp"
+                        android:layout_height="103dp"
                         android:padding="8dp"
                         android:scrollbars="vertical" />
 
@@ -191,29 +201,34 @@
                         android:id="@+id/foodCost"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Cost: ...$" />
+                        android:text="Tiền đồ ăn: ...₫" />
+
+                    <TextView
+                        android:id="@+id/DeliCost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Phí ship: ...₫" />
+
+
                 </LinearLayout>
-
             </LinearLayout>
-
         </androidx.cardview.widget.CardView>
-
     </LinearLayout>
 
-
-    <!-- Nút Accept -->
+    <!-- Nút xác nhận -->
     <Button
         android:id="@+id/acceptButton"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="ACCEPT"
+        android:text="XÁC NHẬN GIAO"
         android:textAllCaps="false"
         android:backgroundTint="@color/design_default_color_primary"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp" />
 
+    <!-- Thanh điều hướng -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
@@ -222,7 +237,5 @@
         app:menu="@menu/bottom_nav_shipper"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-
+        app:layout_constraintEnd_toEndOf="parent" />
 </LinearLayout>

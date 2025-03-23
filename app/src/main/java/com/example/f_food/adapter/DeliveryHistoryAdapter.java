@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.f_food.entity.Order;
 import com.example.f_food.R;
 import com.example.f_food.entity.Restaurant;
+import com.example.f_food.repository.AddressRepository;
 import com.example.f_food.repository.RestaurantRepository;
 import com.example.f_food.screen.order_processing.DeliveryDetails;
 
@@ -28,12 +29,21 @@ import java.util.Locale;
 public class DeliveryHistoryAdapter extends RecyclerView.Adapter<DeliveryHistoryAdapter.OrderViewHolder> {
     private Context context;
     private List<Order> orderList;
-
+    private final String userEmail, userPassword, userName, userPhone;
+    private final AddressRepository addressRepository;
     private final RestaurantRepository restaurantRepository;
-    public DeliveryHistoryAdapter(Context context, List<Order> orderList) {
+    public DeliveryHistoryAdapter(Context context, List<Order> orderList,
+                                  String userEmail, String userPassword,
+                                  String userName, String userPhone) {
         this.context = context;
         this.orderList = orderList;
         this.restaurantRepository = new RestaurantRepository(context);
+        this.addressRepository  = new AddressRepository(context);
+        this.orderList = orderList;
+        this.userEmail = userEmail;
+        this.userPassword = userPassword;
+        this.userName = userName;
+        this.userPhone = userPhone;
     }
 
     public void setOrders(List<Order> orders) {
@@ -66,15 +76,27 @@ public class DeliveryHistoryAdapter extends RecyclerView.Adapter<DeliveryHistory
             holder.imgStatus.setImageResource(R.drawable.iccheck); // Icon mặc định nếu không khớp
         }
 
+
+
         Restaurant restaurant = restaurantRepository.getRestaurantById(order.getRestaurantId());
         String restaurantAddress = (restaurant != null) ? restaurant.getAddress() : "Unknown Address";
+
+        String deliveryAddress = addressRepository.getAddressByUserId(order.getUserId());
 
         holder.btnDetails.setOnClickListener(v -> {
             Intent intent = new Intent(context, DeliveryDetails.class);
             intent.putExtra("orderId", order.getOrderId());
             intent.putExtra("restaurantAddress", restaurantAddress);
-            intent.putExtra("deliveryAddress", "vcvcvcv");
+            intent.putExtra("deliveryAddress", deliveryAddress);
             intent.putExtra("deliveryTime", formattedDate);
+
+
+            intent.putExtra("email", userEmail);
+            intent.putExtra("password", userPassword);
+            intent.putExtra("userName", userName);
+            intent.putExtra("userPhone", userPhone);
+
+
             context.startActivity(intent);
         });
 

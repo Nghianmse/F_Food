@@ -1,11 +1,13 @@
 package com.example.f_food.repository;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.f_food.dao.AddressDAO;
 import com.example.f_food.dao.AddressWithUser;
 import com.example.f_food.dao.RestaurantRoomDatabase;
 import com.example.f_food.entity.Address;
+import com.example.f_food.entity.Restaurant;
 
 import java.util.List;
 
@@ -65,4 +67,25 @@ public class AddressRepository {
         insert(sampleAddress2);
         insert(sampleAddress3);
     }
+    public String getAddressByUserId(int userId) {
+        Address defaultAddress = addressDAO.getDefaultAddressForUser(userId);
+
+        if (defaultAddress != null) {
+            String fullAddress = defaultAddress.getDetailAddress() + ", " + defaultAddress.getAddress();
+            Log.d("AddressRepository", "Địa chỉ mặc định userId=" + userId + ": " + fullAddress);
+            return fullAddress;
+        } else {
+            Log.d("AddressRepository", "Không tìm thấy địa chỉ mặc định cho userId=" + userId);
+            return "Chưa có địa chỉ mặc định";
+        }
+    }
+
+    public String getFullAddress(Address address) {
+        if (address != null) {
+            return address.getDetailAddress() + ", " + address.getAddress();
+        } else {
+            return "Địa chỉ không tồn tại";
+        }
+    }
+
 }

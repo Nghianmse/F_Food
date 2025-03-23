@@ -17,14 +17,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"
         android:scaleType="centerCrop"
-        android:contentDescription="User Avatar" />
+        android:contentDescription="Ảnh đại diện" />
 
-    <!-- User Info -->
+    <!-- Tiêu đề -->
     <TextView
         android:id="@+id/tvPendingTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pending order"
+        android:text="Đơn hàng đang chờ"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@android:color/black"
@@ -33,11 +33,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp" />
 
+    <!-- Thông tin người dùng -->
     <TextView
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name  ........................."
+        android:text="Họ tên: ........................."
         android:textSize="16sp"
         android:textColor="@android:color/black"
         app:layout_constraintTop_toBottomOf="@id/tvPendingTitle"
@@ -49,7 +50,7 @@
         android:id="@+id/tvPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Phone  ..................."
+        android:text="SĐT: ..................."
         android:textSize="16sp"
         android:textColor="@android:color/black"
         app:layout_constraintTop_toBottomOf="@id/tvName"
@@ -57,7 +58,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginStart="16dp" />
 
-    <!-- Search Bar -->
+    <!-- Thanh tìm kiếm -->
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="50dp"
@@ -87,14 +88,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Search"
+                android:hint="Tìm kiếm đơn hàng"
                 android:padding="8dp"
                 android:background="@android:color/transparent"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- RecyclerView for Pending Orders -->
-
+    <!-- Danh sách đơn hàng chờ -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPendingOrders"
         android:layout_width="380dp"
@@ -107,6 +107,7 @@
         app:layout_constraintTop_toBottomOf="@id/search_card"
         app:layout_constraintVertical_bias="0.095" />
 
+    <!-- Thanh điều hướng dưới -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="380sp"
@@ -117,7 +118,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_shipper" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

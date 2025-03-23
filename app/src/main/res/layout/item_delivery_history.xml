@@ -75,7 +75,7 @@
             android:id="@+id/btn_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Details"
+            android:text="Chi tiết"
             android:backgroundTint="@color/black"
             android:textColor="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
