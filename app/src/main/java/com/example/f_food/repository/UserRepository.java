@@ -27,7 +27,9 @@ public class UserRepository {
     public List<User> getAllUsers() {
         return userDAO.getAllUsers();
     }
-
+public   List<User> getAllCustomer(){
+        return  userDAO.getAllCustomers();
+}
     public User getUserById(int id) {
         return userDAO.getUserById(id);
     }

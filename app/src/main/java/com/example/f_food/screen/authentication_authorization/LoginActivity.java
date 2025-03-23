@@ -163,7 +163,7 @@ public class LoginActivity extends AppCompatActivity {
     private void navigateToShipperLogIn() {
         Intent intent = new Intent(this, ShipperLogin.class);  // Assuming RestaurantLogInActivity is your target activity
         startActivity(intent);
-      
+    }
     @Override
     protected void onStop() {
         super.onStop();

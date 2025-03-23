@@ -63,7 +63,7 @@ public class CustomerManagementAdapter extends RecyclerView.Adapter<CustomerMana
             // Hiển thị hộp thoại xác nhận trước khi thay đổi trạng thái
             new AlertDialog.Builder(context)
                     .setTitle("Confirm ")
-                    .setMessage("Are you sure you want to  "+customer.getIsDelete().toString() + customer.getFullName() + "?")
+                    .setMessage("Are you sure you want to  "+ (customer.getIsDelete() ? "Active ":"Ban ") + customer.getFullName() + "?")
                     .setPositiveButton("Yes", (dialog, which) -> {
                         // Thay đổi trạng thái isDeleted
                         if (position >= 0 && position < customerList.size()) {

@@ -84,11 +84,12 @@
         </LinearLayout>
 
         <!-- Delete Button -->
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/btnUser_Management_Delete"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:text="Ban"
+            android:background="@color/red_light"
             android:textColor="@android:color/white"
             app:cornerRadius="16dp"
             android:backgroundTint="@color/gray_dark"

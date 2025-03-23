@@ -2,17 +2,18 @@ package com.example.f_food.screen.admin_management;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.view.Menu;
+import android.view.MenuItem;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
 import com.example.f_food.R;
+import com.example.f_food.screen.authentication_authorization.LoginActivity;  // Correct import
 import com.squareup.picasso.Picasso;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 public class AdminScreen extends AppCompatActivity {
 
@@ -59,7 +60,29 @@ public class AdminScreen extends AppCompatActivity {
             Intent intent = new Intent(AdminScreen.this, Restaurant_Management.class);
             startActivity(intent);
         });
+    }
 
+    // Inflate the menu resource
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.bottom_nav_admin, menu);  // Ensure bottom_nav_menu.xml is the correct one
+        return true;
+    }
 
+    // Handle menu item selection
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId(); // Lấy ID của item được chọn
+
+        if (itemId == R.id.nav_logout) {
+            // Xử lý đăng xuất
+            Intent intent = new Intent(this, LoginActivity.class); // Thay LoginActivity bằng activity phù hợp
+            startActivity(intent);
+            finish(); // Kết thúc activity hiện tại
+            return true;
+        }
+
+        // Xử lý các item khác (nếu cần)
+        return super.onOptionsItemSelected(item);
     }
 }
