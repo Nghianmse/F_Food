@@ -1,6 +1,8 @@
 package com.example.f_food.screen.features_restaurant_management;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +15,7 @@ import com.example.f_food.R;
 import com.example.f_food.adapter.ViewPagerAdapter;
 import com.example.f_food.dao.RestaurantRoomDatabase;
 import com.example.f_food.entity.Order;
+import com.example.f_food.repository.RestaurantRepository;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -51,7 +54,11 @@ public class RestaurantSalesReport extends AppCompatActivity {
     }
 
     private void loadReport() {
-        List<Order> allOrders = db.orderDAO().getAllOrders();
+        RestaurantRepository restaurantRepository = new RestaurantRepository(this);
+        int uid = getLoggedInUserId();
+        int rid = restaurantRepository.getRestaurantByUserId(uid).getRestaurantId();
+
+        List<Order> allOrders = db.orderDAO().getOrdersByRestaurantId(rid);
 
         double totalPaid = 0;
         double totalUnpaid = 0;
@@ -74,6 +81,9 @@ public class RestaurantSalesReport extends AppCompatActivity {
                     }
                     break;
                 case "Cancelled":
+                    // Bỏ qua
+                    break;
+                case "Pending":
                     // Bỏ qua
                     break;
                 default:
@@ -99,5 +109,9 @@ public class RestaurantSalesReport extends AppCompatActivity {
             if (position == 0) tab.setText("Chưa thanh toán");
             else tab.setText("Đã thanh toán");
         }).attach();
+    }
+    private int getLoggedInUserId() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        return preferences.getInt("userId", -1); // Trả về -1 nếu không tìm thấy userId
     }
 }

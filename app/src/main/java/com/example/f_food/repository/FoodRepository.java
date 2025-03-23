@@ -61,7 +61,9 @@ public class FoodRepository {
     public void update(Food food) {
         foodDAO.update(food);
     }
-
+    public void updateFoodInfo(int foodId, String name, double price, String description, int categoryId, String stockStatus){
+        foodDAO.updateFoodInfo(foodId,name, price, description,categoryId,stockStatus);
+    }
     private void insertSampleData() {
         List<Food> sampleFoods = Arrays.asList(
                 new Food(1, "Margherita Pizza", "Classic cheese pizza", 8.99, 1, "https://media.istockphoto.com/id/184946701/photo/pizza.jpg?s=612x612&w=0&k=20&c=97rc0VIi-s3mn4xe4xDy9S-XJ_Ohbn92XaEMaiID_eY=", "Available"),

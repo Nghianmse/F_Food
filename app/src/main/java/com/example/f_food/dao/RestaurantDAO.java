@@ -19,7 +19,8 @@ public interface RestaurantDAO {
 
     @Query("SELECT * FROM Restaurants WHERE restaurant_id = :id")
     Restaurant getRestaurantById(int id);
-
+    @Query("SELECT * FROM Restaurants WHERE user_id = :id")
+    Restaurant getRestaurantByUserId(int id);
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Restaurant restaurant);
 

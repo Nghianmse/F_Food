@@ -29,6 +29,9 @@ public class RestaurantRepository {
     public Restaurant getRestaurantById(int id) {
         return restaurantDAO.getRestaurantById(id);
     }
+    public Restaurant getRestaurantByUserId(int id) {
+        return restaurantDAO.getRestaurantByUserId(id);
+    }
 
     public void deleteById(int id) {
         restaurantDAO.deleteById(id);

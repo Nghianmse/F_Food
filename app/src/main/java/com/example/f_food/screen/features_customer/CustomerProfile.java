@@ -47,12 +47,12 @@ public class CustomerProfile extends AppCompatActivity {
         AddressRepository addressRepository = new AddressRepository(this);
 
         RestaurantRoomDatabase db = RestaurantRoomDatabase.getInstance(this);
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        int userId = preferences.getInt("userId", -1);
+
+        int userId =getLoggedInUserId();
         // Lấy user info
-        User user = db.userDAO().getUserById(1);
+        User user = db.userDAO().getUserById(userId);
         // Lấy địa chỉ mặc định
-        Address defaultAddress = db.addressDAO().getDefaultAddressForUser(1);
+        Address defaultAddress = db.addressDAO().getDefaultAddressForUser(userId);
         // Hander changepass text
         TextView btnChangePassword = findViewById(R.id.btnChangePassword);
         btnChangePassword.setOnClickListener(new View.OnClickListener() {
@@ -174,5 +174,9 @@ public class CustomerProfile extends AppCompatActivity {
 
 
 
+    }
+    private int getLoggedInUserId() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        return preferences.getInt("userId", -1); // Trả về -1 nếu không tìm thấy userId
     }
 }

@@ -18,7 +18,7 @@ import java.util.Locale;
 
 public class ManageFoodDetail extends AppCompatActivity {
 
-    private TextView tvFoodTitle, tvFoodPrice, tvFoodCategory, tvFoodDescription;
+    private TextView tvFoodTitle, tvFoodPrice, tvFoodCategory, tvFoodDescription,tvFoodStatus;
     private ImageView ivFoodImage;
     private Button btnUpdateFood;
     private FoodRepository foodRepository;
@@ -68,7 +68,7 @@ public class ManageFoodDetail extends AppCompatActivity {
                     tvFoodPrice.setText("Giá: " + NumberFormat.getInstance(new Locale("vi", "VN")).format(food.getPrice()) + " VNĐ");
                     tvFoodCategory.setText("Danh mục: " + food.getCategoryId());
                     tvFoodDescription.setText("Mô tả về món ăn:\n" + food.getDescription());
-
+                    tvFoodStatus.setText("Trạng thái món ăn:" + food.getStockStatus());
                     if (food.getImageUrl() != null && !food.getImageUrl().isEmpty()) {
                         com.squareup.picasso.Picasso.get().load(food.getImageUrl()).resize(500, 500).centerCrop().into(ivFoodImage);
                     }
