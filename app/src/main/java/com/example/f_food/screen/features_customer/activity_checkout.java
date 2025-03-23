@@ -36,9 +36,14 @@ import com.example.f_food.repository.RestaurantRepository;
 import com.example.f_food.repository.UserRepository;
 import com.example.f_food.screen.order_processing.AcceptShippingOrder;
 
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;import java.util.Date;
 import java.io.IOException;
 import java.util.ArrayList;import java.util.Date;
 import java.util.List;
+
 import java.util.Locale;
 
 public class activity_checkout extends AppCompatActivity {
@@ -107,6 +112,9 @@ public class activity_checkout extends AppCompatActivity {
             recyclerView.setAdapter(checkoutAdapter);
         }
 
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+
+
         restaurantRepository.getRestaurantByUserId(uId);
 
 
@@ -131,11 +139,6 @@ public class activity_checkout extends AppCompatActivity {
             totalShipCheckout.setText("Phí ship: " + String.format("%.0f", distance * 10000) + " VND");
         });
 
-
-
-
-
-
         btnCreateOrder.setOnClickListener(v -> {
             new AlertDialog.Builder(this)
                     .setTitle("Xác nhận đặt hàng")
@@ -151,8 +154,9 @@ public class activity_checkout extends AppCompatActivity {
                             o.setTotalPrice(item.getProduct().getPrice() * item.getQuantity());
                             o.setPaymentMethod("COD");
                             o.setOrderStatus("Pending");
-                            o.setCreatedAt(new Date().toString());
-                            o.setUpdatedAt(new Date().toString());
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                            String formattedDate = sdf.format(new Date());
+                            o.setCreatedAt(formattedDate);
                             orderRepository.insert(o);
 
                             OrderDetail orderDetail = new OrderDetail();
@@ -258,5 +262,20 @@ public class activity_checkout extends AppCompatActivity {
     private int getLoggedInUserId() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         return preferences.getInt("userId", -1);
+    }
+    private String formatDateTime(String createdAt) {
+        try {
+            // Định dạng ban đầu của createdAt (ví dụ: "2025-03-10 14:30:15")
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+
+            // Định dạng hiển thị mới (Chỉ ngày/tháng + giờ/phút)
+            SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM HH:mm", Locale.getDefault());
+
+            Date date = inputFormat.parse(createdAt);
+            return outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return createdAt; // Nếu lỗi, hiển thị chuỗi gốc
+        }
     }
 }

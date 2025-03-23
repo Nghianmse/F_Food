@@ -61,7 +61,7 @@ public class OrderRepository {
     }
 
     public List<Order> getOrdersByShipperId(int shipperId) {
-        return orderDAO.getOrdersByUserId(shipperId);
+        return orderDAO.getOrdersByShipperId(shipperId);
     }
     public String getRestaurantAddressByOrderId(int orderId) {
         Order order = orderDAO.getOrderById(orderId);

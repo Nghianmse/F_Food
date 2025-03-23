@@ -85,7 +85,7 @@ public class PendingOrder extends AppCompatActivity {
         List<Order> allOrders = orderRepository.getAllOrders();
         fullOrderList = allOrders;
 
-        List<Order> orders = allOrders.stream()
+        List<Order> pendingOrders = allOrders.stream()
                 .filter(order -> order.getOrderStatus().equalsIgnoreCase("Preparing"))
                 .collect(Collectors.toList());
 

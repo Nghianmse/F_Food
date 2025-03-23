@@ -13,8 +13,11 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -23,6 +26,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.example.f_food.R;
+import com.example.f_food.entity.Address;
+import com.example.f_food.repository.AddressRepository;
+import com.example.f_food.repository.UserRepository;
 import com.example.f_food.screen.authentication_authorization.LoginActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -37,9 +43,13 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 public class ManageAddress extends AppCompatActivity {
     private EditText etAddress, etDetailAddress;
+    CheckBox cbDefaultAddress;
+    RadioGroup rgAddressType;
+
     private Button btnComplete, btnCurrentLocation;
     private FusedLocationProviderClient fusedLocationClient;
     private LocationRequest locationRequest;
@@ -63,9 +73,10 @@ public class ManageAddress extends AppCompatActivity {
         etDetailAddress = findViewById(R.id.etDetailAddress);
         btnComplete = findViewById(R.id.btnComplete);
 
+        rgAddressType = findViewById(R.id.rgAddressType);
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-        btnCurrentLocation.setOnClickListener(v -> requestNewLocation());
         btnComplete.setOnClickListener(v -> saveAddress());
         ImageButton homeIcon = findViewById(R.id.homeIcon);
         homeIcon.setOnClickListener(v -> {
@@ -156,15 +167,41 @@ public class ManageAddress extends AppCompatActivity {
 
     // Lưu địa chỉ
     private void saveAddress() {
-        String address = etAddress.getText().toString();
-        String detailAddress = etDetailAddress.getText().toString();
+        String address = etAddress.getText().toString().trim();
+        String detailAddress = etDetailAddress.getText().toString().trim();
+
+        // Lấy loại địa chỉ từ RadioGroup
+        int selectedId = rgAddressType.getCheckedRadioButtonId();
+        String addressType = (selectedId == R.id.rbOffice) ? "Văn Phòng" : "Nhà Riêng";
 
         if (address.isEmpty() || detailAddress.isEmpty()) {
             Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        Toast.makeText(this, "Lưu địa chỉ thành công!", Toast.LENGTH_SHORT).show();
+        // Tạo đối tượng AddressModel để lưu vào DB
+        Address address1 = new Address();
+        UserRepository userRepository = new UserRepository(this);
+
+        address1.setUserId(userRepository.getUserById(isUserLoggedIn1()).getUserId());
+        address1.setAddress(address);
+        address1.setDetailAddress(detailAddress);
+        address1.setAddressType(addressType);
+        address1.setDefault(false);
+        AddressRepository addressRepository = new AddressRepository(this);
+        addressRepository.insert(address1);
+        new android.app.AlertDialog.Builder(this)
+                .setMessage("Đăng kí địa chỉ thành công!")
+                .setPositiveButton("OK", (dialog, which) -> {
+                    dialog.dismiss();
+                    // Chuyển sang màn hình đăng nhập
+                    Intent intent = new Intent(ManageAddress.this, com.example.f_food.screen.features_customer.Address.class);
+                    startActivity(intent);
+                    finish();
+                })
+                .create()
+                .show();
+
     }
 
     // Kiểm tra người dùng đã đăng nhập chưa
@@ -172,6 +209,11 @@ public class ManageAddress extends AppCompatActivity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         int userId = preferences.getInt("userId", -1); // Sử dụng PreferenceManager thay vì getSharedPreferences
         return userId != -1;
+    }
+
+    private int isUserLoggedIn1() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        return preferences.getInt("userId", -1); // Sử dụng PreferenceManager thay vì getSharedPreferences
     }
 
     // Hiển thị hộp thoại thông báo và chuyển sang màn hình đăng nhập
