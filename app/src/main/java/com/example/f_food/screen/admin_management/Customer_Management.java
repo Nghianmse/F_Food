@@ -18,6 +18,7 @@ import com.example.f_food.adapter.CustomerManagementAdapter;
 import com.example.f_food.entity.User;
 import com.example.f_food.R;
 import com.example.f_food.repository.UserRepository;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -31,11 +31,13 @@ public class User {
 
     @ColumnInfo(name = "UpdatedAt")
     private String updatedAt;
+    @ColumnInfo(name = "IsDelete")
+    private Boolean isDelete;
 
     public User() {
     }
 
-    public User(int userId, String fullName, String email, String password, String phone, String userType, String createdAt, String updatedAt) {
+    public User(int userId, String fullName, String email, String password, String phone, String userType, String createdAt, String updatedAt,Boolean isDelete) {
         this.userId = userId;
         this.fullName = fullName;
         this.email = email;
@@ -44,6 +46,15 @@ public class User {
         this.userType = userType;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.isDelete =isDelete;
+    }
+
+    public Boolean getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Boolean delete) {
+        isDelete = delete;
     }
 
     public int getUserId() {
