@@ -19,9 +19,10 @@ public class ReviewRepository {
         new InsertReviewAsyncTask(reviewDAO).execute(review);
     }
 
-    public List<Review> getAllReviews() {
-        return reviewDAO.getAllReviews();
+    public List<Review> getAllReviews(int foodId) {
+        return reviewDAO.getAllReviews(foodId);
     }
+
 
     public List<Review> getReviewsByRestaurantId(int restaurantId) {
         return reviewDAO.getReviewsByRestaurantId(restaurantId);

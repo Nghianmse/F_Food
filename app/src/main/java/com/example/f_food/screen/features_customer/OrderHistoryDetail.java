@@ -73,8 +73,10 @@ public class OrderHistoryDetail extends AppCompatActivity {
     }
 
     private void loadReviews() {
+        Intent intent = getIntent();
+        int id = intent.getIntExtra("food_id", 1);
         reviewRepository = new ReviewRepository(this);
-        List<Review> reviews = reviewRepository.getAllReviews();
+        List<Review> reviews = reviewRepository.getAllReviews(id);
 
         if (reviews.isEmpty()) {
             textViewFeedbacks.setText("No reviews yet.");

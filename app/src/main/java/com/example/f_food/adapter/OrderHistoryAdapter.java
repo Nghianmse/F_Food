@@ -22,7 +22,9 @@ import com.example.f_food.screen.features_customer.OrderHistoryDetail;
 import com.example.f_food.screen.features_customer.ReviewAndRating;
 import com.squareup.picasso.Picasso;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapter.OrderViewHolder> {
 
@@ -69,7 +71,8 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
 
         }
         // Update as needed// Update as needed
-        holder.totalPrice.setText("Tổng Tiền: " + order.getTotalPrice());
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+        holder.totalPrice.setText("Tổng Tiền: " + currencyFormat.format(order.getTotalPrice()));
         holder.paymentMethod.setText("Thanh toán: " + order.getPaymentMethod());
         holder.status.setText("Trạng thái: " + order.getOrderStatus());
 

@@ -28,7 +28,7 @@ import com.example.f_food.entity.OrderDetail;
 import com.example.f_food.entity.Review;
 import com.example.f_food.entity.User;
 
-@Database(entities = {Restaurant.class, Food.class, User.class, Policy.class, Order.class, OrderDetail.class, Review.class, Category.class, Address.class, Shipper.class, Payment.class}, version = 19, exportSchema = false)
+@Database(entities = {Restaurant.class, Food.class, User.class, Policy.class, Order.class, OrderDetail.class, Review.class, Category.class, Address.class, Shipper.class, Payment.class}, version = 20, exportSchema = false)
 
 public abstract class RestaurantRoomDatabase extends RoomDatabase {
 

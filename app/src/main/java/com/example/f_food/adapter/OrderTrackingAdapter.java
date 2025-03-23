@@ -16,7 +16,9 @@ import com.example.f_food.entity.Order;
 import com.example.f_food.R;
 import com.squareup.picasso.Picasso;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class OrderTrackingAdapter extends RecyclerView.Adapter<OrderTrackingAdapter.OrderViewHolder> {
     private List<Order> orderList;
@@ -61,7 +63,9 @@ public class OrderTrackingAdapter extends RecyclerView.Adapter<OrderTrackingAdap
         }
 
         // Set order details in the view
-        holder.totalPrice.setText("Tổng Tiền: " + order.getTotalPrice());
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+
+        holder.totalPrice.setText("Tổng Tiền: " + currencyFormat.format(order.getTotalPrice()));
         holder.status.setText("Trạng thái đơn hàng: " + order.getOrderStatus());
         holder.paymentMethod.setText("Thanh toán: " + order.getPaymentMethod());
         // Check the order status and set the appropriate text

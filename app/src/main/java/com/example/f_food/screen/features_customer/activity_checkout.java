@@ -37,6 +37,7 @@ import com.example.f_food.repository.UserRepository;
 import com.example.f_food.screen.order_processing.AcceptShippingOrder;
 
 
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;import java.util.Date;
@@ -115,28 +116,31 @@ public class activity_checkout extends AppCompatActivity {
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 
 
-        restaurantRepository.getRestaurantByUserId(uId);
-
-
         ImageButton btnOpenMap = findViewById(R.id.btnOpenMap);
-        btnOpenMap.setOnClickListener(v -> openMap(restaurantRepository.getRestaurantByUserId(uId).getAddress(), a.getAddress()));
+        Intent intentRId = getIntent();
+        int rid = intentRId.getIntExtra("rId", 1);
+
+        String rAddress = restaurantRepository.getRestaurantById(rid).getAddress();
+        btnOpenMap.setOnClickListener(v -> openMap(rAddress, a.getAddress()));
 
 
-        calculateDistanceAndDisplay(restaurantRepository.getRestaurantByUserId(uId).getAddress(), a.getAddress(), distanceKm -> {
+        calculateDistanceAndDisplay(rAddress, a.getAddress(), distanceKm -> {
             distance = distanceKm; // gán vào biến của class
             Log.d("DISTANCE_LOG", "Khoảng cách là: " + distanceKm + " km");
             double totalPrice1 = getIntent().getDoubleExtra("totalPrice", 8);
             double ship = 10.0;
             double discount = getIntent().getDoubleExtra("discount", 8);
-            totalPrice2 = totalPrice1 + (distance*10000.0) - discount;
-            totalPriceCheckout.setText("Tạm tính: " + String.format("%.2f VND", totalPrice1));
+            NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
 
-            totalSaleCheckout.setText("Giảm giá: " + String.format("%.2f VND", discount));
-            totalPrice.setText("Tổng thanh toán: " + String.format("%.2f VND", totalPrice2));
+            totalPrice2 = totalPrice1 + (distance * 10000.0) - discount;
 
-            // Cập nhật UI sau khi có khoảng cách
+            totalPriceCheckout.setText("Tạm tính: " + currencyFormat.format(totalPrice1));
+            totalSaleCheckout.setText("Giảm giá: " + currencyFormat.format(discount));
+            totalPrice.setText("Tổng thanh toán: " + currencyFormat.format(totalPrice2));
+
+// Cập nhật UI sau khi có khoảng cách
             addressCheckout.setText(a.getAddress() + " - " + String.format("%.1f km", distance));
-            totalShipCheckout.setText("Phí ship: " + String.format("%.0f", distance * 10000) + " VND");
+            totalShipCheckout.setText("Phí ship: " + currencyFormat.format(distance * 10000));
         });
 
         btnCreateOrder.setOnClickListener(v -> {
@@ -145,20 +149,18 @@ public class activity_checkout extends AppCompatActivity {
                     .setMessage("Bạn có chắc chắn muốn đặt hàng không?")
                     .setPositiveButton("Có", (dialog, which) -> {
 
+                        Order o = new Order();
+                        o.setUserId(uId);
+                        o.setRestaurantId(rid);
+                        o.setTotalPrice(totalPrice2);
+                        o.setPaymentMethod("COD");
+                        o.setOrderStatus("Pending");
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        String formattedDate = sdf.format(new Date());
+                        o.setCreatedAt(formattedDate);
+                        orderRepository.insert(o);
 
                         for (CartItem item : selectedItems) {
-
-                            Order o = new Order();
-                            o.setUserId(uId);
-                            o.setRestaurantId(item.getProduct().getRestaurantId());
-                            o.setTotalPrice(item.getProduct().getPrice() * item.getQuantity());
-                            o.setPaymentMethod("COD");
-                            o.setOrderStatus("Pending");
-                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                            String formattedDate = sdf.format(new Date());
-                            o.setCreatedAt(formattedDate);
-                            orderRepository.insert(o);
-
                             OrderDetail orderDetail = new OrderDetail();
                             orderDetail.setOrderId(orderRepository.getLastInsertedOrder().getOrderId());
                             orderDetail.setFoodId(item.getProduct().getFoodId());

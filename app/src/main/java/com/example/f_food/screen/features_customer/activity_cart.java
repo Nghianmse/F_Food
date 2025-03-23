@@ -31,6 +31,8 @@ public class activity_cart extends AppCompatActivity {
     private TextView txtSubtotal, txtTotal;
     private TextView txtDiscount;
 
+    int rid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +90,7 @@ public class activity_cart extends AppCompatActivity {
 
     private void proceedToCheckout() {
         ArrayList<CartItem> selectedItems = new ArrayList<>();
+
         for (CartItem item : CartManager.getInstance().getCartItems()) {
             if (item.isSelected()) {
                 selectedItems.add(item);
@@ -99,12 +102,27 @@ public class activity_cart extends AppCompatActivity {
             return;
         }
 
+        // Kiểm tra nếu có nhiều hơn 1 nhà hàng
+        int firstRestaurantId = selectedItems.get(0).getProduct().getRestaurantId();
+        for (CartItem item : selectedItems) {
+            if (item.getProduct().getRestaurantId() != firstRestaurantId) {
+                showAlert("Lưu ý", "Bạn chỉ có thể đặt món từ một nhà hàng trong một đơn hàng!");
+                return;
+            }
+            rid = item.getProduct().getRestaurantId();
+        }
+
+
+
+        // Nếu hợp lệ, chuyển sang màn hình thanh toán
         Intent intent = new Intent(activity_cart.this, activity_checkout.class);
         intent.putParcelableArrayListExtra("selectedItems", selectedItems);
         intent.putExtra("totalPrice", totalPrice);
         intent.putExtra("discount", discount);
+        intent.putExtra("rId", rid);
         startActivity(intent);
     }
+
 
     private void showAlert(String title, String message) {
         new AlertDialog.Builder(this)

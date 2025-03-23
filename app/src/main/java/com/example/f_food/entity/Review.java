@@ -33,8 +33,11 @@ public class Review {
     @ColumnInfo(name = "food_image")
     private String foodImage;
 
+    @ColumnInfo(name = "food_id")
+    private int food_id;
+
     // Constructor với foodName và foodImage
-    public Review(int userId, int restaurantId, int rating, String comment, String createdAt, String foodName, String foodImage) {
+    public Review(int userId, int restaurantId, int rating, String comment, String createdAt, String foodName, String foodImage, int food_id) {
         this.userId = userId;
         this.restaurantId = restaurantId;
         this.rating = rating;
@@ -42,6 +45,15 @@ public class Review {
         this.createdAt = createdAt;
         this.foodName = foodName;
         this.foodImage = foodImage;
+        this.food_id = food_id;
+    }
+
+    public int getFood_id() {
+        return food_id;
+    }
+
+    public void setFood_id(int food_id) {
+        this.food_id = food_id;
     }
 
     // Getter và setter cho các trường

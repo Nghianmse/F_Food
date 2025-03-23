@@ -187,7 +187,7 @@ public class ManageAddress extends AppCompatActivity {
         address1.setAddress(address);
         address1.setDetailAddress(detailAddress);
         address1.setAddressType(addressType);
-        address1.setDefault(false);
+        address1.setDefault(true);
         AddressRepository addressRepository = new AddressRepository(this);
         addressRepository.insert(address1);
         new android.app.AlertDialog.Builder(this)

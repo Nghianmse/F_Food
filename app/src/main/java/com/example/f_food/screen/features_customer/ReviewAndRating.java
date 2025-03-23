@@ -82,7 +82,7 @@ public class ReviewAndRating extends AppCompatActivity {
             // Get current time
             String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
             // Save the review into Room Database
-            Review review = new Review(userId, restaurantId, (int) rating, feedback, currentTime, foodName, foodImage); // Pass the foodName and foodImage
+            Review review = new Review(userId, restaurantId, (int) rating, feedback, currentTime, foodName, foodImage, foodId); // Pass the foodName and foodImage
             reviewDAO.insert(review);
 
             new AlertDialog.Builder(ReviewAndRating.this)

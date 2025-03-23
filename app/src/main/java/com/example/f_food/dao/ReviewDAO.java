@@ -15,8 +15,8 @@ import java.util.List;
 public interface ReviewDAO {
 
     // Lấy tất cả các đánh giá
-    @Query("SELECT * FROM review")
-    List<Review> getAllReviews();
+    @Query("SELECT * FROM review where food_id == :foodId")
+    List<Review> getAllReviews(int foodId);
 
     // Lấy một đánh giá theo review_id
     @Query("SELECT * FROM review WHERE review_id = :id")
