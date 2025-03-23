@@ -65,8 +65,6 @@ public class ManageAddress extends AppCompatActivity {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-
-
         btnCurrentLocation.setOnClickListener(v -> requestNewLocation());
         btnComplete.setOnClickListener(v -> saveAddress());
         ImageButton homeIcon = findViewById(R.id.homeIcon);
@@ -74,11 +72,10 @@ public class ManageAddress extends AppCompatActivity {
             // Start HomeStart Activity when the home icon is clicked
             Intent intent = new Intent(ManageAddress.this, HomeStart.class);
             startActivity(intent);
-            finish(); // Optionally finish the current activity if you don't want to return to it
+            finish();
         });
     }
 
-    // Kiểm tra quyền truy cập vị trí
     private boolean checkPermissions() {
         return ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
     }

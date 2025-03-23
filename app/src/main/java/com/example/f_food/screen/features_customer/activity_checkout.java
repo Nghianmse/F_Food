@@ -103,43 +103,51 @@ public class activity_checkout extends AppCompatActivity {
             recyclerView.setAdapter(checkoutAdapter);
         }
 
-        btnCreateOrder.setOnClickListener(v->{
-            Order o = new Order();
-            o.setUserId(uId);
-            o.setRestaurantId(restaurantRepository.getRestaurantByUserId(uId).getRestaurantId());
-            o.setTotalPrice(totalPrice2);
-            o.setPaymentMethod("COD");
-            o.setOrderStatus("Pending");
-            o.setCreatedAt(new Date().toString());
-            o.setUpdatedAt(new Date().toString());
-            orderRepository.insert(o);
-
-            for (CartItem item : selectedItems) {
-                OrderDetail orderDetail = new OrderDetail();
-                orderDetail.setOrderId(orderRepository.getLastInsertedOrder().getOrderId());
-                orderDetail.setFoodId(item.getProduct().getFoodId());
-                orderDetail.setQuantity(item.getQuantity());
-                orderDetail.setPrice(item.getProduct().getPrice());
-
-                // Lưu OrderDetail vào database
-                orderDetailRepository.insert(orderDetail);
-            }
+        btnCreateOrder.setOnClickListener(v -> {
             new AlertDialog.Builder(this)
-                    .setTitle("Đặt hàng thành công")
-                    .setMessage("Đơn hàng của bạn đã được tạo thành công!\nbạn có muốn tiếp tục mua hàng không?")
-                    .setPositiveButton("Tếp tục mua hàng", (dialog, which) -> {
-                        Intent intent = new Intent(this, HomeStart.class);
-                        startActivity(intent);
-                        finish();
-                    })
-                    .setNegativeButton("OK", (dialog, which) -> {
-                        Intent intent = new Intent(this, activity_cart.class);
-                        startActivity(intent);
-                        finish();
-                    })
-                    .setCancelable(false) // Không cho phép đóng hộp thoại khi bấm ra ngoài
-                    .show();
+                    .setTitle("Xác nhận đặt hàng")
+                    .setMessage("Bạn có chắc chắn muốn đặt hàng không?")
+                    .setPositiveButton("Có", (dialog, which) -> {
+                        Order o = new Order();
+                        o.setUserId(uId);
+                        o.setRestaurantId(restaurantRepository.getRestaurantByUserId(uId).getRestaurantId());
+                        o.setTotalPrice(totalPrice2);
+                        o.setPaymentMethod("COD");
+                        o.setOrderStatus("Pending");
+                        o.setCreatedAt(new Date().toString());
+                        o.setUpdatedAt(new Date().toString());
+                        orderRepository.insert(o);
 
+                        for (CartItem item : selectedItems) {
+                            OrderDetail orderDetail = new OrderDetail();
+                            orderDetail.setOrderId(orderRepository.getLastInsertedOrder().getOrderId());
+                            orderDetail.setFoodId(item.getProduct().getFoodId());
+                            orderDetail.setQuantity(item.getQuantity());
+                            orderDetail.setPrice(item.getProduct().getPrice());
+
+                            // Lưu OrderDetail vào database
+                            orderDetailRepository.insert(orderDetail);
+                        }
+
+                        new AlertDialog.Builder(this)
+                                .setTitle("Đặt hàng thành công")
+                                .setMessage("Đơn hàng của bạn đã được tạo thành công!\nBạn có muốn tiếp tục mua hàng không?")
+                                .setPositiveButton("Tiếp tục mua hàng", (dialog1, which1) -> {
+                                    Intent intent = new Intent(this, HomeStart.class);
+                                    startActivity(intent);
+                                    finish();
+                                })
+                                .setNegativeButton("OK", (dialog1, which1) -> {
+                                    Intent intent = new Intent(this, activity_cart.class);
+                                    startActivity(intent);
+                                    finish();
+                                })
+                                .setCancelable(false) // Không cho phép đóng hộp thoại khi bấm ra ngoài
+                                .show();
+                    })
+                    .setNegativeButton("Không", (dialog, which) -> dialog.dismiss())
+                    .setCancelable(false)
+                    .show();
         });
     }
 
