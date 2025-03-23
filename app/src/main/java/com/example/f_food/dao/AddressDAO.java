@@ -7,6 +7,7 @@ import androidx.room.Update;
 import androidx.room.Delete;
 
 import com.example.f_food.entity.Address;
+import com.example.f_food.entity.Restaurant;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public interface AddressDAO {
     // Thêm địa chỉ mới
     @Insert
     void insert(Address address);
+
 
     // Lấy tất cả địa chỉ
     @Query("SELECT * FROM Address")

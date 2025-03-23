@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLoginForShipper = findViewById(R.id.btnLoginForShipper);
         tvForgotPassword = findViewById(R.id.tvForgotPassword);
         imgLogoLogin = findViewById(R.id.imgLogoLogin);
-        reigister=findViewById(R.id.btnRegister);
+        reigister = findViewById(R.id.btnRegister);
         cbRememberMe = findViewById(R.id.cbRememberMe);
 
         Picasso.get()
@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        tvForgotPassword.setOnClickListener(v->{
+        tvForgotPassword.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, ForgotPassActivity.class);
             startActivity(intent);
         });
@@ -164,6 +164,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ShipperLogin.class);  // Assuming RestaurantLogInActivity is your target activity
         startActivity(intent);
     }
-
+       
 }
+
 

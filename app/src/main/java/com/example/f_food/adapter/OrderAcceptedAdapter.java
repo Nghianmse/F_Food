@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.f_food.R;
 import com.example.f_food.entity.Order;
 import com.example.f_food.entity.Restaurant;
+import com.example.f_food.repository.AddressRepository;
 import com.example.f_food.repository.RestaurantRepository;
 import com.example.f_food.screen.order_processing.DeliveryStatusUpdate;
 
@@ -25,10 +26,10 @@ import java.util.List;
 import java.util.Locale;
 
 public class OrderAcceptedAdapter extends RecyclerView.Adapter<OrderAcceptedAdapter.ViewHolder> {
-    private final List<Order> orderList;
+    private List<Order> orderList;
     private final Context context;
     private final RestaurantRepository restaurantRepository;
-
+    private final AddressRepository addressRepository;
     private final String userEmail, userPassword, userName, userPhone;
     public OrderAcceptedAdapter(Context context, List<Order> orderList,
                                 String userEmail, String userPassword,
@@ -40,6 +41,7 @@ public class OrderAcceptedAdapter extends RecyclerView.Adapter<OrderAcceptedAdap
         this.userName = userName;
         this.userPhone = userPhone;
         this.restaurantRepository = new RestaurantRepository(context);
+        this.addressRepository  = new AddressRepository(context);
     }
 
     @NonNull
@@ -62,11 +64,13 @@ public class OrderAcceptedAdapter extends RecyclerView.Adapter<OrderAcceptedAdap
         Restaurant restaurant = restaurantRepository.getRestaurantById(order.getRestaurantId());
         String restaurantAddress = (restaurant != null) ? restaurant.getAddress() : "Unknown Address";
 
+        String deliveryAddress = addressRepository.getAddressByUserId(order.getUserId());
+
         holder.btnUpdate.setOnClickListener(v -> {
             Intent intent = new Intent(context, DeliveryStatusUpdate.class);
             intent.putExtra("orderId", order.getOrderId());
             intent.putExtra("restaurantAddress", restaurantAddress);
-            intent.putExtra("deliveryAddress", "cxcxcxc");
+            intent.putExtra("deliveryAddress", deliveryAddress);
             intent.putExtra("deliveryTime", formattedDate);
             intent.putExtra("cost", order.getTotalPrice());
 
@@ -115,4 +119,10 @@ public class OrderAcceptedAdapter extends RecyclerView.Adapter<OrderAcceptedAdap
             return createdAt; // Nếu lỗi, hiển thị chuỗi gốc
         }
     }
+    public void updateOrders(List<Order> newOrders) {
+        orderList.clear();
+        orderList.addAll(newOrders);
+        notifyDataSetChanged();
+    }
+
 }

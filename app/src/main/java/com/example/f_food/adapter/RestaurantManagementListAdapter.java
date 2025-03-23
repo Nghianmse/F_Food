@@ -2,6 +2,7 @@ package com.example.f_food.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.example.f_food.entity.Restaurant;
 import com.example.f_food.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RestaurantManagementListAdapter extends RecyclerView.Adapter<RestaurantManagementListAdapter.ViewHolder> {
@@ -68,7 +70,11 @@ public class RestaurantManagementListAdapter extends RecyclerView.Adapter<Restau
         holder.addressText.setText("Address: " + restaurant.getAddress());
         holder.phoneText.setText("Phone: " + restaurant.getPhone());
         holder.statusText.setText("Status: " + restaurant.getStatus());
-
+        if (restaurant.getStatus().equals("Close")) {
+            holder.statusText.setTextColor(Color.RED); // Set text color to red if status is "Close"
+        } else {
+            holder.statusText.setTextColor(Color.GREEN); // Set text color to black (or any other color) if status is "Open"
+        }
         // Load image from the path or URL using Picasso
         Picasso.get()
                 .load(restaurant.getImage())  // Assuming restaurant.getImage() contains the image path or URL
@@ -81,6 +87,11 @@ public class RestaurantManagementListAdapter extends RecyclerView.Adapter<Restau
                 statusChangeListener.onStatusChange(position);
             }
         });
+    }
+
+    public void updateList(List<Restaurant> newList) {
+        restaurantList = new ArrayList<>(newList);
+        notifyDataSetChanged();
     }
 
 
