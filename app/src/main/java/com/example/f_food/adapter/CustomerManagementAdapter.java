@@ -2,6 +2,7 @@ package com.example.f_food.adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,23 +43,41 @@ public class CustomerManagementAdapter extends RecyclerView.Adapter<CustomerMana
         holder.tvPhone.setText("Phone: " + customer.getPhone());
         holder.tvCreateAt.setText("Create_at: " + customer.getCreatedAt());
 
-        holder.btnDelete.setOnClickListener(v -> {
-            // Hiển thị hộp thoại xác nhận trước khi xóa
+        // Kiểm tra trạng thái của isDeleted và cập nhật giao diện
+        if (customer.getIsDelete()) {
+            holder.tvFullName.setText("Banned: " + customer.getFullName());
+        } else {
+            holder.tvFullName.setText("FullName: " + customer.getFullName());
+        }
+
+        // Cập nhật trạng thái của nút Ban (Ban/Active)
+        if (customer.getIsDelete()) {
+            holder.btnban.setText("Active");
+            holder.btnban.setTextColor(Color.GREEN); // Text màu xanh khi đã bị banned
+        } else {
+            holder.btnban.setText("Ban");
+            holder.btnban.setTextColor(Color.RED); // Text màu đỏ khi chưa bị banned
+        }
+
+        holder.btnban.setOnClickListener(v -> {
+            // Hiển thị hộp thoại xác nhận trước khi thay đổi trạng thái
             new AlertDialog.Builder(context)
-                    .setTitle("Confirm Deletion")
-                    .setMessage("Are you sure you want to delete " + customer.getFullName() + "?")
+                    .setTitle("Confirm ")
+                    .setMessage("Are you sure you want to  "+customer.getIsDelete().toString() + customer.getFullName() + "?")
                     .setPositiveButton("Yes", (dialog, which) -> {
+                        // Thay đổi trạng thái isDeleted
                         if (position >= 0 && position < customerList.size()) {
-                            customerList.remove(position);
-                            notifyItemRemoved(position);
-                            notifyItemRangeChanged(position, customerList.size());
-                            Toast.makeText(context, "Deleted: " + customer.getFullName(), Toast.LENGTH_SHORT).show();
+                            customer.setIsDelete(!customer.getIsDelete()); // Toggle trạng thái
+                            notifyItemChanged(position); // Cập nhật lại giao diện cho phần tử đó
+                            Toast.makeText(context, customer.getIsDelete() ? "Banned: " + customer.getFullName() : "Activated: " + customer.getFullName(), Toast.LENGTH_SHORT).show();
                         }
                     })
                     .setNegativeButton("No", (dialog, which) -> dialog.dismiss()) // Đóng hộp thoại nếu chọn "No"
                     .show();
         });
     }
+
+
 
 
     @Override
@@ -68,7 +87,7 @@ public class CustomerManagementAdapter extends RecyclerView.Adapter<CustomerMana
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvUserID, tvFullName, tvEmail, tvPhone, tvCreateAt;
-        Button btnDelete;
+        Button btnban;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -77,7 +96,7 @@ public class CustomerManagementAdapter extends RecyclerView.Adapter<CustomerMana
             tvEmail = itemView.findViewById(R.id.txtUser_Management_Email);
             tvPhone = itemView.findViewById(R.id.txtUser_Management_Phone);
             tvCreateAt = itemView.findViewById(R.id.txtUser_Management_CreateAt);
-            btnDelete = itemView.findViewById(R.id.btnUser_Management_Delete);
+            btnban = itemView.findViewById(R.id.btnUser_Management_Delete);
         }
     }
 }

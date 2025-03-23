@@ -47,8 +47,9 @@ public interface OrderDAO {
     @Query("DELETE FROM Orders")
     void deleteAll();
 
-    @Query("SELECT * FROM Orders WHERE order_status IN ('Delivered', 'Cancelled')")
-    List<Order> getDeliveredOrCancelledOrders();
+    @Query("SELECT * FROM Orders WHERE order_status IN ('Delivered', 'Cancelled') AND user_id = :userId")
+    List<Order> getDeliveredOrCancelledOrdersByUserId(int userId);
+
     @Query("SELECT o.order_id, o.user_id, od.food_id, f.name AS food_name " +
             "FROM Orders o " +
             "INNER JOIN OrderDetails od ON o.order_id = od.order_id " +
@@ -64,8 +65,8 @@ public interface OrderDAO {
     List<FoodWithOrder> getImageByOrderId(int orderId);
     // A custom class to hold the results of the join query
 
-    @Query("SELECT * FROM Orders WHERE order_status IN ('Preparing', 'Delivering', 'Delivered')")
-    List<Order> getFilteredOrders();
+    @Query("SELECT * FROM Orders WHERE order_status IN ('Preparing', 'Delivering', 'Delivered') AND user_Id = :userId " )
+    List<Order> getFilteredOrdersByUserId(int userId);
 
     @Query("SELECT Orders.order_id AS orderId, Orders.shipper_id AS shipperId, " +
             "Users.FullName AS shipperName, Users.Phone AS shipperPhone " +

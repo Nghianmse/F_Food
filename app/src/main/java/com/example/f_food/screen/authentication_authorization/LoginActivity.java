@@ -16,10 +16,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.f_food.entity.User;
 import com.example.f_food.R;
+import com.example.f_food.repository.AddressRepository;
 import com.example.f_food.repository.UserRepository;
 import com.example.f_food.screen.admin_management.AdminScreen;
+import com.example.f_food.screen.features_customer.Address;
 import com.example.f_food.screen.features_customer.HomeStart;
 import com.example.f_food.screen.features_customer.ManageAddress;
+import com.example.f_food.screen.features_customer.OrderHistory;
+import com.example.f_food.screen.features_customer.OrderTracking;
 import com.example.f_food.screen.features_customer.ViewRestaurantList;
 import com.squareup.picasso.Picasso;
 
@@ -31,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin, btnLoginForPartner;
     private TextView tvForgotPassword;
     private UserRepository userRepository;
+    private AddressRepository addressRepository;
     Button reigister;
     ImageView imgLogoLogin;
     private CheckBox cbRememberMe;
@@ -58,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Khởi tạo repository
         userRepository = new UserRepository(this);
+        addressRepository = new AddressRepository(this);
         // Xử lý sự kiện khi nhấn nút đăng nhập
         btnLogin.setOnClickListener(v -> handleLogin());
 
@@ -145,5 +151,15 @@ public class LoginActivity extends AppCompatActivity {
     private void navigateToRestaurantLogIn() {
         Intent intent = new Intent(this, RestaurantLogIn.class);  // Assuming RestaurantLogInActivity is your target activity
         startActivity(intent);
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        // Xóa userId khỏi SharedPreferences ngay khi ứng dụng bị dừng lại
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove("userId");
+        editor.apply();
     }
 }

@@ -1,16 +1,22 @@
 package com.example.f_food.screen.features_customer;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.f_food.dao.RestaurantRoomDatabase;
 import com.example.f_food.dao.ReviewDAO;
 import com.example.f_food.entity.Review;
 import com.example.f_food.R;
 import com.example.f_food.repository.ReviewRepository;
+import com.example.f_food.screen.authentication_authorization.LoginActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -23,13 +29,18 @@ public class OrderHistoryDetail extends AppCompatActivity {
     private int foodId, restaurantId;
     private String foodName, foodImage;
     private ReviewDAO reviewDAO;
-
     private ReviewRepository reviewRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history_detail);
+
+        // Kiểm tra nếu người dùng chưa đăng nhập
+        if (!isUserLoggedIn()) {
+            showAlertDialog("Bạn chưa đăng nhập, bạn vui lòng đăng nhập để thao tác.");
+            return;
+        }
 
         // Bind UI components
         textViewFoodName = findViewById(R.id.textViewFoodName);
@@ -82,5 +93,27 @@ public class OrderHistoryDetail extends AppCompatActivity {
             float averageRating = totalRating / reviews.size();
             ratingBar.setRating(averageRating);
         }
+    }
+
+    // Kiểm tra người dùng đã đăng nhập chưa
+    private boolean isUserLoggedIn() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        int userId = preferences.getInt("userId", -1); // Sử dụng PreferenceManager thay vì getSharedPreferences
+        return userId != -1;
+    }
+
+    // Hiển thị hộp thoại thông báo và chuyển sang màn hình đăng nhập
+    private void showAlertDialog(String message) {
+        new android.app.AlertDialog.Builder(this)
+                .setMessage(message)
+                .setPositiveButton("OK", (dialog, which) -> {
+                    dialog.dismiss();
+                    // Chuyển sang màn hình đăng nhập
+                    Intent intent = new Intent(OrderHistoryDetail.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                })
+                .create()
+                .show();
     }
 }

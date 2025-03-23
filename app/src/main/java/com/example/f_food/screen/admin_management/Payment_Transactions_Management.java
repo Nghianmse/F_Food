@@ -26,8 +26,6 @@ import java.util.List;
 public class Payment_Transactions_Management extends AppCompatActivity {
 
     private ImageView back;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
