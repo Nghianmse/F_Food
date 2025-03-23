@@ -23,6 +23,10 @@
         android:theme="@style/Theme.F_Food"
         tools:targetApi="31">
         <activity
+            android:name=".screen.admin_management.Update_Policy"
+            android:exported="true"
+            android:theme="@style/Apptheme" />
+      <activity
             android:name=".screen.features_restaurant_management.HomeRestaurant"
             android:exported="true" />
         <activity
@@ -39,7 +43,7 @@
         <activity
             android:name=".screen.features_customer.HomeStart"
             android:exported="false" />
-      <activity
+        <activity
             android:name=".screen.features_customer.Address"
             android:exported="true" />
         <activity
@@ -141,28 +145,34 @@
             android:exported="true" />
         <activity
             android:name=".screen.admin_management.Restaurant_Management"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Apptheme" />
         <activity
             android:name=".screen.admin_management.Customer_Management"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Apptheme" />
         <activity
             android:name=".screen.admin_management.Payment_Transactions_Management"
             android:exported="true" />
         <activity
             android:name=".screen.admin_management.Policy_Management"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Apptheme" />
         <activity
             android:name=".screen.admin_management.Shipper_Management"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Apptheme" />
         <activity
             android:name=".screen.admin_management.AdminScreen"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Apptheme" />
         <activity
             android:name=".screen.features_customer.ProductListRestaurant"
             android:exported="true" />
         <activity
             android:name=".screen.admin_management.AddPolicy"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Apptheme" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

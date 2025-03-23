@@ -5,21 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
+
     android:id="@+id/adminscreen_activity"
     android:background="#F5F5F5"
     tools:context=".screen.admin_management.AdminScreen">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        >
 
         <!-- Logo -->
         <ImageView
             android:id="@+id/logo"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
             android:src="@drawable/login"
             android:layout_marginBottom="10dp" />
 
@@ -68,7 +72,7 @@
                     <ImageView
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:src="@drawable/baseline_barcode_reader_24"
+                        android:src="@drawable/ic_action_name"
                         app:tint="#3F51B5" />
 
                     <TextView

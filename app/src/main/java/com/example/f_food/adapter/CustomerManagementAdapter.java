@@ -15,16 +15,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.f_food.entity.User;
 import com.example.f_food.R;
+import com.example.f_food.repository.UserRepository;
 
 import java.util.List;
 
 public class CustomerManagementAdapter extends RecyclerView.Adapter<CustomerManagementAdapter.ViewHolder> {
     private Context context;
     private List<User> customerList;
-
+    private UserRepository userRepository;
     public CustomerManagementAdapter(Context context, List<User> customerList) {
         this.context = context;
         this.customerList = customerList;
+        userRepository=new UserRepository(context);
     }
 
     @NonNull
@@ -60,21 +62,25 @@ public class CustomerManagementAdapter extends RecyclerView.Adapter<CustomerMana
         }
 
         holder.btnban.setOnClickListener(v -> {
-            // Hiển thị hộp thoại xác nhận trước khi thay đổi trạng thái
             new AlertDialog.Builder(context)
-                    .setTitle("Confirm ")
-                    .setMessage("Are you sure you want to  "+customer.getIsDelete().toString() + customer.getFullName() + "?")
+                    .setTitle("Confirm")
+                    .setMessage("Are you sure you want to " + (customer.getIsDelete() ? "Activate " : "Ban ") + customer.getFullName() + "?")
                     .setPositiveButton("Yes", (dialog, which) -> {
-                        // Thay đổi trạng thái isDeleted
                         if (position >= 0 && position < customerList.size()) {
-                            customer.setIsDelete(!customer.getIsDelete()); // Toggle trạng thái
-                            notifyItemChanged(position); // Cập nhật lại giao diện cho phần tử đó
+                            customer.setIsDelete(!customer.getIsDelete());
+
+                            // Cập nhật vào database
+                            userRepository.update(customer);
+
+                            // Cập nhật giao diện
+                            notifyItemChanged(position);
                             Toast.makeText(context, customer.getIsDelete() ? "Banned: " + customer.getFullName() : "Activated: " + customer.getFullName(), Toast.LENGTH_SHORT).show();
                         }
                     })
-                    .setNegativeButton("No", (dialog, which) -> dialog.dismiss()) // Đóng hộp thoại nếu chọn "No"
+                    .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
                     .show();
         });
+
     }
 
 

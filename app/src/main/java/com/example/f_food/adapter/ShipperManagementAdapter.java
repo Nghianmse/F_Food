@@ -55,9 +55,15 @@ public class ShipperManagementAdapter extends RecyclerView.Adapter<ShipperManage
         holder.txtShipperCreatedAt.setText("Status: " + (user != null ? shipper.getStatus() : "Unknown"));
 
         // Xóa shipper
-        String statusText = shipper.getStatus().equals("Active") ? "Deactivate" : "Activate";
+        String statusText = shipper.getStatus().equals("Active") ? "Ban" : "Active";
         holder.btnDelete.setText(statusText);
-
+        if (shipper.getStatus().equals("Active")) {
+            holder.txtShipperCreatedAt.setTextColor(context.getResources().getColor(R.color.green));
+            holder.btnDelete.setBackgroundColor(context.getResources().getColor(R.color.green));
+        } else {
+            holder.txtShipperCreatedAt.setTextColor(context.getResources().getColor(R.color.red_light));
+            holder.btnDelete.setBackgroundColor(context.getResources().getColor(R.color.white));
+        }
         // Xử lý sự kiện khi nhấn vào nút
         holder.btnDelete.setOnClickListener(v -> {
             // Tạo một AlertDialog xác nhận
@@ -83,7 +89,10 @@ public class ShipperManagementAdapter extends RecyclerView.Adapter<ShipperManage
                     .show();
         });
     }
-
+    public void updateShipperList(List<Shipper> newShipperList) {
+        this.shipperList = newShipperList;
+        notifyDataSetChanged(); // Notify that the data has changed
+    }
 
     @Override
     public int getItemCount() {

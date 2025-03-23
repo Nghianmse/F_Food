@@ -3,11 +3,17 @@ package com.example.f_food.screen.admin_management;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -28,6 +34,8 @@ public class Restaurant_Management extends AppCompatActivity {
     private List<Restaurant> restaurantList;
     private RestaurantRepository restaurantRepository;
     private ImageView back;
+    private EditText searchInput;
+    private Button searchButton;
 
 
     @Override
@@ -41,23 +49,45 @@ public class Restaurant_Management extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        back=findViewById(R.id.btnBack_Restaurant_Management);
-        back.setOnClickListener(v -> {
-            Intent intent = new Intent(Restaurant_Management.this, AdminScreen.class);
-            startActivity(intent);
-            finish(); // Để đóng màn hiện tại nếu không cần quay lại
-        });
+
 
         recyclerView = findViewById(R.id.recyclerViewListRestaurant);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("Restaurant Management");
+            actionBar.setDisplayHomeAsUpEnabled(true); // Hiện nút quay lại
+        }
         // Initialize repository and data
         restaurantRepository = new RestaurantRepository(this);
         init();
+        searchInput = findViewById(R.id.etNameRestaurant);
+        searchInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                searchRestaurant(s.toString()); // Gọi hàm tìm kiếm khi nhập văn bản
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
+
 
         // Set adapter with item click listener
         adapter = new RestaurantManagementListAdapter(restaurantList, this::updateRestaurantStatus);
         recyclerView.setAdapter(adapter);
+    }
+    @Override
+    public boolean onOptionsItemSelected (@NonNull MenuItem item){
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent(Restaurant_Management.this, AdminScreen.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void init() {
@@ -66,6 +96,16 @@ public class Restaurant_Management extends AppCompatActivity {
         if (restaurantList == null) {
             restaurantList = new ArrayList<>(); // Prevent NullPointerException
         }
+    }
+
+    private void searchRestaurant(String query) {
+        List<Restaurant> filteredList = new ArrayList<>();
+        for (Restaurant restaurant : restaurantList) {
+            if (restaurant.getName().toLowerCase().contains(query.toLowerCase())) {
+                filteredList.add(restaurant);
+            }
+        }
+        adapter.updateList(filteredList);
     }
 
 
