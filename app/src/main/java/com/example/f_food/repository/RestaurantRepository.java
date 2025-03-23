@@ -46,6 +46,10 @@ public class RestaurantRepository {
         restaurantDAO.insertAll(listRestaurant);
     }
 
+    public Restaurant getRestaurantByUserId(int id) {
+        return restaurantDAO.getRestaurantByUserId(id);
+    }
+
     public void update(Restaurant restaurant) {
         restaurantDAO.update(restaurant);
     }

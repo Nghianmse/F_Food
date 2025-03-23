@@ -62,7 +62,6 @@ public class ManageAddress extends AppCompatActivity {
         etAddress = findViewById(R.id.etAddress);
         etDetailAddress = findViewById(R.id.etDetailAddress);
         btnComplete = findViewById(R.id.btnComplete);
-        btnCurrentLocation = findViewById(R.id.btnCurrentLocation);
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 

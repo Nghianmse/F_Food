@@ -102,6 +102,7 @@ public class OrderHistoryDetail extends AppCompatActivity {
                         View.SYSTEM_UI_FLAG_FULLSCREEN
         );
 
+    }
 
     // Kiểm tra người dùng đã đăng nhập chưa
     private boolean isUserLoggedIn() {

@@ -1,15 +1,20 @@
 package com.example.f_food.screen.features_customer;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +27,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.f_food.MainActivity;
 import com.example.f_food.R;
 import com.example.f_food.adapter.FoodListAdapter;
 import com.example.f_food.adapter.HomeCustomerAdapter;
@@ -30,6 +36,7 @@ import com.example.f_food.entity.Food;
 import com.example.f_food.repository.CategoryRepository;
 import com.example.f_food.repository.FoodRepository;
 import com.example.f_food.repository.RestaurantRepository;
+import com.example.f_food.screen.authentication_authorization.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
 
@@ -55,6 +62,15 @@ public class HomeStart extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        ImageView menuIcon = findViewById(R.id.menuIcon);
+
+        menuIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopupMenu(v);
+            }
         });
         hideSystemUI(); // Ẩn ngay khi khởi chạy
 
@@ -202,5 +218,36 @@ public class HomeStart extends AppCompatActivity {
         );
     }
 
+    private void showPopupMenu(View view) {
+        PopupMenu popup = new PopupMenu(this, view);
+        popup.getMenuInflater().inflate(R.menu.right_nav_menu, popup.getMenu());
 
+        popup.setOnMenuItemClickListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.action_profile) {
+                Intent intent = new Intent(HomeStart.this, CustomerProfile.class);
+                startActivity(intent);
+                return true;
+            } else if (itemId == R.id.action_logout) {
+                Toast.makeText(HomeStart.this, "Logging out...", Toast.LENGTH_SHORT).show();
+                performLogout(); // Gọi hàm đăng xuất (nếu có)
+                return true;
+            }
+            return false;
+        });
+
+        popup.show();
+    }
+
+    private void performLogout() {
+
+        SharedPreferences preferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear(); // Xóa dữ liệu đăng nhập
+        editor.apply();
+
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
 }

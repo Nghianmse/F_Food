@@ -7,6 +7,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 import androidx.room.Delete;
 
+import com.example.f_food.entity.Order;
 import com.example.f_food.entity.Restaurant;
 
 import java.util.List;
@@ -20,11 +21,16 @@ public interface RestaurantDAO {
     @Query("SELECT * FROM Restaurants WHERE restaurant_id = :id")
     Restaurant getRestaurantById(int id);
 
+    @Query("SELECT * FROM Restaurants WHERE user_id = :id")
+    Restaurant getRestaurantByUserId(int id);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Restaurant restaurant);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<Restaurant> restaurants);
+
+
 
     @Update
     void update(Restaurant restaurant);
