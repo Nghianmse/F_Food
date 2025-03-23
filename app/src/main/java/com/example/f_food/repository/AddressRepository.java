@@ -80,6 +80,11 @@ public class AddressRepository {
         }
     }
 
+    public boolean getAddressByUserId1(int userId) {
+        Address defaultAddress = addressDAO.getDefaultAddressForUser(userId);
+        return defaultAddress.isDefault();
+    }
+
     public String getFullAddress(Address address) {
         if (address != null) {
             return address.getDetailAddress() + ", " + address.getAddress();

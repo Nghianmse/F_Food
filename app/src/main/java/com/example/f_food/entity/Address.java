@@ -15,6 +15,10 @@ public class Address {
     private double latitude; // Vĩ độ
     private double longitude; // Kinh độ
 
+    public Address(){
+
+    }
+
     // Constructor
     public Address(int userId, String address, String detailAddress, boolean isDefault, String addressType, double latitude, double longitude) {
         this.userId = userId;

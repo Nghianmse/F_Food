@@ -112,7 +112,6 @@ public class AcceptShippingOrder extends AppCompatActivity {
         tvDeliveryTime.setText("Delivery Time: " + deliveryTime);
         tvCost.setText("Tiền đồ ăn: " + totalCost + " VND");
 
-        acceptButton.setOnClickListener(v -> showConfirmationDialog(orderId));
 
 
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {

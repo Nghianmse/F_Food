@@ -124,19 +124,14 @@ public class DeliveryStatusUpdate extends AppCompatActivity {
             int checkedId = rgStatus.getCheckedRadioButtonId();
             String status = "";
 
-
-            if (!newStatus.isEmpty()) {
-                // 🟢 Gọi update vào DB
-                orderRepository.updateOrderStatus(orderId, newStatus, shipperId);
-
             if (checkedId == R.id.rb_processing) status = "Processing";
             else if (checkedId == R.id.rb_out_for_delivery) status = "Out for Delivery";
             else if (checkedId == R.id.rb_delivered) status = "Delivered";
 
-
             if (!status.isEmpty()) {
-                orderRepository.updateOrderStatus(orderId, status);
+                orderRepository.updateOrderStatus(orderId, status, shipperId);
                 Toast.makeText(this, "Cập nhật trạng thái: " + status, Toast.LENGTH_SHORT).show();
+                finish();
             } else {
                 Toast.makeText(this, "Vui lòng chọn trạng thái!", Toast.LENGTH_SHORT).show();
             }

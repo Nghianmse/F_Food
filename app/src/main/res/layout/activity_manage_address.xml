@@ -57,12 +57,6 @@
         android:layout_marginTop="8dp" />
 
     <!-- CheckBox Đặt làm địa chỉ mặc định -->
-    <CheckBox
-        android:id="@+id/cbDefaultAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Đặt làm địa chỉ mặc định"
-        android:layout_marginTop="8dp"/>
 
     <!-- Chọn loại địa chỉ -->
     <TextView
