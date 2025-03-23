@@ -25,6 +25,9 @@ public interface OrderDAO {
             "WHERE od.order_id = :orderId")
     double getTotalPriceByOrderId(int orderId);
 
+    @Query("SELECT * FROM `Orders` ORDER BY order_id DESC LIMIT 1")
+    Order getLastInsertedOrder();
+
     @Query("SELECT * FROM Orders WHERE user_id = :userId")
     List<Order> getOrdersByUserId(int userId);
     @Query("UPDATE Orders SET order_status = :newStatus WHERE order_id = :orderId")

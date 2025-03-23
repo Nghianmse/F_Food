@@ -164,4 +164,6 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ShipperLogin.class);  // Assuming RestaurantLogInActivity is your target activity
         startActivity(intent);
     }
+
 }
+

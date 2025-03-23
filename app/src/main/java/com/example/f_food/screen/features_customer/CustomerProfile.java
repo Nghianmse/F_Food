@@ -48,7 +48,7 @@ public class CustomerProfile extends AppCompatActivity {
 
         RestaurantRoomDatabase db = RestaurantRoomDatabase.getInstance(this);
 
-        int userId =getLoggedInUserId();
+        int userId = getLoggedInUserId();
         // Lấy user info
         User user = db.userDAO().getUserById(userId);
         // Lấy địa chỉ mặc định
@@ -67,7 +67,7 @@ public class CustomerProfile extends AppCompatActivity {
         btnManageAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CustomerProfile.this, ManageAddress.class);
+                Intent intent = new Intent(CustomerProfile.this, com.example.f_food.screen.features_customer.Address.class);
                 startActivity(intent);
             }
         });
@@ -177,6 +177,6 @@ public class CustomerProfile extends AppCompatActivity {
     }
     private int getLoggedInUserId() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        return preferences.getInt("userId", -1); // Trả về -1 nếu không tìm thấy userId
+        return preferences.getInt("userId", -1);
     }
 }

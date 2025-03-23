@@ -39,7 +39,7 @@
         <activity
             android:name=".screen.features_customer.HomeStart"
             android:exported="false" />
-        <activity
+      <activity
             android:name=".screen.features_customer.Address"
             android:exported="true" />
         <activity

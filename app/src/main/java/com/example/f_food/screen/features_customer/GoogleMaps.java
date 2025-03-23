@@ -36,6 +36,7 @@ public class GoogleMaps extends FragmentActivity implements OnMapReadyCallback {
 
         // Tọa độ của 2G7G+M2 Thạch Thất, Hanoi, Vietnam
         LatLng thachThat = new LatLng(21.0031, 105.5321);
+        LatLng thachThat1 = new LatLng(21.0031, 105.5321);
 
         // Thêm marker và di chuyển camera đến vị trí
         mMap.addMarker(new MarkerOptions().position(thachThat).title("Thạch Thất, Hà Nội"));

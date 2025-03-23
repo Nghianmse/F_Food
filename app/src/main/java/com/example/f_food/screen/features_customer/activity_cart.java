@@ -27,7 +27,8 @@ public class activity_cart extends AppCompatActivity {
     private RecyclerView recyclerCart;
     private CartAdapter cartAdapter;
     private Button btnBuy;
-    private TextView txtSubtotal;
+    double discount, totalPrice;
+    private TextView txtSubtotal, txtTotal;
     private TextView txtDiscount;
 
     @Override
@@ -52,9 +53,10 @@ public class activity_cart extends AppCompatActivity {
         recyclerCart.setLayoutManager(new LinearLayoutManager(this));
 
         txtDiscount = findViewById(R.id.txtDiscount);
-        txtDiscount.setText("5%");
+        txtDiscount.setText("Giảm giá : 5%");
 
         txtSubtotal = findViewById(R.id.txtSubtotal);
+        txtTotal = findViewById(R.id.txtTotal);
         btnBuy = findViewById(R.id.btnBuyNow);
 
         // Lấy danh sách sản phẩm trong giỏ hàng
@@ -73,13 +75,15 @@ public class activity_cart extends AppCompatActivity {
     }
 
     private void updateTotalPrice() {
-        double totalPrice = 0;
+        totalPrice = 0;
         for (CartItem item : CartManager.getInstance().getCartItems()) {
             if (item.isSelected()) {  // Chỉ tính sản phẩm được chọn
                 totalPrice += item.getProduct().getPrice() * item.getQuantity();
             }
         }
+        discount =  totalPrice * 0.05;
         txtSubtotal.setText("Total: " + totalPrice + " VNĐ");
+        txtTotal.setText("Total: " + (totalPrice - discount));
     }
 
     private void proceedToCheckout() {
@@ -97,6 +101,8 @@ public class activity_cart extends AppCompatActivity {
 
         Intent intent = new Intent(activity_cart.this, activity_checkout.class);
         intent.putParcelableArrayListExtra("selectedItems", selectedItems);
+        intent.putExtra("totalPrice", totalPrice);
+        intent.putExtra("discount", discount);
         startActivity(intent);
     }
 

@@ -32,5 +32,7 @@ public class MainActivity extends AppCompatActivity {
     PaymentRepository paymentRepository = new PaymentRepository(this);
     PolicyRepository policyRepository = new PolicyRepository(this);
     ReviewRepository repository=new ReviewRepository(this);
+
+
     }
 }

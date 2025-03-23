@@ -93,6 +93,10 @@ public class OrderRepository {
         orderDAO.insert(order);
     }
 
+    public Order getLastInsertedOrder() {
+        return orderDAO.getLastInsertedOrder();
+    }
+
     public void insertAll(List<Order> listOrder) {
         orderDAO.insertAll(listOrder);
     }
