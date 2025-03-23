@@ -93,6 +93,10 @@ public class OrderRepository {
         orderDAO.insert(order);
     }
 
+    public Order getLastInsertedOrder() {
+        return orderDAO.getLastInsertedOrder();
+    }
+
     public void insertAll(List<Order> listOrder) {
         orderDAO.insertAll(listOrder);
     }
@@ -123,11 +127,6 @@ public class OrderRepository {
     public ShipperWithOrder getShipperWithOrder(int orderId) {
         return orderDAO.getShipperWithOrder(orderId);
     }
-
-
-        public ShipperWithOrder getShipperWithOrder(int orderId){
-            return orderDAO.getShipperWithOrder(orderId);
-        }
 
         private void insertSampleData () {
             List<Order> sampleOrders = Arrays.asList(

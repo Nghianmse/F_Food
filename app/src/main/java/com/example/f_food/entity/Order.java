@@ -35,6 +35,9 @@ public class Order {
     @ColumnInfo(name = "shipper_id")
     private int shipperId;
 
+
+    public Order(){}
+
     public Order(int userId, int restaurantId, double totalPrice, String paymentMethod, String orderStatus, String createdAt, String updatedAt, int shipperId) {
         this.userId = userId;
         this.restaurantId = restaurantId;

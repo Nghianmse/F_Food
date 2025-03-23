@@ -11,22 +11,22 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Header -->
+        <!-- Tiêu đề -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Check Out"
+            android:text="Thanh Toán"
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="#1D1D1D"
             android:layout_gravity="center"
             android:paddingBottom="16dp"/>
 
-        <!-- ORDER SUMMARY -->
+        <!-- Tóm tắt đơn hàng -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ORDER SUMMARY"
+            android:text="TÓM TẮT ĐƠN HÀNG"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="#FFC107"
@@ -48,14 +48,13 @@
                 android:background="@android:color/white"
                 android:padding="12dp"
                 android:layout_marginBottom="8dp"/>
-
         </LinearLayout>
 
-        <!-- DELIVERY ADDRESS -->
+        <!-- Địa chỉ giao hàng -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DELIVERY ADDRESS"
+            android:text="ĐỊA CHỈ GIAO HÀNG"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="#FFC107"
@@ -70,6 +69,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/phoneCheckout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Elin Septika Ningrum (+62 812 3456 7890)"
@@ -77,6 +77,7 @@
                 android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/addressCheckout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Jl. Taman Kb. Sirih IV No.3, RW.8, Kp. Bali, Kecamatan Tanah Abang"
@@ -84,11 +85,11 @@
                 android:textColor="#777"/>
         </LinearLayout>
 
-        <!-- PAYMENT DETAILS -->
+        <!-- Chi tiết thanh toán -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PAYMENT DETAILS"
+            android:text="CHI TIẾT THANH TOÁN"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="#FFC107"
@@ -103,27 +104,24 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/totalPriceCheckout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Subtotal: Rp150.000"
+                android:text="Tạm tính: 150.000đ"
                 android:textSize="14sp"/>
 
             <TextView
+                android:id="@+id/totalShipCheckout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Shipping Fee: Rp10.000"
+                android:text="Phí vận chuyển: 10.000đ"
                 android:textSize="14sp"/>
 
             <TextView
+                android:id="@+id/totalSaleCheckout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Admin Fee: Rp10.000"
-                android:textSize="14sp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Voucher Code: -Rp20.000"
+                android:text="Mã giảm giá: -20.000đ"
                 android:textSize="14sp"
                 android:textColor="#FF3D00"
                 android:textStyle="bold"/>
@@ -132,19 +130,19 @@
                 android:id="@+id/totalPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total: Rp150.000"
+                android:text="Tổng cộng: 150.000đ"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="#1D1D1D"
                 android:paddingTop="8dp"/>
         </LinearLayout>
 
-        <!-- Create Order Button -->
+        <!-- Nút đặt hàng -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCreateOrder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Create Order"
+            android:text="Đặt hàng"
             android:backgroundTint="#1976D2"
             android:textColor="@android:color/white"
             android:layout_marginTop="20dp"/>

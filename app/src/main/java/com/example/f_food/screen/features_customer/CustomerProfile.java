@@ -47,12 +47,11 @@ public class CustomerProfile extends AppCompatActivity {
         AddressRepository addressRepository = new AddressRepository(this);
 
         RestaurantRoomDatabase db = RestaurantRoomDatabase.getInstance(this);
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        int userId = preferences.getInt("userId", -1);
+        int userId = getLoggedInUserId();
         // Lấy user info
-        User user = db.userDAO().getUserById(1);
+        User user = db.userDAO().getUserById(userId);
         // Lấy địa chỉ mặc định
-        Address defaultAddress = db.addressDAO().getDefaultAddressForUser(1);
+        Address defaultAddress = db.addressDAO().getDefaultAddressForUser(userId);
         // Hander changepass text
         TextView btnChangePassword = findViewById(R.id.btnChangePassword);
         btnChangePassword.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +66,7 @@ public class CustomerProfile extends AppCompatActivity {
         btnManageAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CustomerProfile.this, ManageAddress.class);
+                Intent intent = new Intent(CustomerProfile.this, com.example.f_food.screen.features_customer.Address.class);
                 startActivity(intent);
             }
         });
@@ -174,5 +173,9 @@ public class CustomerProfile extends AppCompatActivity {
 
 
 
+    }
+    private int getLoggedInUserId() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        return preferences.getInt("userId", -1);
     }
 }
