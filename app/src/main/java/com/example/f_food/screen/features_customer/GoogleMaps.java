@@ -36,13 +36,15 @@ public class GoogleMaps extends FragmentActivity implements OnMapReadyCallback {
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
         mMap.getUiSettings().setZoomControlsEnabled(true);
-
         // Nhận intent
         Intent intent = getIntent();
         double originLat = intent.getDoubleExtra("origin_lat", 0.0);
         double originLng = intent.getDoubleExtra("origin_lng", 0.0);
         double destLat = intent.getDoubleExtra("dest_lat", 0.0);
         double destLng = intent.getDoubleExtra("dest_lng", 0.0);
+        // Tọa độ của 2G7G+M2 Thạch Thất, Hanoi, Vietnam
+        LatLng thachThat = new LatLng(21.0031, 105.5321);
+        LatLng thachThat1 = new LatLng(21.0031, 105.5321);
 
         LatLng origin = new LatLng(originLat, originLng);
         LatLng destination = new LatLng(destLat, destLng);

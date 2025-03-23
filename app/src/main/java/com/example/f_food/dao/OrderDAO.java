@@ -25,6 +25,9 @@ public interface OrderDAO {
             "WHERE od.order_id = :orderId")
     double getTotalPriceByOrderId(int orderId);
 
+    @Query("SELECT * FROM `Orders` ORDER BY order_id DESC LIMIT 1")
+    Order getLastInsertedOrder();
+
     @Query("SELECT * FROM Orders WHERE user_id = :userId")
     List<Order> getOrdersByUserId(int userId);
     @Query("UPDATE Orders SET order_status = :newStatus WHERE order_id = :orderId")
@@ -78,4 +81,11 @@ public interface OrderDAO {
     ShipperWithOrder getShipperWithOrder(int orderId);
     @Query("SELECT * FROM Orders WHERE restaurant_id = :restaurantId")
     List<Order> getOrdersByRestaurantId(int restaurantId);
+    @Query("SELECT o.order_id, o.user_id, od.food_id, f.name AS food_name, f.image_url AS image_url " +
+            "FROM Orders o " +
+            "INNER JOIN OrderDetails od ON o.order_id = od.order_id " +
+            "INNER JOIN Foods f ON od.food_id = f.food_id " +
+            "WHERE o.order_id = :orderId")
+    List<FoodWithOrder> getFoodsByOrderId(int orderId);
+
 }

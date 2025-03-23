@@ -1,7 +1,10 @@
 package com.example.f_food.screen.features_restaurant_management;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -14,7 +17,7 @@ import com.example.f_food.R;
 import com.example.f_food.adapter.OrdersRestaurantAdapter;
 import com.example.f_food.dao.RestaurantRoomDatabase;
 import com.example.f_food.entity.Order;
-
+import com.example.f_food.repository.RestaurantRepository;
 import java.util.List;
 
 public class RestaurantOrders extends AppCompatActivity {
@@ -43,13 +46,16 @@ public class RestaurantOrders extends AppCompatActivity {
 
     private void loadOrders() {
         db = RestaurantRoomDatabase.getInstance(this);
-        int restaurantId = 1; // Hardcoded restaurant ID for testing
-        List<Order> orderList = db.orderDAO().getOrdersByRestaurantId(restaurantId);
+        RestaurantRepository restaurantRepository = new RestaurantRepository(this);
+        int uid = getLoggedInUserId();
+        int rid = restaurantRepository.getRestaurantByUserId(uid).getRestaurantId();
+
+        List<Order> orderList = db.orderDAO().getOrdersByRestaurantId(rid);
 
         adapter = new OrdersRestaurantAdapter(this, orderList, new OrdersRestaurantAdapter.OnOrderClickListener() {
             @Override
             public void onAcceptClick(Order order) {
-                order.setOrderStatus("Delivered");
+                order.setOrderStatus("Preparing");
                 db.orderDAO().update(order);
                 loadOrders();
             }
@@ -70,5 +76,9 @@ public class RestaurantOrders extends AppCompatActivity {
         });
 
         recyclerView.setAdapter(adapter);
+    }
+    private int getLoggedInUserId() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        return preferences.getInt("userId", -1); // Trả về -1 nếu không tìm thấy userId
     }
 }

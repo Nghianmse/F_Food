@@ -2,10 +2,12 @@ package com.example.f_food.adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,12 +16,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.f_food.entity.Policy;
 import com.example.f_food.R;
+import com.example.f_food.screen.admin_management.Update_Policy;
 
 import java.util.List;
 
 public class PolicyManagementAdapter extends RecyclerView.Adapter<PolicyManagementAdapter.ViewHolder> {
     private List<Policy> policyList;
     private Context context;
+
+
+
     public PolicyManagementAdapter(List<Policy> policyList,Context context) {
         this.policyList = policyList;
         this.context=context;
@@ -27,7 +33,7 @@ public class PolicyManagementAdapter extends RecyclerView.Adapter<PolicyManageme
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView titleTextView, descriptionTextView, createdAtTextView;
         Button btnDelete;
-
+        LinearLayout editpolicy;
 
         public ViewHolder(View view) {
             super(view);
@@ -35,6 +41,7 @@ public class PolicyManagementAdapter extends RecyclerView.Adapter<PolicyManageme
             descriptionTextView = itemView.findViewById(R.id.txtPolicy_Management_Description);
             createdAtTextView = itemView.findViewById(R.id.txtPolicy_Management_Createat);
             btnDelete= itemView.findViewById(R.id.btnManagement_Delete_Policy);
+            editpolicy= itemView.findViewById(R.id.Ln_policy);
         }
     }
     @NonNull
@@ -51,6 +58,13 @@ public class PolicyManagementAdapter extends RecyclerView.Adapter<PolicyManageme
         holder.titleTextView.setText("Title: " + policy.getTitle());
         holder.descriptionTextView.setText("Description: " + policy.getDescription());
         holder.createdAtTextView.setText("Created At: " + policy.getCreatedAt());
+        holder.editpolicy.setOnClickListener(v -> {
+            Policy policyToUpdate = policyList.get(position);
+            Intent intent = new Intent(context, Update_Policy.class);
+            intent.putExtra("POLICY_ID", policyToUpdate.getPolicyId());
+            context.startActivity(intent);
+        });
+
         holder.btnDelete.setOnClickListener(v -> {
             // Hiển thị hộp thoại xác nhận trước khi xóa
             new AlertDialog.Builder(context)

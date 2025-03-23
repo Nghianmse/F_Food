@@ -2,6 +2,7 @@ package com.example.f_food.screen.admin_management;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -9,6 +10,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -35,18 +38,20 @@ public class AddPolicy extends AppCompatActivity {
         setContentView(R.layout.activity_add_policy);
 
         // Áp dụng padding cho hệ thống thanh điều hướng (navigation bar)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.addpolicy), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("Add Policy");
+            actionBar.setDisplayHomeAsUpEnabled(true); // Hiện nút quay lại
+        }
         // Khởi tạo các view
         etTitle = findViewById(R.id.txtTitle_policy);
         etDescription = findViewById(R.id.txtDescription_policy);
         btnSavePolicy = findViewById(R.id.btnSavePolicy);
-        btnback = findViewById(R.id.btnBack_AddPolicy);
-        btnback.setOnClickListener(v -> finish());
         btnSavePolicy.setOnClickListener(view -> {
             try {
                 String Title = etTitle.getText().toString().trim();
@@ -65,6 +70,13 @@ public class AddPolicy extends AppCompatActivity {
         });
 
     }
-
+    @Override
+    public boolean onOptionsItemSelected (@NonNull MenuItem item){
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent(AddPolicy.this, Policy_Management.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 }

@@ -23,6 +23,11 @@ public class OrderDetail {
     @ColumnInfo(name = "price")
     private double price;
 
+
+    public OrderDetail(){
+
+    }
+
     public OrderDetail(int orderId, int foodId, int quantity, double price) {
         this.orderId = orderId;
         this.foodId = foodId;

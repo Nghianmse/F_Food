@@ -164,14 +164,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ShipperLogin.class);  // Assuming RestaurantLogInActivity is your target activity
         startActivity(intent);
     }
-        @Override
-        protected void onStop () {
-            super.onStop();
+       
+}
 
-            // Xóa userId khỏi SharedPreferences ngay khi ứng dụng bị dừng lại
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.remove("userId");
-            editor.apply();
-        }
-    }
+

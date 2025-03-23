@@ -19,6 +19,8 @@ public interface UserDAO {
 
     @Query("SELECT * FROM Users WHERE UserID = :id")
     User getUserById(int id);
+    @Query("SELECT * FROM Users WHERE UserType = 'Customer'")
+    List<User> getAllCustomers();
 
     @Query("SELECT * FROM Users WHERE LOWER(Email) = LOWER(:email)")
     User getUserByEmail(String email);

@@ -1,7 +1,9 @@
 package com.example.f_food.screen.authentication_authorization;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -10,10 +12,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.f_food.entity.Restaurant;
 import com.example.f_food.entity.User;
 import com.example.f_food.MainActivity;
 import com.example.f_food.R;
+import com.example.f_food.repository.RestaurantRepository;
 import com.example.f_food.repository.UserRepository;
+import com.example.f_food.screen.features_restaurant_management.HomeRestaurant;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -69,14 +74,18 @@ public class RestaurantLogIn extends AppCompatActivity {
 
         for (User user : users) {
             if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
-                // Kiểm tra UserType là "Customer"
+                // Kiểm tra UserType là "restaurant"
                 if ("Restaurant".equals(user.getUserType())) {
-                    Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
 
+                    Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+                    SharedPreferences.Editor editor = preferences.edit();
+
+                    editor.putInt("userId", user.getUserId());
+                    editor.apply();
                     // Chuyển sang màn hình khác sau khi đăng nhập
-                    Intent intent = new Intent(this, MainActivity.class);
+                    Intent intent = new Intent(this, HomeRestaurant.class);
                     startActivity(intent);
-                    finish();
                     return;
                 } else {
                     Toast.makeText(this, "Bạn không phải là nhà hàng!", Toast.LENGTH_SHORT).show();

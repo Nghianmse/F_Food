@@ -1,111 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="20dp"
     android:gravity="center"
-    tools:context=".screen.authentication_authorization.SignUp">
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="#FFF3E0"
+    android:id="@+id/signup">
 
+    <!-- Logo -->
+    <ImageView
+        android:id="@+id/imgLogoSignup"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/login"
+        android:layout_gravity="center"/>
+
+    <!-- Tên ứng dụng -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign Up"
+        android:text="F-Food"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginBottom="8dp"/>
+        android:textColor="@android:color/black"
+        android:layout_marginTop="16dp"/>
 
+    <!-- Tiêu đề phụ -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Please type your information below"
+        android:text="Đăng ký tài khoản mới"
         android:textSize="14sp"
-        android:textColor="#888888"
-        android:gravity="center"
+        android:textColor="@android:color/darker_gray"
         android:layout_marginBottom="16dp"/>
 
+    <!-- Ô nhập Họ và tên -->
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Full name"
         android:id="@+id/txtSignup_fullname"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Họ và tên"
         android:background="@android:drawable/editbox_background"
         android:padding="12dp"
         android:layout_marginBottom="10dp"/>
 
+    <!-- Ô nhập Email -->
     <EditText
+        android:id="@+id/txtSignup_Email"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:background="@android:drawable/editbox_background"
         android:padding="12dp"
-        android:id="@+id/txtSignup_Email"
         android:layout_marginBottom="10dp"/>
 
+    <!-- Ô nhập số điện thoại -->
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Phone number"
-        android:inputType="phone"
         android:id="@+id/txtSignup_Phone"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Số điện thoại"
+        android:inputType="phone"
         android:background="@android:drawable/editbox_background"
         android:padding="12dp"
         android:layout_marginBottom="10dp"/>
 
+    <!-- Ô nhập Mật khẩu -->
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/txtSignup_Password"
-        android:hint="Password"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Mật khẩu"
         android:inputType="textPassword"
         android:background="@android:drawable/editbox_background"
         android:padding="12dp"
         android:layout_marginBottom="10dp"/>
 
+    <!-- Ô nhập Xác nhận mật khẩu -->
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/txtSignup_ConfirmPassword"
-        android:hint="Confirm password"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Xác nhận mật khẩu"
         android:inputType="textPassword"
         android:background="@android:drawable/editbox_background"
         android:padding="12dp"
         android:layout_marginBottom="10dp"/>
 
-
-
+    <!-- Nút đăng ký -->
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/btnSignUp"
-        android:text="SIGN UP"
-        android:backgroundTint="#007BFF"
-        android:textColor="#FFFFFF"
-        android:padding="12dp"
-        android:textSize="16sp"/>
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Đăng ký"
+        android:textSize="16sp"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="16dp"/>
 
+    <!-- "Nếu đã có tài khoản" -->
     <TextView
+        android:id="@+id/txtAlreadyHaveAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="You have an account? "
-        android:textSize="18sp"
-        android:layout_marginTop="16dp"
-        android:textColor="#888888"
-        android:gravity="center"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtFromSignUptoSignin"
-        android:text="Log In"
+        android:text="Nếu đã có tài khoản, nhấn để đăng nhập"
         android:textSize="14sp"
-        android:textColor="#007BFF"
-        android:textStyle="normal"
-        android:layout_marginTop="4dp"
-        android:gravity="center"/>
+        android:textColor="@android:color/darker_gray"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center"/>
+
+    <!-- Nút đăng nhập -->
+    <Button
+        android:id="@+id/btn_signup_login"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Đăng nhập"
+        android:textSize="16sp"
+        android:backgroundTint="@android:color/holo_green_light"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="8dp"/>
+
 </LinearLayout>
