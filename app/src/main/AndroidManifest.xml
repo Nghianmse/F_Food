@@ -26,6 +26,9 @@
             android:name=".screen.admin_management.Update_Policy"
             android:exported="true"
             android:theme="@style/Apptheme" />
+      <activity
+            android:name=".screen.features_restaurant_management.HomeRestaurant"
+            android:exported="true" />
         <activity
             android:name=".screen.features_customer.ChangePassword"
             android:exported="true" />

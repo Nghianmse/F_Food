@@ -13,8 +13,16 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical">
-
-
+        <ImageView
+            android:id="@+id/btnBack_Restaurant_Management"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/home_icon"
+            android:contentDescription="Home Icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="16dp"
+            />
 
         <TextView
             android:id="@+id/tvTitle"

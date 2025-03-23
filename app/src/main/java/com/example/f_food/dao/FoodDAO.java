@@ -40,7 +40,8 @@ public interface FoodDAO {
 
     @Delete
     void delete(Food food);
-
+    @Query("UPDATE Foods SET name = :name, price = :price, description = :description, category_id = :categoryId, stock_status = :stockStatus WHERE food_id = :foodId")
+    void updateFoodInfo(int foodId, String name, double price, String description, int categoryId, String stockStatus);
     @Query("DELETE FROM Foods WHERE food_id = :id")
     void deleteById(int id);
 

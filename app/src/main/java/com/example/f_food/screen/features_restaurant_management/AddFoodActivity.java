@@ -2,9 +2,11 @@ package com.example.f_food.screen.features_restaurant_management;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -22,6 +24,7 @@ import com.example.f_food.entity.Food;
 import com.example.f_food.R;
 import com.example.f_food.repository.CategoryRepository;
 import com.example.f_food.repository.FoodRepository;
+import com.example.f_food.repository.RestaurantRepository;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -101,9 +104,13 @@ public class AddFoodActivity extends AppCompatActivity {
 
             String imageUriString = imageUri.toString();
 
+            RestaurantRepository restaurantRepository = new RestaurantRepository(this);
+
+            int rid = restaurantRepository.getRestaurantByUserId(getLoggedInUserId()).getRestaurantId();
+
             // Tạo đối tượng Food
             Food newFood = new Food();
-            newFood.setRestaurantId(1);
+            newFood.setRestaurantId(rid);
             newFood.setName(foodName);
             newFood.setPrice(foodPrice);
             newFood.setDescription(foodDescription);
@@ -119,6 +126,7 @@ public class AddFoodActivity extends AppCompatActivity {
                     foodRepository.insert(newFood);
                     runOnUiThread(() -> {
                         showAlert("Thành công", "Thêm sản phẩm thành công!", true);
+                        startActivity(new Intent(AddFoodActivity.this, MenuManagement.class));
                     });
                 } catch (Exception e) {
                     runOnUiThread(() -> showAlert("Lỗi", "Không thể thêm sản phẩm, vui lòng thử lại sau!"));
@@ -215,5 +223,10 @@ public class AddFoodActivity extends AppCompatActivity {
                     if (closeActivity) finish();
                 })
                 .show();
+    }
+
+    private int getLoggedInUserId() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        return preferences.getInt("userId", -1); // Trả về -1 nếu không tìm thấy userId
     }
 }

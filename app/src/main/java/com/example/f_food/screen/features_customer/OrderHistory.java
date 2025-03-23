@@ -86,18 +86,4 @@ public class OrderHistory extends AppCompatActivity {
                 .create()
                 .show();
     }
-    @Override
-    protected void onStop() {
-        super.onStop();
-        // Xóa userId khi ứng dụng thực sự bị dừng
-        clearUserId();
-    }
-
-    // Phương thức xóa userId
-    private void clearUserId() {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.remove("userId"); // Xóa userId khỏi SharedPreferences
-        editor.apply();
-    }
 }

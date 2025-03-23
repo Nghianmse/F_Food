@@ -94,7 +94,7 @@ public class OrderTracking extends AppCompatActivity {
     // Lấy userId của người dùng đã đăng nhập
     private int getLoggedInUserId() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        return preferences.getInt("userId", -1); // Trả về -1 nếu không tìm thấy userId
+        return preferences.getInt("userId", -1);
     }
 
     // Hiển thị hộp thoại thông báo và chuyển sang màn hình đăng nhập
