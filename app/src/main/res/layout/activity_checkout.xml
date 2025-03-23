@@ -83,6 +83,15 @@
                 android:text="Jl. Taman Kb. Sirih IV No.3, RW.8, Kp. Bali, Kecamatan Tanah Abang"
                 android:textSize="12sp"
                 android:textColor="#777"/>
+
+            <ImageButton
+                android:id="@+id/btnOpenMap"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="300dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/baseline_location_searching_24"
+                android:contentDescription="Mở Google Maps" />
         </LinearLayout>
 
         <!-- Chi tiết thanh toán -->
