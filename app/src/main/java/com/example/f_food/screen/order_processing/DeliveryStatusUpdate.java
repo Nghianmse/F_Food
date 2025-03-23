@@ -67,7 +67,7 @@ public class DeliveryStatusUpdate extends AppCompatActivity {
         foodRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // 🟢 Lấy dữ liệu từ Intent
-        int orderId = getIntent().getIntExtra("orderId", -1);
+        orderId = getIntent().getIntExtra("orderId", -1);
         String restaurantAddress = getIntent().getStringExtra("restaurantAddress");
         String deliveryAddress = getIntent().getStringExtra("deliveryAddress");
         String deliveryTime = getIntent().getStringExtra("deliveryTime");
@@ -90,24 +90,79 @@ public class DeliveryStatusUpdate extends AppCompatActivity {
             Log.d("AcceptShippingOrder", "Không có món ăn nào trong đơn hàng.");
         }
 
+        orderRepository = new OrderRepository(this);
+
+
+        btnUpdate = findViewById(R.id.btn_update);
+        rgStatus = findViewById(R.id.rg_status);
+
+        // 🟢 Xử lý khi nhấn nút cập nhật trạng thái đơn hàng
+        btnUpdate.setOnClickListener(v -> {
+            int selectedStatusId = rgStatus.getCheckedRadioButtonId();
+            String newStatus = "";
+
+            if (selectedStatusId == R.id.rb_processing) {
+                newStatus = "Processing";
+            } else if (selectedStatusId == R.id.rb_out_for_delivery) {
+                newStatus = "Out for Delivery";
+            } else if (selectedStatusId == R.id.rb_delivered) {
+                newStatus = "Delivered";
+            }
+
+            if (!newStatus.isEmpty()) {
+                // 🟢 Gọi update vào DB
+                orderRepository.updateOrderStatus(orderId, newStatus);
+
+                Toast.makeText(DeliveryStatusUpdate.this,
+                        "Order #" + orderId + " updated to '" + newStatus + "'",
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(DeliveryStatusUpdate.this,
+                        "Vui lòng chọn trạng thái!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Intent intent = getIntent();
+        String userName = intent.getStringExtra("userName");
+        String userPhone = intent.getStringExtra("userPhone");
+        String userEmail = intent.getStringExtra("email");
+        String userPassword = intent.getStringExtra("password");
+        Log.d("DeliveryHistory", "Tên: " + userEmail + ", Email: " + userEmail);
+        Log.d("DEBUG_INTENT", "Email: " + userEmail + ", Password: " + userPassword);
         // 🟢 Xử lý `BottomNavigationView`
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.nav_delivery);
-
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
 
-                if (itemId == R.id.nav_home) { // 🔹 Quay lại PendingOrder
-                    startActivity(new Intent(DeliveryStatusUpdate.this, PendingOrder.class));
+                if (itemId == R.id.nav_home) { // 🔹 Chuyen sang Pending
+                    Intent intent = new Intent(DeliveryStatusUpdate.this, PendingOrder.class);
+                    intent.putExtra("email", userEmail);
+                    intent.putExtra("password", userPassword);
+                    intent.putExtra("userName", userName);
+                    intent.putExtra("userPhone", userPhone);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    startActivity(intent);
+                    finish();
                     return true;
                 } else if (itemId == R.id.nav_orders) { // 🔹 Chuyển sang DeliveryHistory
-                    startActivity(new Intent(DeliveryStatusUpdate.this, DeliveryHistory.class));
+                    Intent intent = new Intent(DeliveryStatusUpdate.this, DeliveryHistory.class);
+                    intent.putExtra("email", userEmail);
+                    intent.putExtra("password", userPassword);
+                    intent.putExtra("userName", userName);
+                    intent.putExtra("userPhone", userPhone);
+                    startActivity(intent);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     return true;
-                } else if (itemId == R.id.nav_delivery) { // 🔹 Giữ nguyên trang này
+                } else if (itemId == R.id.nav_delivery) { // 🔹 Giu nguyen trang
+                    Intent intent = new Intent(DeliveryStatusUpdate.this, OrderAccepted.class);
+                    intent.putExtra("email", userEmail);
+                    intent.putExtra("password", userPassword);
+                    intent.putExtra("userName", userName);
+                    intent.putExtra("userPhone", userPhone);
+                    startActivity(intent);
                     return true;
                 }
 
@@ -115,28 +170,6 @@ public class DeliveryStatusUpdate extends AppCompatActivity {
             }
         });
 
-        // 🟢 Xử lý khi nhấn nút cập nhật trạng thái đơn hàng
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int selectedStatusId = rgStatus.getCheckedRadioButtonId();
-                String newStatus = "";
-
-                if (selectedStatusId == R.id.rb_processing) {
-                    newStatus = "Processing";
-                } else if (selectedStatusId == R.id.rb_out_for_delivery) {
-                    newStatus = "Out for Delivery";
-                } else if (selectedStatusId == R.id.rb_delivered) {
-                    newStatus = "Delivered";
-                }
-
-                if (!newStatus.isEmpty()) {
-                    orderRepository.updateOrderStatus(orderId, newStatus);
-                    Toast.makeText(DeliveryStatusUpdate.this, "Order #" + orderId + " updated to '" + newStatus + "'", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(DeliveryStatusUpdate.this, "Please select a status!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
+
 }

@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.f_food.R;
 import com.example.f_food.entity.Order;
+import com.example.f_food.entity.Restaurant;
+import com.example.f_food.repository.RestaurantRepository;
 import com.example.f_food.screen.order_processing.DeliveryStatusUpdate;
 
 import java.text.ParseException;
@@ -25,10 +27,19 @@ import java.util.Locale;
 public class OrderAcceptedAdapter extends RecyclerView.Adapter<OrderAcceptedAdapter.ViewHolder> {
     private final List<Order> orderList;
     private final Context context;
+    private final RestaurantRepository restaurantRepository;
 
-    public OrderAcceptedAdapter(Context context, List<Order> orderList) {
+    private final String userEmail, userPassword, userName, userPhone;
+    public OrderAcceptedAdapter(Context context, List<Order> orderList,
+                                String userEmail, String userPassword,
+                                String userName, String userPhone) {
         this.context = context;
         this.orderList = orderList;
+        this.userEmail = userEmail;
+        this.userPassword = userPassword;
+        this.userName = userName;
+        this.userPhone = userPhone;
+        this.restaurantRepository = new RestaurantRepository(context);
     }
 
     @NonNull
@@ -42,17 +53,29 @@ public class OrderAcceptedAdapter extends RecyclerView.Adapter<OrderAcceptedAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Order order = orderList.get(position);
 
+
         holder.tvOrderId.setText("ID: " + order.getOrderId());
         String formattedDate = formatDateTime(order.getCreatedAt());
         holder.tvDate.setText(formattedDate);
         holder.imgStatus.setImageResource(R.drawable.ic_deli);
 
-        // 🟢 Khi bấm vào `btn_update`, chuyển sang `DeliveryStatusUpdate`
+        Restaurant restaurant = restaurantRepository.getRestaurantById(order.getRestaurantId());
+        String restaurantAddress = (restaurant != null) ? restaurant.getAddress() : "Unknown Address";
+
         holder.btnUpdate.setOnClickListener(v -> {
             Intent intent = new Intent(context, DeliveryStatusUpdate.class);
             intent.putExtra("orderId", order.getOrderId());
-            intent.putExtra("orderDate", order.getCreatedAt());
-            intent.putExtra("orderStatus", order.getOrderStatus());
+            intent.putExtra("restaurantAddress", restaurantAddress);
+            intent.putExtra("deliveryAddress", "cxcxcxc");
+            intent.putExtra("deliveryTime", formattedDate);
+            intent.putExtra("cost", order.getTotalPrice());
+
+            intent.putExtra("email", userEmail);
+            intent.putExtra("password", userPassword);
+            intent.putExtra("userName", userName);
+            intent.putExtra("userPhone", userPhone);
+
+
             context.startActivity(intent);
         });
     }
@@ -83,7 +106,7 @@ public class OrderAcceptedAdapter extends RecyclerView.Adapter<OrderAcceptedAdap
             SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 
             // Định dạng hiển thị mới (Chỉ ngày/tháng + giờ/phút)
-            SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+            SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM HH:mm", Locale.getDefault());
 
             Date date = inputFormat.parse(createdAt);
             return outputFormat.format(date);
