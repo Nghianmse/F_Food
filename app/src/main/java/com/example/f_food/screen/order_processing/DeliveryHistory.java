@@ -1,9 +1,12 @@
 package com.example.f_food.screen.order_processing;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -15,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.f_food.R;
 import com.example.f_food.adapter.DeliveryHistoryAdapter;
+import com.example.f_food.dao.RestaurantRoomDatabase;
 import com.example.f_food.entity.Order;
 import com.example.f_food.entity.Restaurant;
 import com.example.f_food.repository.OrderRepository;
@@ -44,7 +48,10 @@ public class DeliveryHistory extends AppCompatActivity {
         etSearch = findViewById(R.id.et_search);
 
         orderRepository = new OrderRepository(this);
-        List<Order> allOrders = orderRepository.getAllOrders();
+
+        int shipperId = RestaurantRoomDatabase.getInstance(this).shipperDAO().getShipperByUserId(getLoggedInUserId()).getShipperId();
+
+        List<Order> allOrders = orderRepository.getOrdersByShipperId(shipperId);
 
         // Lưu danh sách gốc để search
         fullOrderList = allOrders;
@@ -145,7 +152,12 @@ public class DeliveryHistory extends AppCompatActivity {
                             || restaurantAddress.contains(lowerQuery);
                 })
                 .collect(Collectors.toList());
-
         orderAdapter.setOrders(filteredList);
     }
+
+    private int getLoggedInUserId() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        return preferences.getInt("userId", -1);
+    }
+
 }

@@ -3,7 +3,9 @@ package com.example.f_food.screen.order_processing;
 import android.location.Geocoder;
 import android.location.Address;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageButton;
@@ -23,6 +25,9 @@ import com.example.f_food.entity.OrderDetail;
 import com.example.f_food.repository.FoodRepository;
 import com.example.f_food.repository.OrderDetailRepository;
 import com.example.f_food.repository.OrderRepository;
+import com.example.f_food.repository.ShipperRepository;
+import com.example.f_food.repository.UserRepository;
+import com.example.f_food.screen.authentication_authorization.ShipperLogin;
 import com.example.f_food.screen.features_customer.GoogleMaps;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -41,10 +46,15 @@ public class AcceptShippingOrder extends AppCompatActivity {
     private OrderDetailRepository orderDetailRepository;
     private FoodRepository foodRepository;
 
+    private int shipperId = 0;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accept_shipping_order);
+
+        ShipperRepository shipperRepository = new ShipperRepository(this);
+        shipperId = shipperRepository.getShipperByUserId(getLoggedInUserId()).getShipperId();
 
         Intent intent = getIntent();
         String userName = intent.getStringExtra("userName");
@@ -90,6 +100,9 @@ public class AcceptShippingOrder extends AppCompatActivity {
             foodRecyclerView.setAdapter(foodAdapter);
         }
 
+
+        // Nút Accept
+        acceptButton.setOnClickListener(v -> showConfirmationDialog(orderId, shipperId));
         ImageButton btnOpenMap = findViewById(R.id.btnOpenMap);
         btnOpenMap.setOnClickListener(v -> openMap(restaurantAddress, deliveryAddress));
 
@@ -100,6 +113,7 @@ public class AcceptShippingOrder extends AppCompatActivity {
         tvCost.setText("Tiền đồ ăn: " + totalCost + " VND");
 
         acceptButton.setOnClickListener(v -> showConfirmationDialog(orderId));
+
 
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             int itemId = item.getItemId();
@@ -182,15 +196,22 @@ public class AcceptShippingOrder extends AppCompatActivity {
         }
     }
 
-    private void showConfirmationDialog(int orderId) {
+    private void showConfirmationDialog(int orderId, int shipperId) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Xác nhận đơn hàng");
         builder.setMessage("Bạn có chắc chắn muốn chấp nhận đơn hàng #" + orderId + " không?");
         builder.setPositiveButton("Chấp nhận", (dialog, which) -> {
-            orderRepository.updateOrderStatus(orderId, "Delivering");
+            orderRepository.updateOrderStatus(orderId, "Delivering", shipperId);
             Toast.makeText(this, "Đơn hàng #" + orderId + " đã chuyển sang trạng thái 'Delivering'!", Toast.LENGTH_SHORT).show();
         });
         builder.setNegativeButton("Hủy", (dialog, which) -> dialog.dismiss());
         builder.show();
     }
+
+
+    private int getLoggedInUserId() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        return preferences.getInt("userId", -1);
+    }
 }
+

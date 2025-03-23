@@ -18,6 +18,7 @@ import com.example.f_food.adapter.RestaurantListAdapter;
 import com.example.f_food.entity.Restaurant;
 import com.example.f_food.R;
 import com.example.f_food.repository.RestaurantRepository;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
 
@@ -57,29 +58,32 @@ public class ViewRestaurantList extends AppCompatActivity {
             }
         });
         recyclerView.setAdapter(adapter);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            Intent intent1 = null;
+
+            if (itemId == R.id.nav_home) {
+                intent1 = new Intent(this, HomeStart.class); // Màn hình Trang chủ
+            } else if (itemId == R.id.nav_bag) {
+                intent1 = new Intent(this, OrderHistory.class); // Màn hình Đơn hàng
+            } else if (itemId == R.id.nav_orders) {
+                intent1 = new Intent(this, ViewRestaurantList.class); // Màn hình Nhà hàng
+            } else if (itemId == R.id.nav_profile) {
+                intent1 = new Intent(this, activity_cart.class); // Màn hình Thông báo
+            }
+            if (intent1 != null) {
+                startActivity(intent1);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); // Hiệu ứng chuyển màn
+            }
+            return true;
+        });
     }
 
     private void init() {
         restaurantRepository = new RestaurantRepository(this);
         restaurantList = restaurantRepository.getAllRestaurants();
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.bottom_nav_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        if (menu != null) {
-            for (int i = 0; i < menu.size(); i++) {
-                MenuItem item = menu.getItem(i);
-                item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-            }
-        }
-        return super.onPrepareOptionsMenu(menu);
     }
 
 }

@@ -1,9 +1,11 @@
 package com.example.f_food.screen.order_processing;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.*;
@@ -18,7 +20,11 @@ import com.example.f_food.entity.Food;
 import com.example.f_food.repository.FoodRepository;
 import com.example.f_food.repository.OrderDetailRepository;
 import com.example.f_food.repository.OrderRepository;
+
+import com.example.f_food.repository.ShipperRepository;
+
 import com.example.f_food.screen.features_customer.GoogleMaps;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.IOException;
@@ -38,8 +44,13 @@ public class DeliveryStatusUpdate extends AppCompatActivity {
     private FoodRepository foodRepository;
     private OrderDetailRepository orderDetailRepository;
 
+
+    private List<Food> foodList;
+    private int shipperId = 0;
+
     private int orderId;
     private double distanceKm;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +62,9 @@ public class DeliveryStatusUpdate extends AppCompatActivity {
         orderDetailRepository = new OrderDetailRepository(this);
         foodRepository = new FoodRepository(this);
 
-        // 2. Ánh xạ UI
+        ShipperRepository shipperRepository = new ShipperRepository(this);
+        shipperId = shipperRepository.getShipperByUserId(getLoggedInUserId()).getShipperId();
+
         tvOrderId = findViewById(R.id.orderId);
         tvRestaurantAddress = findViewById(R.id.restaurantAddress);
         tvDeliveryAddress = findViewById(R.id.deliveryAddress);
@@ -111,9 +124,15 @@ public class DeliveryStatusUpdate extends AppCompatActivity {
             int checkedId = rgStatus.getCheckedRadioButtonId();
             String status = "";
 
+
+            if (!newStatus.isEmpty()) {
+                // 🟢 Gọi update vào DB
+                orderRepository.updateOrderStatus(orderId, newStatus, shipperId);
+
             if (checkedId == R.id.rb_processing) status = "Processing";
             else if (checkedId == R.id.rb_out_for_delivery) status = "Out for Delivery";
             else if (checkedId == R.id.rb_delivered) status = "Delivered";
+
 
             if (!status.isEmpty()) {
                 orderRepository.updateOrderStatus(orderId, status);
@@ -172,6 +191,11 @@ public class DeliveryStatusUpdate extends AppCompatActivity {
             }
         }).start();
     }
+    private int getLoggedInUserId() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        return preferences.getInt("userId", -1);
+    }
+
 
     private void openMap(String resAddress, String deliveryAddress) {
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());

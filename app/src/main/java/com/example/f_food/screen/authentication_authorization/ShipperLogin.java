@@ -1,7 +1,9 @@
 package com.example.f_food.screen.authentication_authorization;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -74,7 +76,10 @@ public class ShipperLogin extends AppCompatActivity {
                 // Kiểm tra UserType là "Customer"
                 if ("Shipper".equals(user.getUserType())) {
                     Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-
+                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putInt("userId", user.getUserId());
+                    editor.apply();
                     // Chuyển sang màn hình khác sau khi đăng nhập
                     Intent intent = new Intent(this, PendingOrder.class);
                     intent.putExtra("userName", user.getFullName()); // hoặc user.getName()
