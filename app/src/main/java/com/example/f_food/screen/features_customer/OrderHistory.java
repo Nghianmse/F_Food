@@ -3,6 +3,7 @@ package com.example.f_food.screen.features_customer;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -34,11 +35,11 @@ public class OrderHistory extends AppCompatActivity {
 
         // Kiểm tra nếu người dùng chưa đăng nhập
         if (!isUserLoggedIn()) {
-            showAlertDialog("Bạn chưa đăng nhập, bạn vui lòng đăng nhập để thao tác.");
+            showAlertDialog("Bạn chưa đăng nhập, vui lòng đăng nhập để thao tác.");
             return;
         }
 
-        // Lấy userId từ SharedPreferences
+        // Lấy userId từ SharedPreferences bằng PreferenceManager
         int userId = getLoggedInUserId();
 
         // Fetch orders with status "Delivered" or "Cancelled" for the logged-in user
@@ -60,14 +61,14 @@ public class OrderHistory extends AppCompatActivity {
 
     // Kiểm tra người dùng đã đăng nhập chưa
     private boolean isUserLoggedIn() {
-        SharedPreferences preferences = getSharedPreferences("userPreferences", MODE_PRIVATE);
-        int userId = preferences.getInt("userId", -1);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        int userId = preferences.getInt("userId", -1); // Sử dụng PreferenceManager thay vì getSharedPreferences
         return userId != -1;
     }
 
     // Lấy userId của người dùng đã đăng nhập
     private int getLoggedInUserId() {
-        SharedPreferences preferences = getSharedPreferences("userPreferences", MODE_PRIVATE);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         return preferences.getInt("userId", -1); // Trả về -1 nếu không tìm thấy userId
     }
 
@@ -80,9 +81,23 @@ public class OrderHistory extends AppCompatActivity {
                     // Chuyển sang màn hình đăng nhập
                     Intent intent = new Intent(OrderHistory.this, LoginActivity.class);
                     startActivity(intent);
-                    finish();
+                    finish(); // Kết thúc Activity hiện tại
                 })
                 .create()
                 .show();
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        // Xóa userId khi ứng dụng thực sự bị dừng
+        clearUserId();
+    }
+
+    // Phương thức xóa userId
+    private void clearUserId() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove("userId"); // Xóa userId khỏi SharedPreferences
+        editor.apply();
     }
 }

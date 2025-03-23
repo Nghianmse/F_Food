@@ -22,6 +22,8 @@ import com.example.f_food.screen.admin_management.AdminScreen;
 import com.example.f_food.screen.features_customer.Address;
 import com.example.f_food.screen.features_customer.HomeStart;
 import com.example.f_food.screen.features_customer.ManageAddress;
+import com.example.f_food.screen.features_customer.OrderHistory;
+import com.example.f_food.screen.features_customer.OrderTracking;
 import com.example.f_food.screen.features_customer.ViewRestaurantList;
 import com.squareup.picasso.Picasso;
 
@@ -107,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
 
                     // Chuyển sang màn hình OrderHistory
-                    Intent intent = new Intent(this, Address.class);
+                    Intent intent = new Intent(this, HomeStart.class);
                     intent.putExtra("fullName", user.getFullName());
                     startActivity(intent);
                     finish();
@@ -149,5 +151,15 @@ public class LoginActivity extends AppCompatActivity {
     private void navigateToRestaurantLogIn() {
         Intent intent = new Intent(this, RestaurantLogIn.class);  // Assuming RestaurantLogInActivity is your target activity
         startActivity(intent);
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        // Xóa userId khỏi SharedPreferences ngay khi ứng dụng bị dừng lại
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove("userId");
+        editor.apply();
     }
 }

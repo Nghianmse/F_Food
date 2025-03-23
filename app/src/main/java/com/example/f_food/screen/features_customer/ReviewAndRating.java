@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -97,15 +98,15 @@ public class ReviewAndRating extends AppCompatActivity {
 
     // Check if user is logged in
     private boolean isUserLoggedIn() {
-        SharedPreferences preferences = getSharedPreferences("userPreferences", MODE_PRIVATE);
-        int userId = preferences.getInt("userId", -1);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        int userId = preferences.getInt("userId", -1); // Sử dụng PreferenceManager thay vì getSharedPreferences
         return userId != -1;
     }
 
     // Get logged-in userId
     private int getLoggedInUserId() {
-        SharedPreferences preferences = getSharedPreferences("userPreferences", MODE_PRIVATE);
-        return preferences.getInt("userId", -1); // Return -1 if userId not found
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        return preferences.getInt("userId", -1); // Trả về -1 nếu không tìm thấy userId
     }
 
     // Show alert dialog and redirect to Login screen if not logged in
