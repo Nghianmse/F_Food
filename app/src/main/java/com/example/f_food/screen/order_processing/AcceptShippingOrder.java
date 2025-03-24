@@ -34,6 +34,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class AcceptShippingOrder extends AppCompatActivity {
     private TextView tvOrderId, tvRestaurantAddress, tvDeliveryAddress, tvDeliveryTime, tvCost, DeliCost,OrderCost;
@@ -46,12 +48,15 @@ public class AcceptShippingOrder extends AppCompatActivity {
     private OrderDetailRepository orderDetailRepository;
     private FoodRepository foodRepository;
 
+
     private int shipperId = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accept_shipping_order);
+
+
 
         ShipperRepository shipperRepository = new ShipperRepository(this);
         shipperId = shipperRepository.getShipperByUserId(getLoggedInUserId()).getShipperId();
@@ -82,7 +87,12 @@ public class AcceptShippingOrder extends AppCompatActivity {
         String restaurantAddress = getIntent().getStringExtra("restaurantAddress");
         String deliveryAddress = getIntent().getStringExtra("deliveryAddress");
         String deliveryTime = getIntent().getStringExtra("deliveryTime");
+
+
         double totalCost = orderRepository.getTotalPriceByOrderId(orderId);
+        // Format số theo định dạng Việt Nam
+        NumberFormat formatter = NumberFormat.getInstance(new Locale("vi", "VN"));
+        String formattedCost = formatter.format(totalCost);
 
         calculateDistanceAndDisplay(restaurantAddress, deliveryAddress, distanceKm -> {
             distance = distanceKm; // gán vào biến của class
@@ -90,7 +100,7 @@ public class AcceptShippingOrder extends AppCompatActivity {
 
             // Cập nhật UI sau khi có khoảng cách
             tvDeliveryAddress.setText("Delivery Address: " + deliveryAddress + " - " + String.format("%.1f km", distance));
-            DeliCost.setText("Phí ship: " + String.format("%.0f", distance * 10000) + " VND");
+            DeliCost.setText("Phí ship: " + formatter.format( distance * 10000) + " VND");
         });
 
 
@@ -110,7 +120,7 @@ public class AcceptShippingOrder extends AppCompatActivity {
         tvOrderId.setText("Order ID: " + orderId);
         tvRestaurantAddress.setText("Restaurant: " + restaurantAddress);
         tvDeliveryTime.setText("Delivery Time: " + deliveryTime);
-        tvCost.setText("Tiền đồ ăn: " + totalCost + " VND");
+        tvCost.setText("Tiền đồ ăn: " + formattedCost + " VND");
 
 
 

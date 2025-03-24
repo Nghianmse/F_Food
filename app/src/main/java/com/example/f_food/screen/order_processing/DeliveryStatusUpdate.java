@@ -36,6 +36,8 @@ public class DeliveryStatusUpdate extends AppCompatActivity {
     private RecyclerView foodRecyclerView;
     private RadioGroup rgStatus;
     private Button btnUpdate;
+
+    private RadioButton rbDeli;
     private double distance;
     private ImageButton btnOpenMap;
     private BottomNavigationView bottomNavigationView;
@@ -76,6 +78,7 @@ public class DeliveryStatusUpdate extends AppCompatActivity {
         btnUpdate = findViewById(R.id.btn_update);
         foodRecyclerView = findViewById(R.id.foodListAcceptShipping);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        rbDeli = findViewById(R.id.rb_out_for_delivery);
 
         foodRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -120,12 +123,13 @@ public class DeliveryStatusUpdate extends AppCompatActivity {
         btnOpenMap.setOnClickListener(v -> openMap(restaurantAddress, deliveryAddress));
 
         // 8. Cập nhật trạng thái đơn
+        rbDeli.setChecked(true);
+
         btnUpdate.setOnClickListener(v -> {
             int checkedId = rgStatus.getCheckedRadioButtonId();
             String status = "";
 
-            if (checkedId == R.id.rb_processing) status = "Processing";
-            else if (checkedId == R.id.rb_out_for_delivery) status = "Out for Delivery";
+            if (checkedId == R.id.rb_out_for_delivery) status = "Delivering";
             else if (checkedId == R.id.rb_delivered) status = "Delivered";
 
             if (!status.isEmpty()) {
