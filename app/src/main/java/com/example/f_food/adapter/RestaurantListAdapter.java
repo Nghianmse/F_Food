@@ -1,5 +1,8 @@
 package com.example.f_food.adapter;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -20,10 +23,13 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
     private List<Restaurant> restaurantList;
     private OnItemClickListener listener;
 
+    private static Context context;
+
     // Constructor
-    public RestaurantListAdapter(List<Restaurant> restaurantList, OnItemClickListener listener) {
+    public RestaurantListAdapter(List<Restaurant> restaurantList, OnItemClickListener listener, Context context) {
         this.restaurantList = restaurantList;
         this.listener = listener;
+        this.context = context;
     }
 
     // Interface để xử lý sự kiện click
@@ -43,6 +49,15 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         Restaurant restaurant = restaurantList.get(position);
         holder.bind(restaurant, listener);
     }
+
+    private static void showAlert(String title, String message) {
+        new AlertDialog.Builder(context)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                .show();
+    }
+
 
     @Override
     public int getItemCount() {
@@ -80,11 +95,19 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
                 }
             }
 
+            if (restaurant.getStatus().equals("Open"))  txtStatus.setTextColor(Color.GREEN);
+            else txtStatus.setTextColor(Color.RED);
+
             // Xử lý sự kiện click
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onItemClick(restaurant.getRestaurantId());
+                    if (restaurant.getStatus().equals("Open")) {
+                        listener.onItemClick(restaurant.getRestaurantId());
+                    }
+                    else {
+                        showAlert("Chú ý", "Nhà hàng đã đóng cửa!");
+                    }
                 }
             });
         }
