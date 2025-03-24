@@ -1,20 +1,19 @@
 package com.example.f_food.screen.authentication_authorization;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.f_food.entity.Restaurant;
 import com.example.f_food.entity.Shipper;
 import com.example.f_food.entity.User;
 import com.example.f_food.R;
-import com.example.f_food.repository.RestaurantRepository;
 import com.example.f_food.repository.ShipperRepository;
 import com.example.f_food.repository.UserRepository;
 
@@ -23,8 +22,6 @@ import java.util.Date;
 
 public class ShipperSignUp extends AppCompatActivity {
     private UserRepository userRepository;
-    private RestaurantRepository restaurantRepository;
-
     private ShipperRepository shipperRepository;
 
     private EditText etFullName, etEmail, etPhoneNumber, etAddress, etPassword, etConfirmPassword;
@@ -36,11 +33,9 @@ public class ShipperSignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shipper_sign_up);
 
-        // Initialize repositories
         userRepository = new UserRepository(this);
-        restaurantRepository = new RestaurantRepository(this);
         shipperRepository = new ShipperRepository(this);
-        // Initialize UI components
+
         etFullName = findViewById(R.id.etFullName);
         etEmail = findViewById(R.id.etEmail);
         etPhoneNumber = findViewById(R.id.etPhoneNumber);
@@ -49,72 +44,108 @@ public class ShipperSignUp extends AppCompatActivity {
         etConfirmPassword = findViewById(R.id.etConfirmPassword);
         btnConfirm = findViewById(R.id.btnConfirm);
         tvLogin = findViewById(R.id.tvLogin);
+
         tvLogin.setOnClickListener(v -> navigateToShipperLogIn());
         btnConfirm.setOnClickListener(v -> handleSignUp());
     }
 
     private void handleSignUp() {
-        String fullName = etFullName.getText().toString();
-        String email = etEmail.getText().toString();
-        String phoneNumber = etPhoneNumber.getText().toString();
-        String address = etAddress.getText().toString();
-        String password = etPassword.getText().toString();
-        String confirmPassword = etConfirmPassword.getText().toString();
+        String fullName = etFullName.getText().toString().trim();
+        String email = etEmail.getText().toString().trim();
+        String phoneNumber = etPhoneNumber.getText().toString().trim();
+        String address = etAddress.getText().toString().trim();
+        String password = etPassword.getText().toString().trim();
+        String confirmPassword = etConfirmPassword.getText().toString().trim();
 
-        // Basic validation
-        if (TextUtils.isEmpty(fullName) || TextUtils.isEmpty(email) || TextUtils.isEmpty(phoneNumber) ||
-                TextUtils.isEmpty(address) || TextUtils.isEmpty(password) || !password.equals(confirmPassword)) {
-            Toast.makeText(this, "Please fill in all fields correctly", Toast.LENGTH_SHORT).show();
+        if (fullName.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() ||
+                address.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+            showToast("Vui lòng điền đầy đủ thông tin.");
             return;
         }
 
-        // Check if email or phone number already exists
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            showToast("Email không hợp lệ.");
+            return;
+        }
+
+        if (!isValidVietnamesePhoneNumber(phoneNumber)) {
+            showToast("Số điện thoại không hợp lệ.");
+            return;
+        }
+
+        if (!isValidPassword(password)) {
+            showToast("Mật khẩu phải có ít nhất 8 ký tự và bắt đầu bằng chữ cái viết hoa.");
+            return;
+        }
+
+        if (!password.equals(confirmPassword)) {
+            showToast("Mật khẩu xác nhận không khớp.");
+            return;
+        }
+
         if (userRepository.getUserByEmail(email) != null) {
-            Toast.makeText(this, "Email already registered", Toast.LENGTH_SHORT).show();
+            showToast("Email đã tồn tại.");
             return;
         }
 
         if (userRepository.getUserByPhone(phoneNumber) != null) {
-            Toast.makeText(this, "Phone number already registered", Toast.LENGTH_SHORT).show();
+            showToast("Số điện thoại đã tồn tại.");
             return;
         }
 
-        // Create and insert user
+        // Tạo tài khoản shipper
+        String currentDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+
         User user = new User();
         user.setFullName(fullName);
         user.setEmail(email);
         user.setPhone(phoneNumber);
         user.setPassword(password);
         user.setUserType("Shipper");
-        String currentDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         user.setCreatedAt(currentDateTime);
         user.setUpdatedAt(currentDateTime);
 
         userRepository.insert(user);
 
-        // Get the userId of the newly inserted user (assuming last inserted)
+        // Lấy ID của user vừa tạo
         User insertedUser = userRepository.getAllUsers().get(userRepository.getAllUsers().size() - 1);
         int userId = insertedUser.getUserId();
 
-        // Create and insert restaurant
         Shipper shipper = new Shipper();
-
         shipper.setUserId(userId);
-
         shipper.setStatus("Active");
-
-
         shipperRepository.insert(shipper);
-
-        // Provide feedback to the user
-        Toast.makeText(this, "Shipper registered successfully", Toast.LENGTH_SHORT).show();
-        // Optionally, navigate back or to another screen
-        navigateToShipperLogIn();
-
-
+        //abc
+        showSuccessDialog();
     }
+
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void showSuccessDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Đăng ký thành công!")
+                .setCancelable(false)
+                .setPositiveButton("OK", (dialog, id) -> {
+                    navigateToShipperLogIn();
+                    finish();
+                });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private boolean isValidPassword(String password) {
+        return password.length() >= 8 && Character.isUpperCase(password.charAt(0));
+    }
+
+    private boolean isValidVietnamesePhoneNumber(String phoneNumber) {
+        return phoneNumber.matches("^0[0-9]{9,10}$");
+    }
+
     private void navigateToShipperLogIn() {
-        Intent intent = new Intent(this, ShipperLogin.class);  // Assuming RestaurantLogInActivity is your target activity
+        Intent intent = new Intent(this, ShipperLogin.class);
         startActivity(intent);
     }
 }

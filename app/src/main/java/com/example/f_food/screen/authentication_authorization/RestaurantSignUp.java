@@ -50,33 +50,56 @@ public class RestaurantSignUp extends AppCompatActivity {
     }
 
     private void handleSignUp() {
-        String fullName = etFullName.getText().toString();
-        String email = etEmail.getText().toString();
-        String phoneNumber = etPhoneNumber.getText().toString();
-        String address = etAddress.getText().toString();
+        String fullName = etFullName.getText().toString().trim();
+        String email = etEmail.getText().toString().trim();
+        String phoneNumber = etPhoneNumber.getText().toString().trim();
+        String address = etAddress.getText().toString().trim();
         String password = etPassword.getText().toString();
         String confirmPassword = etConfirmPassword.getText().toString();
 
-        // Basic validation
+        // Kiểm tra các trường không được bỏ trống
         if (TextUtils.isEmpty(fullName) || TextUtils.isEmpty(email) || TextUtils.isEmpty(phoneNumber) ||
-                TextUtils.isEmpty(address) || TextUtils.isEmpty(password) || !password.equals(confirmPassword)) {
-            showAlertDialog("Please fill in all fields correctly");
+                TextUtils.isEmpty(address) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)) {
+            showAlertDialog("Please fill in all fields.");
             return;
         }
 
-// Check if email or phone number already exists
+        // Kiểm tra định dạng email hợp lệ
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            showAlertDialog("Invalid email format.");
+            return;
+        }
+
+        // Kiểm tra số điện thoại có đúng định dạng Việt Nam không
+        if (!isValidVietnamesePhoneNumber(phoneNumber)) {
+            showAlertDialog("Invalid Vietnamese phone number.");
+            return;
+        }
+
+        // Kiểm tra điều kiện mật khẩu
+        if (!isValidPassword(password)) {
+            showAlertDialog("Password must be at least 8 characters long and start with an uppercase letter.");
+            return;
+        }
+
+        // Kiểm tra mật khẩu nhập lại có khớp không
+        if (!password.equals(confirmPassword)) {
+            showAlertDialog("Passwords do not match.");
+            return;
+        }
+
+        // Kiểm tra xem email hoặc số điện thoại đã tồn tại chưa
         if (userRepository.getUserByEmail(email) != null) {
-            showAlertDialog("Email already registered");
+            showAlertDialog("Email is already registered.");
             return;
         }
 
         if (userRepository.getUserByPhone(phoneNumber) != null) {
-            showAlertDialog("Phone number already registered");
+            showAlertDialog("Phone number is already registered.");
             return;
         }
 
-
-        // Create and insert user
+        // Tạo và lưu user
         User user = new User();
         user.setFullName(fullName);
         user.setEmail(email);
@@ -86,14 +109,15 @@ public class RestaurantSignUp extends AppCompatActivity {
         String currentDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         user.setCreatedAt(currentDateTime);
         user.setUpdatedAt(currentDateTime);
+        user.setIsDelete(false);
 
         userRepository.insert(user);
 
-        // Get the userId of the newly inserted user (assuming last inserted)
+        // Lấy userId của user vừa thêm vào
         User insertedUser = userRepository.getAllUsers().get(userRepository.getAllUsers().size() - 1);
         int userId = insertedUser.getUserId();
 
-        // Create and insert restaurant
+        // Tạo và lưu nhà hàng
         Restaurant restaurant = new Restaurant();
         restaurant.setUserId(userId);
         restaurant.setName(fullName + " Restaurant");
@@ -104,10 +128,16 @@ public class RestaurantSignUp extends AppCompatActivity {
 
         restaurantRepository.insert(restaurant);
 
-        // Hiển thị pop-up thay vì Toast
+        // Hiển thị thông báo thành công
         showSuccessDialog();
     }
 
+    private boolean isValidPassword(String password) {
+        return password.length() >= 8 && Character.isUpperCase(password.charAt(0));
+    }
+    private boolean isValidVietnamesePhoneNumber(String phoneNumber) {
+        return phoneNumber.matches("^0[0-9]{9,10}$");
+    }
     // Phương thức hiển thị popup
     private void showSuccessDialog() {
         // Tạo AlertDialog Builder
