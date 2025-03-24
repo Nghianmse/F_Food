@@ -1,12 +1,16 @@
 package com.example.f_food.screen.order_processing;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +28,10 @@ import com.example.f_food.entity.User;
 import com.example.f_food.repository.OrderRepository;
 import com.example.f_food.repository.RestaurantRepository;
 import com.example.f_food.repository.UserRepository;
+import com.example.f_food.screen.authentication_authorization.LoginActivity;
 import com.example.f_food.screen.authentication_authorization.ShipperLogin;
+import com.example.f_food.screen.features_customer.CustomerProfile;
+import com.example.f_food.screen.features_restaurant_management.MenuManagement;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
@@ -47,7 +54,14 @@ public class PendingOrder extends AppCompatActivity {
         rvPendingOrders.setLayoutManager(new LinearLayoutManager(this));
 
         etSearch = findViewById(R.id.et_search);
+        ImageView menuIcon = findViewById(R.id.menuIcon);
 
+        menuIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopupMenu(v);
+            }
+        });
         TextView tvName = findViewById(R.id.tvName);
         TextView tvPhone = findViewById(R.id.tvPhone);
 
@@ -166,5 +180,37 @@ public class PendingOrder extends AppCompatActivity {
                 .collect(Collectors.toList());
 
         adapter.updateList(filteredList);
+    }
+    private void showPopupMenu(View view) {
+        PopupMenu popup = new PopupMenu(this, view);
+        popup.getMenuInflater().inflate(R.menu.right_nav_menu, popup.getMenu());
+
+        popup.setOnMenuItemClickListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.action_profile) {
+                Intent intent = new Intent(PendingOrder.this, CustomerProfile.class);
+                startActivity(intent);
+                return true;
+            } else if (itemId == R.id.action_logout) {
+                Toast.makeText(PendingOrder.this, "Logging out...", Toast.LENGTH_SHORT).show();
+                performLogout(); // Gọi hàm đăng xuất (nếu có)
+                return true;
+            }
+            return false;
+        });
+
+        popup.show();
+    }
+
+    private void performLogout() {
+
+        SharedPreferences preferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear(); // Xóa dữ liệu đăng nhập
+        editor.apply();
+
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }

@@ -56,7 +56,7 @@ public class ViewRestaurantList extends AppCompatActivity {
                 intent.putExtra("restaurantId", id);
                 startActivity(intent);
             }
-        });
+        }, this);
         recyclerView.setAdapter(adapter);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
 

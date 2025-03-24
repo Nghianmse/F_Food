@@ -4,7 +4,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +19,9 @@ import com.example.f_food.entity.Food;
 import com.example.f_food.R;
 import com.example.f_food.repository.FoodRepository;
 import com.example.f_food.repository.RestaurantRepository;
+import com.example.f_food.screen.authentication_authorization.LoginActivity;
+import com.example.f_food.screen.features_customer.CustomerProfile;
+import com.example.f_food.screen.features_customer.HomeStart;
 
 import java.util.List;
 
@@ -35,6 +42,7 @@ public class MenuManagement extends AppCompatActivity {
         int uid = getLoggedInUserId();
         int rid = restaurantRepository.getRestaurantByUserId(uid).getRestaurantId();
         recyclerView = findViewById(R.id.recyclerViewFoods);
+
         btnAddFood = findViewById(R.id.btnAddFood);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -58,5 +66,37 @@ public class MenuManagement extends AppCompatActivity {
     private int getLoggedInUserId() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         return preferences.getInt("userId", -1); // Trả về -1 nếu không tìm thấy userId
+    }
+    private void showPopupMenu(View view) {
+        PopupMenu popup = new PopupMenu(this, view);
+        popup.getMenuInflater().inflate(R.menu.right_nav_menu, popup.getMenu());
+
+        popup.setOnMenuItemClickListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.action_profile) {
+                Intent intent = new Intent(MenuManagement.this, CustomerProfile.class);
+                startActivity(intent);
+                return true;
+            } else if (itemId == R.id.action_logout) {
+                Toast.makeText(MenuManagement.this, "Logging out...", Toast.LENGTH_SHORT).show();
+                performLogout(); // Gọi hàm đăng xuất (nếu có)
+                return true;
+            }
+            return false;
+        });
+
+        popup.show();
+    }
+
+    private void performLogout() {
+
+        SharedPreferences preferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear(); // Xóa dữ liệu đăng nhập
+        editor.apply();
+
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }
