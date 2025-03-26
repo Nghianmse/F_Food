@@ -30,7 +30,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Đối tác"
+        android:text="Partner"
         android:textSize="14sp"
         android:textColor="@android:color/darker_gray"
         android:layout_marginBottom="16dp"/>
@@ -50,7 +50,7 @@
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="Mật khẩu"
+        android:hint="Password"
         android:background="@android:drawable/editbox_background"
         android:padding="12dp"
         android:inputType="textPassword"/>
@@ -59,7 +59,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Quên mật khẩu?"
+        android:text="Forget password"
         android:textSize="14sp"
         android:textColor="@android:color/holo_blue_light"
         android:layout_marginTop="8dp"
@@ -71,7 +71,7 @@
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Đăng nhập"
+        android:text="Login"
         android:textSize="16sp"
         android:backgroundTint="@android:color/holo_blue_dark"
         android:textColor="@android:color/white"
@@ -81,7 +81,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nếu bạn chưa có tài khoản, nhấn để đăng ký"
+        android:text="If you don't have an account, click to Register"
         android:textSize="14sp"
         android:textColor="@android:color/darker_gray"
         android:layout_marginTop="8dp"
@@ -92,7 +92,7 @@
         android:id="@+id/btnRegister"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Đăng ký"
+        android:text="Register"
         android:textSize="16sp"
         android:backgroundTint="@android:color/holo_green_light"
         android:textColor="@android:color/white"
@@ -103,7 +103,7 @@
         android:id="@+id/btnLoginForCustomer"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Đăng nhập dành cho khách hàng"
+        android:text="Login for Customer"
         android:textSize="16sp"
         android:backgroundTint="@android:color/holo_blue_light"
         android:textColor="@android:color/white"
