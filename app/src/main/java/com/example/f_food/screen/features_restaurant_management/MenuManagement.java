@@ -31,6 +31,7 @@ public class MenuManagement extends AppCompatActivity {
     private FoodListAdapter adapter;
     private FoodRepository repository;
 
+    ImageView ivHome;
     Button btnAddFood;
 
     @Override
@@ -60,6 +61,12 @@ public class MenuManagement extends AppCompatActivity {
 
         btnAddFood.setOnClickListener(v->{
             Intent intent = new Intent(MenuManagement.this, AddFoodActivity.class);
+            startActivity(intent);
+        });
+
+        ivHome = findViewById(R.id.ivHome);
+        ivHome.setOnClickListener(v->{
+            Intent intent = new Intent(MenuManagement.this, HomeRestaurant.class);
             startActivity(intent);
         });
     }

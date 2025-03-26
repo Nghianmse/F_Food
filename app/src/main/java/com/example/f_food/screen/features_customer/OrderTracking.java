@@ -47,8 +47,7 @@ public class OrderTracking extends AppCompatActivity {
             public void onClick(View v) {
                 // Start HomeStart Activity when the home icon is clicked
                 Intent intent = new Intent(OrderTracking.this, HomeStart.class);
-                startActivity(intent);
-                finish(); // Optionally finish the current activity if you don't want to return to it
+                finish();
             }
         });
 
