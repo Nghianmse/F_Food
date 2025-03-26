@@ -103,7 +103,7 @@
         android:id="@+id/btnLoginForCustomer"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Đăng nhập cho Khách hàng"
+        android:text="Đăng nhập cho Shipper"
         android:textSize="16sp"
         android:backgroundTint="@android:color/holo_blue_light"
         android:textColor="@android:color/white"

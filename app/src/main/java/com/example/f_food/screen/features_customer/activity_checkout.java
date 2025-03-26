@@ -127,7 +127,6 @@ public class activity_checkout extends AppCompatActivity {
         calculateDistanceAndDisplay(rAddress, a.getAddress(), distanceKm -> {
             distance = distanceKm; // gán vào biến của class
             Log.d("DISTANCE_LOG", "Khoảng cách là: " + distanceKm + " km");
-
             double totalPrice1 = getIntent().getDoubleExtra("totalPrice", 8);
             double ship = 10.0;
             double discount = getIntent().getDoubleExtra("discount", 8);
@@ -144,70 +143,54 @@ public class activity_checkout extends AppCompatActivity {
             totalShipCheckout.setText("Phí ship: " + currencyFormat.format(distance * 10000));
         });
 
-
         btnCreateOrder.setOnClickListener(v -> {
-            if (a == null || a.getAddress() == null || a.getAddress().trim().isEmpty()) {
-                new AlertDialog.Builder(this)
-                        .setTitle("Chưa có địa chỉ giao hàng")
-                        .setMessage("Vui lòng thêm địa chỉ giao hàng trước khi đặt hàng.")
-                        .setPositiveButton("OK", null)
-                        .show();
-                return;
-            }
+            new AlertDialog.Builder(this)
+                    .setTitle("Xác nhận đặt hàng")
+                    .setMessage("Bạn có chắc chắn muốn đặt hàng không?")
+                    .setPositiveButton("Có", (dialog, which) -> {
 
-            checkAddressWithGeocoder(a.getAddress(), () -> {
-                // Địa chỉ hợp lệ -> tiếp tục đặt hàng
-                new AlertDialog.Builder(this)
-                        .setTitle("Xác nhận đặt hàng")
-                        .setMessage("Bạn có chắc chắn muốn đặt hàng không?")
-                        .setPositiveButton("Có", (dialog, which) -> {
+                        Order o = new Order();
+                        o.setUserId(uId);
+                        o.setRestaurantId(rid);
+                        o.setTotalPrice(totalPrice2);
+                        o.setPaymentMethod("COD");
+                        o.setOrderStatus("Pending");
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        String formattedDate = sdf.format(new Date());
+                        o.setCreatedAt(formattedDate);
+                        orderRepository.insert(o);
 
-                            Order o = new Order();
-                            o.setUserId(uId);
-                            o.setRestaurantId(rid);
-                            o.setTotalPrice(totalPrice2);
-                            o.setPaymentMethod("COD");
-                            o.setOrderStatus("Pending");
-                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                            String formattedDate = sdf.format(new Date());
-                            o.setCreatedAt(formattedDate);
-                            orderRepository.insert(o);
+                        for (CartItem item : selectedItems) {
+                            OrderDetail orderDetail = new OrderDetail();
+                            orderDetail.setOrderId(orderRepository.getLastInsertedOrder().getOrderId());
+                            orderDetail.setFoodId(item.getProduct().getFoodId());
+                            orderDetail.setQuantity(item.getQuantity());
+                            orderDetail.setPrice(item.getProduct().getPrice());
 
-                            for (CartItem item : selectedItems) {
-                                OrderDetail orderDetail = new OrderDetail();
-                                orderDetail.setOrderId(orderRepository.getLastInsertedOrder().getOrderId());
-                                orderDetail.setFoodId(item.getProduct().getFoodId());
-                                orderDetail.setQuantity(item.getQuantity());
-                                orderDetail.setPrice(item.getProduct().getPrice());
+                            // Lưu OrderDetail vào database
+                            orderDetailRepository.insert(orderDetail);
+                        }
 
-                                orderDetailRepository.insert(orderDetail);
-                            }
-
-                            new AlertDialog.Builder(this)
-                                    .setTitle("Đặt hàng thành công")
-                                    .setMessage("Đơn hàng của bạn đã được tạo thành công!\nBạn có muốn tiếp tục mua hàng không?")
-                                    .setPositiveButton("Tiếp tục mua hàng", (dialog1, which1) -> {
-                                        Intent intent = new Intent(this, HomeStart.class);
-                                        startActivity(intent);
-                                        finish();
-                                    })
-                                    .setNegativeButton("OK", (dialog1, which1) -> {
-                                        Intent intent = new Intent(this, activity_cart.class);
-                                        startActivity(intent);
-                                        finish();
-                                    })
-                                    .setCancelable(false)
-                                    .show();
-                        })
-                        .setNegativeButton("Không", (dialog, which) -> dialog.dismiss())
-                        .setCancelable(false)
-                        .show();
-
-            }, () -> {
-
-            });
+                        new AlertDialog.Builder(this)
+                                .setTitle("Đặt hàng thành công")
+                                .setMessage("Đơn hàng của bạn đã được tạo thành công!\nBạn có muốn tiếp tục mua hàng không?")
+                                .setPositiveButton("Tiếp tục mua hàng", (dialog1, which1) -> {
+                                    Intent intent = new Intent(this, HomeStart.class);
+                                    startActivity(intent);
+                                    finish();
+                                })
+                                .setNegativeButton("OK", (dialog1, which1) -> {
+                                    Intent intent = new Intent(this, activity_cart.class);
+                                    startActivity(intent);
+                                    finish();
+                                })
+                                .setCancelable(false) // Không cho phép đóng hộp thoại khi bấm ra ngoài
+                                .show();
+                    })
+                    .setNegativeButton("Không", (dialog, which) -> dialog.dismiss())
+                    .setCancelable(false)
+                    .show();
         });
-
     }
 
     private void openMap(String resAddress, String deliveryAddress) {
@@ -237,39 +220,6 @@ public class activity_checkout extends AppCompatActivity {
     public interface DistanceCallback {
         void onDistanceCalculated(double distance);
     }
-    private void checkAddressWithGeocoder(String address, Runnable onValid, Runnable onInvalid) {
-        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-
-        new Thread(() -> {
-            try {
-                List<android.location.Address> addressList = geocoder.getFromLocationName(address, 1);
-
-                runOnUiThread(() -> {
-                    if (addressList == null || addressList.isEmpty()) {
-                        // Không tìm thấy địa chỉ → thông báo lỗi
-                        new AlertDialog.Builder(this)
-                                .setTitle("Không tìm thấy địa chỉ")
-                                .setMessage("Vui lòng kiểm tra và nhập lại địa chỉ giao hàng.")
-                                .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
-                                .setCancelable(false)
-                                .show();
-
-                        if (onInvalid != null) onInvalid.run();
-                    } else {
-                        // Địa chỉ hợp lệ → thực thi logic tiếp theo
-                        if (onValid != null) onValid.run();
-                    }
-                });
-
-            } catch (IOException e) {
-                e.printStackTrace();
-                runOnUiThread(() ->
-                        Toast.makeText(this, "Lỗi khi kiểm tra địa chỉ", Toast.LENGTH_SHORT).show()
-                );
-            }
-        }).start();
-    }
-
 
     private void calculateDistanceAndDisplay(String resAddress, String deliveryAddress, AcceptShippingOrder.DistanceCallback callback) {
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());

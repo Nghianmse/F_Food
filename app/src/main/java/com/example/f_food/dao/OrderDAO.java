@@ -20,7 +20,9 @@ public interface OrderDAO {
     @Query("SELECT * FROM Orders WHERE order_id = :id")
     Order getOrderById(int id);
 
-    @Query("SELECT od.total_price FROM Orders od WHERE od.order_id = :orderId")
+    @Query("SELECT COALESCE(SUM(f.price * od.quantity), 0) FROM OrderDetails od " +
+            "INNER JOIN Foods f ON od.food_id = f.food_id " +
+            "WHERE od.order_id = :orderId")
     double getTotalPriceByOrderId(int orderId);
 
     @Query("SELECT * FROM `Orders` ORDER BY order_id DESC LIMIT 1")
