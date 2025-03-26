@@ -1,6 +1,8 @@
 package com.example.f_food.screen.features_customer;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.InputType;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,8 +42,7 @@ public class ChangePassword extends AppCompatActivity {
 
         // DB & User
         db = RestaurantRoomDatabase.getInstance(this);
-        int userId = getSharedPreferences("user_session", MODE_PRIVATE).getInt("USER_ID", -1);
-        user = db.userDAO().getUserById(1);
+        user = db.userDAO().getUserById(getLoggedInUserId());
 
         if (user != null) {
             tvEmail.setText(user.getEmail());
@@ -101,6 +102,11 @@ public class ChangePassword extends AppCompatActivity {
             editText.setSelection(editText.getText().length());
             isVisible[0] = !isVisible[0];
         });
+    }
+
+    private int getLoggedInUserId() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        return preferences.getInt("userId", -1); // Trả về -1 nếu không tìm thấy userId
     }
 
 }
