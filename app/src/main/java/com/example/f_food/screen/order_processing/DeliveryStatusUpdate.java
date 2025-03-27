@@ -81,7 +81,7 @@ public class DeliveryStatusUpdate extends AppCompatActivity {
 
         // 3. Lấy dữ liệu từ intent
         Intent intent = getIntent();
-        orderId = intent.getIntExtra("orderId", -1);
+        orderId = intent.getIntExtra("Order Code: ODFOD", -1);
         String restaurantAddress = intent.getStringExtra("restaurantAddress");
         String deliveryAddress = intent.getStringExtra("deliveryAddress");
         String deliveryTime = intent.getStringExtra("deliveryTime");
