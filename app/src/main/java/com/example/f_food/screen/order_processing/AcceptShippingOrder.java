@@ -117,7 +117,7 @@ public class AcceptShippingOrder extends AppCompatActivity {
         btnOpenMap.setOnClickListener(v -> openMap(restaurantAddress, deliveryAddress));
 
 
-        tvOrderId.setText("Order ID: " + orderId);
+        tvOrderId.setText("Order Code: ODFOD" + orderId);
         tvRestaurantAddress.setText("Restaurant: " + restaurantAddress);
         tvDeliveryTime.setText("Delivery Time: " + deliveryTime);
         tvCost.setText("Tiền đồ ăn: " + formattedCost + " VND");

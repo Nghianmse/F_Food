@@ -74,7 +74,7 @@ public class DeliveryDetails extends AppCompatActivity {
         String deliveryTime = getIntent().getStringExtra("deliveryTime");
         double totalCost = orderRepository.getTotalPriceByOrderId(orderId);
 
-        tvOrderId.setText("Order ID: " + orderId);
+        tvOrderId.setText("Order Code: ODFOD" + orderId);
         tvRestaurantAddress.setText("Restaurant: " + restaurantAddress);
         tvDeliveryTime.setText("Delivery Time: " + deliveryTime);
         tvCost.setText("Total Cost: $" + totalCost);
