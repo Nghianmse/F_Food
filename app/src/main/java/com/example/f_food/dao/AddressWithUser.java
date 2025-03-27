@@ -17,4 +17,5 @@ public class AddressWithUser {
         this.isDefault = isDefault;
         this.addressType = addressType;
     }
+    //
 }
